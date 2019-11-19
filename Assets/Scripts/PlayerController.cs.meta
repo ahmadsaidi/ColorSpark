@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c0a5c38576769d842b378115500796de
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - goodpick: {instanceID: 0}
+  - blueAduio: {fileID: 8300000, guid: 236a11effbeb7d24383b974b03f4da35, type: 3}
+  - greenAudio: {fileID: 8300000, guid: bf13e1f9b480eb742be62c8f6cac0f5d, type: 3}
+  - redAudio: {fileID: 8300000, guid: ee01c3d6e0e690848a639275392de1d1, type: 3}
+  - yellowAudio: {fileID: 8300000, guid: 65e2068faf42ded448ad29de19a206eb, type: 3}
+  - pushboxAudio: {fileID: 8300000, guid: 9fc33062985384f49903252d5e35fc3d, type: 3}
+  - runfasterAudio: {fileID: 8300000, guid: f7e80387025177e4ab6cf708b439ba94, type: 3}
+  - teleportAudio: {fileID: 8300000, guid: 029cab137a7d2354db2caf0b7fedb252, type: 3}
+  - jumphigherAudio: {fileID: 8300000, guid: a6309e9fdf74abc4fbc0bd1594b9bfd2, type: 3}
+  - tilePickupAudio: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

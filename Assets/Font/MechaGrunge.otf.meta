@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 93ae5b40ef3f6844e8c812a6fbe32357
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Mecha Grunge
+  fontNames:
+  - Mecha Grunge
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 029ed809eb86b0847ab683fab4e6ceee, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

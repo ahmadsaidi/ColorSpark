@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - blue
+  - red
+  - green
+  - green
+  - land
+  - floor
+  - trap
+  - sand
+  - finish
+  - yellow
+  - white
+  - whitebox
+  - tele
+  - engine
+  - hole
+  - Door
+  - TUT1_mission
+  - Fixedtele
+  - blast
+  - move
+  - wall
+  - robot_light
+  - float
+  - need_tele
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Sky
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
