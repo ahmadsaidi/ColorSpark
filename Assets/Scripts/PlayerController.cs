@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         speed = 40;
         curspeed = 0f;
         acceleration = 1f;
-        rotationSpeed = 75;
+        rotationSpeed = 75 ;
         rb.freezeRotation = true;
         powerups = rb.gameObject.GetComponent<PowerUps>();
         gm = FindObjectOfType<GameManager>();
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, rotation, 0);
         Debug.Log(curspeed);
         Vector3 forward_direction = transform.TransformDirection(Vector3.left);
-        Vector3 forward_velocity = new Vector3(20*forward_direction.z * translationx, rb.velocity.y, -20*forward_direction.x*translationx);
+        Vector3 forward_velocity = new Vector3(30*forward_direction.z * translationx, rb.velocity.y, -30*forward_direction.x*translationx);
         rb.velocity = forward_velocity;
 
         if (stationary && translationx != 0)
@@ -219,6 +219,15 @@ public class PlayerController : MonoBehaviour
                 if (hitColliders[i].tag == "tele" && powerups.tele_num > 0)
                 {
                     Destroy(hitColliders[i].gameObject);
+                    if (powerups.yellowbox2 != null)
+                    {
+                        Debug.Log("get");
+                        powerups.yellowbox1 = powerups.yellowbox2;
+                    }
+ 
+                   
+
+                    
                     powerups.tele_num--;
 
                 }
