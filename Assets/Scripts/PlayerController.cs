@@ -47,8 +47,13 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         speed = 40;
         curspeed = 0f;
+<<<<<<< HEAD
         acceleration = 2f;
         rotationSpeed = 75;
+=======
+        acceleration = 1f;
+        rotationSpeed = 75 ;
+>>>>>>> 1e31016bea6b65dc6bff928470dfa7cb797b712b
         rb.freezeRotation = true;
         powerups = rb.gameObject.GetComponent<PowerUps>();
         gm = FindObjectOfType<GameManager>();
@@ -97,7 +102,11 @@ public class PlayerController : MonoBehaviour
         }
         transform.Rotate(0, rotation, 0);
         Vector3 forward_direction = transform.TransformDirection(Vector3.left);
+<<<<<<< HEAD
         Vector3 forward_velocity = new Vector3(28 * forward_direction.z * translationx, rb.velocity.y, -28 * forward_direction.x * translationx);
+=======
+        Vector3 forward_velocity = new Vector3(30*forward_direction.z * translationx, rb.velocity.y, -30*forward_direction.x*translationx);
+>>>>>>> 1e31016bea6b65dc6bff928470dfa7cb797b712b
         rb.velocity = forward_velocity;
 
         if (stationary && translationx != 0)
@@ -177,6 +186,15 @@ public class PlayerController : MonoBehaviour
                 if (hitColliders[i].tag == "tele" && powerups.tele_num > 0)
                 {
                     Destroy(hitColliders[i].gameObject);
+                    if (powerups.yellowbox2 != null)
+                    {
+                        Debug.Log("get");
+                        powerups.yellowbox1 = powerups.yellowbox2;
+                    }
+ 
+                   
+
+                    
                     powerups.tele_num--;
                 }
             }
