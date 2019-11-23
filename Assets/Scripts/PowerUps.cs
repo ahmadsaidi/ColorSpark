@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class PowerUps : MonoBehaviour
 {
@@ -24,6 +24,7 @@ public class PowerUps : MonoBehaviour
     public GameObject yellowbox2;
     public int tele_num = 0;
     MusicManager mm;
+    public Text msgDisp;
     // public Color engine_color;
 
 
@@ -144,6 +145,14 @@ public class PowerUps : MonoBehaviour
                 tilePickupAudio.PlayOneShot(mm.dropGreenAudio);
                 pc.whitePower();
             }
+        } else if (hitColliders.Length > 2 && !foundEngine && pc.color != Color.white)
+        {
+            string msg = "Cannot drop spark here.";
+            if (msgDisp)
+            {
+                msgDisp.text = msg;
+                pc.msgDispTimer = 2;
+            }
         }
     }
 
@@ -155,6 +164,12 @@ public class PowerUps : MonoBehaviour
         Vector3 forwardDirection =  new Vector3 (-90 *forward.x, 0, -180 * forward.z);
         if (hitColliders.Length >= 1)
         {
+            if (msgDisp)
+            {
+                string msg = "Cannot place portal here.";
+                msgDisp.text = msg;
+                pc.msgDispTimer = 2;
+            }
             return;
         }
         if (tele_num == 0)
