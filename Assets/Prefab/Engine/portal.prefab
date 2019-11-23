@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1091006005305254924}
   - component: {fileID: 6636196185336076533}
   - component: {fileID: 5450946086855233406}
+  - component: {fileID: 6833903195976900827}
   m_Layer: 0
   m_Name: portal
   m_TagString: tele
@@ -92,3 +93,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.9528277, y: 0.3316635, z: 3.986722}
   m_Center: {x: 0, y: 0.16583093, z: 0.28173682}
+--- !u!114 &6833903195976900827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910145467122215977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87fd2a0c421d7f5479b0e0fb9a3c3489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat1: {fileID: 2100000, guid: c148c1b1f6cbde349a5a027a2328e875, type: 2}
+  mat2: {fileID: 2100000, guid: 38fc98d09eb2e2b42babd2fb2fa7442c, type: 2}
