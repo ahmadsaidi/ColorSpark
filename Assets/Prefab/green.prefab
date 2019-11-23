@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5331562301491968748}
   - component: {fileID: 2328370198717333540}
   m_Layer: 0
-  m_Name: Green
+  m_Name: green
   m_TagString: green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2555653172586502232}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

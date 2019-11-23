@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody rb;
-
     public float speed;
     public float rotationSpeed;
     // public float jumpspeed;
@@ -15,7 +14,7 @@ public class PlayerController : MonoBehaviour
     PowerUps powerups;
     public Light led;
     public AudioSource tilePickupAudio;
-    bool eat = false;
+    bool eat = true;
     bool jump = true;
     public bool carry = false;
     public GameObject pauseMenu;
@@ -42,17 +41,13 @@ public class PlayerController : MonoBehaviour
     float lastHit = 0;
     public float msgDispTimer = 0;
     public Text msgDisp;
-    //public WheelCollider leftwheel;
-    //public WheelCollider rightwheel;
-
-
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         speed = 40;
         curspeed = 0f;
-        acceleration = 1f;
+        acceleration = 2f;
         rotationSpeed = 75;
         rb.freezeRotation = true;
         powerups = rb.gameObject.GetComponent<PowerUps>();
@@ -64,9 +59,6 @@ public class PlayerController : MonoBehaviour
         control = false;
         msgDisp.text = "";
     }
-
-
-
     private void Update()
     {
         if (transform.position.y < -100)
@@ -86,20 +78,16 @@ public class PlayerController : MonoBehaviour
         {
             curspeed -= acceleration;
         }
-
-        
         float translationx = Input.GetAxis("Vertical") * curspeed;
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
         float rotationv = Input.GetAxis("Camera Vertical") * rotationSpeed;
         float rotationh = Input.GetAxis("Camera Horizontal") * rotationSpeed;
 
-        //float motor = translationx*100;
         axel.Rotate(0, 0, -0.1f * translationx);
         translationx *= Time.deltaTime;
         rotationv *= Time.deltaTime;
         rotationh *= Time.deltaTime;
         rotation *= Time.deltaTime;
-        //led.transform.position = led.transform.parent.transform.position;
 
         if (currHorRot != 0 && translationx != 0)
         {
@@ -107,11 +95,9 @@ public class PlayerController : MonoBehaviour
             cameraAnchorH.transform.Rotate(0, -currHorRot / 5, 0.0f);
             currHorRot -= currHorRot / 5;
         }
-        // transform.Translate(0, 0, translationx);
         transform.Rotate(0, rotation, 0);
-        Debug.Log(curspeed);
         Vector3 forward_direction = transform.TransformDirection(Vector3.left);
-        Vector3 forward_velocity = new Vector3(20*forward_direction.z * translationx, rb.velocity.y, -20*forward_direction.x*translationx);
+        Vector3 forward_velocity = new Vector3(28 * forward_direction.z * translationx, rb.velocity.y, -28 * forward_direction.x * translationx);
         rb.velocity = forward_velocity;
 
         if (stationary && translationx != 0)
@@ -127,22 +113,7 @@ public class PlayerController : MonoBehaviour
         }
         stationary = translationx == 0;
 
-
-        //if (rotationv != 0 && (currVerRot < 10 && currVerRot > -10))
-        //{
-            //currVerRot += rotationv;
-            //cameraAnchorV.transform.Rotate(rotationv, 0, 0.0f);
-        //}
-        //else if (rotationv == 0 && (currVerRot > 0.01 || currVerRot < -0.01))
-        //{
-            //cameraAnchorV.transform.Rotate(-currVerRot / 10, 0, 0.0f);
-            //currVerRot -= currVerRot / 10;
-        //}
-        //else if (rotationv == 0 && currVerRot < 0.1 && currVerRot > -0.1)
-        //{
-            //cameraAnchorV.transform.Rotate(-currVerRot, 0, 0.0f);
-            currVerRot = 0;
-        //}
+        currVerRot = 0;
 
         if (rotationh != 0 && (currHorRot < 90 && currHorRot > -90))
         {
@@ -170,23 +141,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && jump == true && paused == false)
         {
-            // red for high jump
-            //if (color == Color.red) {
-            //   rb.AddForce(Vector3.up * 1.3f * jumpspeed);
-            //}
-            //else
-            //{
-            // rb.AddForce(Vector3.up * jumpspeed);
-            rb.velocity += new Vector3(0, 40, 0); 
+            rb.velocity += new Vector3(0, 40, 0);
             tilePickupAudio.PlayOneShot(mm.jump);
             animator.SetTrigger("startedJumping");
-            //}
             jump = false;
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
-            // get forward direciton
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             forward = new Vector3(-5 * forward.x, 8, -5 * forward.z);
             powerups.Createbox(transform.position + forward, color);
@@ -206,31 +168,21 @@ public class PlayerController : MonoBehaviour
             {
                 teleHere = true;
                 break;
-
             }
         }
         if (Input.GetButtonDown("Fire3") && (color == Color.blue) && teleHere)
         {
-            
-
-
             for (int i = 0; i < hitColliders.Length; i++)
             {
                 if (hitColliders[i].tag == "tele" && powerups.tele_num > 0)
                 {
                     Destroy(hitColliders[i].gameObject);
                     powerups.tele_num--;
-
                 }
             }
-
-
         }
         else if (Input.GetButtonDown("Fire3") && carry == false)
         {
-           
-
-
             for (int i = 0; i < hitColliders.Length; i++)
             {
 
@@ -246,7 +198,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetButtonDown("Fire2") && carry)
         {
-       
+
             if (hitColliders.Length < 5)
             {
                 Vector3 forward = transform.TransformDirection(Vector3.left);
@@ -254,7 +206,8 @@ public class PlayerController : MonoBehaviour
                 carryThing.transform.position = transform.position + forward;
                 carry = false;
                 tilePickupAudio.PlayOneShot(mm.putDownBox);
-            } else if (msgDisp)
+            }
+            else if (msgDisp)
             {
                 msgDispTimer = 2;
                 string msg = "Cannot place box here.";
@@ -276,17 +229,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && (color == Color.red))
         {
-           
+
 
             for (int i = 0; i < hitColliders.Length; i++)
             {
-                Debug.Log(hitColliders[i]);
                 if (hitColliders[i].tag == "blast")
                 {
-
                     Destroy(hitColliders[i].gameObject);
-
-
                 }
                 //tilePickupAudio.PlayOneShot(mm.blastAudio);
             }
@@ -317,9 +266,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetButtonDown("Jump"))
         {
-            
-
-
             for (int i = 0; i < hitColliders.Length; i++)
             {
                 if (hitColliders[i].tag == "tele" && powerups.tele_num == 2)
@@ -340,8 +286,6 @@ public class PlayerController : MonoBehaviour
                         Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
                         transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, 0, off.z);
                     }
-
-
                 }
 
                 if (hitColliders[i].tag == "Fixedtele")
@@ -352,14 +296,9 @@ public class PlayerController : MonoBehaviour
                     tilePickupAudio.PlayOneShot(mm.teleportAudio);
                     Vector3 off = 2 * other.transform.TransformDirection(Vector3.up);
                     transform.position = other.transform.position + new Vector3(off.x, 0, off.z);
-
-
-
                 }
             }
         }
-
-
 
         if (Input.GetButtonDown("Restart"))
         {
@@ -374,7 +313,6 @@ public class PlayerController : MonoBehaviour
             jump = true;
             Time.timeScale = 1;
             paused = false;
-
         }
 
         if (Input.GetButtonDown("Fire2") && paused && control == false)
@@ -399,7 +337,6 @@ public class PlayerController : MonoBehaviour
             pauseMenu.SetActive(false);
             controller.SetActive(true);
             control = true;
-       
         }
 
         if (Input.GetButtonDown("Fire1") && paused && control == true)
@@ -408,15 +345,7 @@ public class PlayerController : MonoBehaviour
             controller.SetActive(false);
             pauseMenu.SetActive(false);
             control = false;
-
         }
-
-
-
-
-
-
-
 
         if (!hitWall)
         {
@@ -431,30 +360,23 @@ public class PlayerController : MonoBehaviour
         {
             msgDisp.color = new Color(1, 1, 1, msgDispTimer / 2);
         }
-
     }
 
- 
+
     void OnCollisionEnter(Collision collision)
     {
-        jump = true;
-
-        eatPower(collision);
-
         if (collision.collider.gameObject.CompareTag("sand"))
         {
-            //if (color != Color.green) {
             jump = false;
             StartCoroutine(dekroy(collision.collider.gameObject));
-            //}
-        } else if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast") || collision.collider.gameObject.CompareTag("move")) && lastHit > 1f)
+        }
+        else if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")) && lastHit > 1f)
         {
-            //if (color != Color.green) {
-            //tilePickupAudio.PlayOneShot(mm.hitWall);
             hitWall = true;
             jump = false;
             lastHit = 0;
-            //}
+        }else{
+            jump = true;
         }
     }
 
@@ -463,31 +385,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         Destroy(o);
     }
-    // void OnCollisionStay(Collision collision)
-    // {
-
-    //     if (Input.GetButton("Jump") && color == Color.blue)
-    //     {
-    //         if (collision.gameObject.GetComponent<Rigidbody>() && collision.gameObject.tag == "move")
-    //         {
-    //             tilePickupAudio.PlayOneShot(mm.pushboxAudio);
-    //             collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-    //         }
-
-    //     }
-    //     //This is to make sure the colliders update
-    //     if (collision.gameObject.CompareTag("float"))
-    //     {
-    //         transform.Translate(0, 0.01f, 0);
-    //     }
-    //     // stop people from going through walls hopefully
-    //     if (collision.gameObject.CompareTag("wall"))
-    //     {
-    //         transform.Translate(-0.1f, 0, -0.1f);
-    //     }
-
-    // }
-
 
     void OnCollisionExit(Collision collision)
     {
@@ -495,15 +392,17 @@ public class PlayerController : MonoBehaviour
         {
             collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
-        if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast") || collision.collider.gameObject.CompareTag("move"))){
+        if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")))
+        {
             hitWall = false;
             jump = true;
         }
-
+        
     }
 
     void OnTriggerEnter(Collider other)
     {
+        eatPower(other);
         if (other.gameObject.CompareTag("hole"))
         {
             gm.LoseGame();
@@ -513,13 +412,14 @@ public class PlayerController : MonoBehaviour
             Debug.Log("win");
             gm.WinLevel();
         }
-
-
-        // }
-
-
     }
 
+    void OnTriggerExit(Collider other) {
+        if (other.gameObject.CompareTag("green") || other.gameObject.CompareTag("red") || other.gameObject.CompareTag("blue"))
+        {
+            eat = true;
+        }
+    }
 
 
     public void redPower()
@@ -529,7 +429,6 @@ public class PlayerController : MonoBehaviour
         tilePickupAudio.PlayOneShot(mm.redAudio);
         Icon.GetComponent<Image>().color = Color.white;
         Icon.GetComponent<Image>().sprite = Icon.Drill;
-
     }
 
 
@@ -561,7 +460,6 @@ public class PlayerController : MonoBehaviour
 
     void ChangeColor(Color color)
     {
-        //led.color = color;
         Material mymat1 = wheel1.GetComponent<Renderer>().material;
         mymat1.SetColor("_EmissionColor", color);
         Material mymat2 = wheel2.GetComponent<Renderer>().material;
@@ -570,49 +468,44 @@ public class PlayerController : MonoBehaviour
 
 
 
-    void eatPower(Collision item)
+    void eatPower(Collider item)
     {
+        
         if ((item.gameObject.CompareTag("green")) || (item.gameObject.CompareTag("blue")) ||
-            (item.gameObject.CompareTag("red")) || (item.gameObject.CompareTag("yellow")))
+            (item.gameObject.CompareTag("red")))
         {
-            bool check = item.gameObject.GetComponent<SparkController>().eat;
-            if (!check)
-            {
-                return;
+            if (eat){
+                if (color == Color.blue){
+                    GameObject spark = Instantiate(powerups.bluespark, transform.position+ new Vector3(0,3,0), Quaternion.identity);
+                    eat = false;
+                }
+                else if (color == Color.green){
+                    GameObject spark = Instantiate(powerups.greenspark, transform.position+ new Vector3(0,3,0), Quaternion.identity);
+                    eat = false;
+                }
+                else if (color == Color.red){
+                    GameObject spark = Instantiate(powerups.redspark, transform.position+ new Vector3(0,3,0), Quaternion.identity);
+                    eat = false;
+                }
+
+
+                if (item.gameObject.CompareTag("green"))
+                {
+                    item.gameObject.SetActive(false);
+                    greenPower();
+                }
+                else if (item.gameObject.CompareTag("blue"))
+                {
+                    item.gameObject.SetActive(false);
+                    bluePower();
+                }
+                else if (item.gameObject.CompareTag("red"))
+                {
+                    item.gameObject.SetActive(false);
+                    redPower();
+                }
             }
         }
-
-
-        if (item.gameObject.CompareTag("green") && color == Color.white)
-        {
-            item.gameObject.SetActive(false);
-            greenPower();
-            powerups.count_green--;
-
-        }
-
-        else if ((item.gameObject.CompareTag("blue") && color == Color.white))
-        {
-            item.gameObject.SetActive(false);
-            bluePower();
-            powerups.count_blue--;
-
-        }
-        else if (item.gameObject.CompareTag("red") && color == Color.white)
-        {
-
-            item.gameObject.SetActive(false);
-            redPower();
-            powerups.count_red--;
-
-        }
-
-
-
-
-
-
     }
-
 }
 

@@ -14,11 +14,6 @@ public class PowerUps : MonoBehaviour
     PlayerController control;
     public AudioSource tilePickupAudio;
     bool fast, teleport, highJump, push = false;
-    public int count_yellow = 0;
-    public int count_white = 0;
-    public int count_blue = 0;
-    public int count_red = 0;
-    public int count_green = 0;
     PlayerController pc;
     public GameObject yellowbox1;
     public GameObject yellowbox2;
@@ -63,13 +58,11 @@ public class PowerUps : MonoBehaviour
                         GetEnginePower(position + 5 * new Vector3(forward.x, 0, forward.z));
                     }
                     foundEngine = true;
-                    if (color == Color.blue && count_blue < 1)
+                    if (color == Color.blue )
                     {
                         GameObject spark = Instantiate(bluespark, newpos, Quaternion.identity);
                         spark.GetComponent<SparkController>().eat = false;
-
-                        //  engine_color = Color.yellow;
-                        count_blue++;
+                        spark.GetComponent<SphereCollider>().isTrigger = false;
                         gc.color = Color.blue;
                         gc.blue();
                         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("tele");
@@ -83,24 +76,22 @@ public class PowerUps : MonoBehaviour
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
 
                     }
-                    if (color == Color.red && count_red < 1)
+                    if (color == Color.red )
                     {
                         GameObject spark = Instantiate(redspark, newpos, Quaternion.identity);
                         spark.transform.parent = hitCollidersFront[i].gameObject.transform;
                         spark.GetComponent<SparkController>().eat = false;
-                        count_red++;
-                        //engine_color = Color.red;
+                        spark.GetComponent<SphereCollider>().isTrigger = false;
                         gc.color = Color.red;
                         gc.red();
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
 
                     }
-                    if (color == Color.green && count_green < 1)
+                    if (color == Color.green)
                     {
                         GameObject spark = Instantiate(greenspark, newpos, Quaternion.identity);
                         spark.GetComponent<SparkController>().eat = false;
-                        count_green++;
-                        //engine_color = Color.green;
+                        spark.GetComponent<SphereCollider>().isTrigger = false;
                         gc.color = Color.green;
                         gc.green();
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
@@ -124,24 +115,21 @@ public class PowerUps : MonoBehaviour
         if (hitColliders.Length <= 2 && !foundEngine)
         {
             
-            if (color == Color.blue && count_blue < 1)
+            if (color == Color.blue)
             {
                 GameObject spark = Instantiate(bluespark, position, Quaternion.identity);
-                count_blue++;
                 tilePickupAudio.PlayOneShot(mm.dropBlueAudio);
                 pc.whitePower();
             }
-            if (color == Color.red && count_red < 1)
+            if (color == Color.red )
             {
                 Instantiate(redspark, position, Quaternion.identity);
-                count_red++;
                 tilePickupAudio.PlayOneShot(mm.dropRedAudio);
                 pc.whitePower();
             }
-            if (color == Color.green && count_green < 1)
+            if (color == Color.green)
             {
                 Instantiate(greenspark, position, Quaternion.identity);
-                count_green++;
                 tilePickupAudio.PlayOneShot(mm.dropGreenAudio);
                 pc.whitePower();
             }
@@ -215,7 +203,6 @@ public class PowerUps : MonoBehaviour
                         intersecting[j].gameObject.SetActive(false);
                         pc.greenPower();
                         gc.white();
-                        count_green--;
                         tilePickupAudio.PlayOneShot(mm.greenAudio);
                     }
 
@@ -225,7 +212,6 @@ public class PowerUps : MonoBehaviour
                         intersecting[j].gameObject.SetActive(false);
                         pc.redPower();
                         gc.white();
-                        count_red--;
                         tilePickupAudio.PlayOneShot(mm.redAudio);
                     }
 
@@ -239,8 +225,6 @@ public class PowerUps : MonoBehaviour
                         gc.flo = false;
                         gc.fall = true;
                         tilePickupAudio.PlayOneShot(mm.blueAudio);
-
-                        count_blue--;
                     }
 
 

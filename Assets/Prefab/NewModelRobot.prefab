@@ -3190,11 +3190,11 @@ GameObject:
   - component: {fileID: 7249106094416459376}
   - component: {fileID: 7249106094416459374}
   - component: {fileID: 7249106094416459377}
-  - component: {fileID: 7249106094416459378}
   - component: {fileID: 7249106094416459381}
   - component: {fileID: 7249106094416459380}
   - component: {fileID: 7249106094416459379}
   - component: {fileID: 9055264397425044481}
+  - component: {fileID: 8363756170044693409}
   m_Layer: 0
   m_Name: NewModelRobot
   m_TagString: Player
@@ -3253,19 +3253,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7249106094416459378
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7249106094416459383}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.455284, y: 0.29600757, z: 0.36280245}
-  m_Center: {x: 0.009713888, y: 0.15279804, z: 0.0021704435}
 --- !u!82 &7249106094416459381
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3377,7 +3364,6 @@ MonoBehaviour:
   rb: {fileID: 0}
   speed: 0
   rotationSpeed: 0
-  jumpspeed: 700000
   color: {r: 1, g: 1, b: 1, a: 1}
   led: {fileID: 0}
   tilePickupAudio: {fileID: 0}
@@ -3392,6 +3378,8 @@ MonoBehaviour:
   cameraAnchorH: {fileID: 8823505464079855879}
   acceleration: 0
   control: 0
+  msgDispTimer: 0
+  msgDisp: {fileID: 0}
 --- !u!114 &7249106094416459379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3412,14 +3400,10 @@ MonoBehaviour:
   player: {fileID: 7249106094416459383}
   tele: {fileID: 4910145467122215977, guid: b619a4952324f774498e32fd9304783f, type: 3}
   tilePickupAudio: {fileID: 0}
-  count_yellow: 0
-  count_white: 0
-  count_blue: 0
-  count_red: 0
-  count_green: 0
   yellowbox1: {fileID: 0}
   yellowbox2: {fileID: 0}
   tele_num: 0
+  msgDisp: {fileID: 0}
 --- !u!65 &9055264397425044481
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3433,6 +3417,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.22497347, y: 0.75305337, z: 0.27770784}
   m_Center: {x: -0.00093651674, y: 0.38987622, z: 0.030332267}
+--- !u!135 &8363756170044693409
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7249106094416459383}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &7249106094478476768
 GameObject:
   m_ObjectHideFlags: 0
