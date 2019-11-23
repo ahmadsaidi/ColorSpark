@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
     public float rotationSpeed;
-    public float jumpspeed = 7000;
+    // public float jumpspeed;
     public Color color = Color.white;
     PowerUps powerups;
     public Light led;
@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     public bool control;
     bool hitWall = false;
     float lastHit = 0;
+    public float msgDispTimer = 0;
+    public Text msgDisp;
     //public WheelCollider leftwheel;
     //public WheelCollider rightwheel;
 
@@ -60,7 +62,9 @@ public class PlayerController : MonoBehaviour
         Icon = FindObjectOfType<RobotIcon>();
         animator = GetComponent<Animator>();
         control = false;
+        msgDisp.text = "";
     }
+
 
 
     private void Update()
@@ -72,22 +76,18 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetAxis("Vertical") != 0)
         {
-
             curspeed += acceleration;
-
             if (curspeed > speed)
             {
                 curspeed = speed;
             }
-
-
         }
         else if (curspeed != 0)
         {
             curspeed -= acceleration;
         }
 
-
+        
         float translationx = Input.GetAxis("Vertical") * curspeed;
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
         float rotationv = Input.GetAxis("Camera Vertical") * rotationSpeed;
@@ -107,8 +107,12 @@ public class PlayerController : MonoBehaviour
             cameraAnchorH.transform.Rotate(0, -currHorRot / 5, 0.0f);
             currHorRot -= currHorRot / 5;
         }
-        transform.Translate(0, 0, translationx);
+        // transform.Translate(0, 0, translationx);
         transform.Rotate(0, rotation, 0);
+        Debug.Log(curspeed);
+        Vector3 forward_direction = transform.TransformDirection(Vector3.left);
+        Vector3 forward_velocity = new Vector3(20*forward_direction.z * translationx, rb.velocity.y, -20*forward_direction.x*translationx);
+        rb.velocity = forward_velocity;
 
         if (stationary && translationx != 0)
         {
@@ -122,39 +126,23 @@ public class PlayerController : MonoBehaviour
             }
         }
         stationary = translationx == 0;
-        //float angle = Mathf.PI * transform.rotation.eulerAngles.y / 180;
-        //if (rb.velocity.magnitude < speed)
+
+
+        //if (rotationv != 0 && (currVerRot < 10 && currVerRot > -10))
         //{
-        //    rb.AddForce( 10 * translationx * Mathf.Cos(angle),0, -10 * translationx * Mathf.Sin(angle), ForceMode.VelocityChange);
+            //currVerRot += rotationv;
+            //cameraAnchorV.transform.Rotate(rotationv, 0, 0.0f);
         //}
-        //if (translationx < 0.1 && translationx > -0.1)
+        //else if (rotationv == 0 && (currVerRot > 0.01 || currVerRot < -0.01))
         //{
-        //    rb.velocity = Vector3.Scale(rb.velocity, new Vector3(0.01f, 1, 0.01f));
-        //}        //Debug.Log(angle);
-        //float steering = rotation;
-
-        //leftwheel.steerAngle = steering;
-        //rightwheel.steerAngle = steering;
-        //leftwheel.motorTorque = motor;
-        //rightwheel.motorTorque = motor;
-
-
-
-        if (rotationv != 0 && (currVerRot < 10 && currVerRot > -10))
-        {
-            currVerRot += rotationv;
-            cameraAnchorV.transform.Rotate(rotationv, 0, 0.0f);
-        }
-        else if (rotationv == 0 && (currVerRot > 0.01 || currVerRot < -0.01))
-        {
-            cameraAnchorV.transform.Rotate(-currVerRot / 10, 0, 0.0f);
-            currVerRot -= currVerRot / 10;
-        }
-        else if (rotationv == 0 && currVerRot < 0.1 && currVerRot > -0.1)
-        {
-            cameraAnchorV.transform.Rotate(-currVerRot, 0, 0.0f);
+            //cameraAnchorV.transform.Rotate(-currVerRot / 10, 0, 0.0f);
+            //currVerRot -= currVerRot / 10;
+        //}
+        //else if (rotationv == 0 && currVerRot < 0.1 && currVerRot > -0.1)
+        //{
+            //cameraAnchorV.transform.Rotate(-currVerRot, 0, 0.0f);
             currVerRot = 0;
-        }
+        //}
 
         if (rotationh != 0 && (currHorRot < 90 && currHorRot > -90))
         {
@@ -188,7 +176,8 @@ public class PlayerController : MonoBehaviour
             //}
             //else
             //{
-            rb.AddForce(Vector3.up * jumpspeed);
+            // rb.AddForce(Vector3.up * jumpspeed);
+            rb.velocity += new Vector3(0, 40, 0); 
             tilePickupAudio.PlayOneShot(mm.jump);
             animator.SetTrigger("startedJumping");
             //}
@@ -265,6 +254,11 @@ public class PlayerController : MonoBehaviour
                 carryThing.transform.position = transform.position + forward;
                 carry = false;
                 tilePickupAudio.PlayOneShot(mm.putDownBox);
+            } else if (msgDisp)
+            {
+                msgDispTimer = 2;
+                string msg = "Cannot place box here.";
+                msgDisp.text = msg;
             }
 
         }
@@ -428,14 +422,19 @@ public class PlayerController : MonoBehaviour
         {
             lastHit += Time.deltaTime;
         }
+        msgDispTimer -= Time.deltaTime;
+        if (msgDispTimer < 0)
+        {
+            msgDispTimer = 0;
+        }
+        if (msgDisp)
+        {
+            msgDisp.color = new Color(1, 1, 1, msgDispTimer / 2);
+        }
 
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-    }
-
+ 
     void OnCollisionEnter(Collision collision)
     {
         jump = true;
@@ -448,11 +447,12 @@ public class PlayerController : MonoBehaviour
             jump = false;
             StartCoroutine(dekroy(collision.collider.gameObject));
             //}
-        } else if (collision.collider.gameObject.CompareTag("wall") && lastHit > 1f)
+        } else if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast") || collision.collider.gameObject.CompareTag("move")) && lastHit > 1f)
         {
             //if (color != Color.green) {
-            tilePickupAudio.PlayOneShot(mm.hitWall);
+            //tilePickupAudio.PlayOneShot(mm.hitWall);
             hitWall = true;
+            jump = false;
             lastHit = 0;
             //}
         }
@@ -463,30 +463,30 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         Destroy(o);
     }
-    void OnCollisionStay(Collision collision)
-    {
+    // void OnCollisionStay(Collision collision)
+    // {
 
-        if (Input.GetButton("Jump") && color == Color.blue)
-        {
-            if (collision.gameObject.GetComponent<Rigidbody>() && collision.gameObject.tag == "move")
-            {
-                tilePickupAudio.PlayOneShot(mm.pushboxAudio);
-                collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            }
+    //     if (Input.GetButton("Jump") && color == Color.blue)
+    //     {
+    //         if (collision.gameObject.GetComponent<Rigidbody>() && collision.gameObject.tag == "move")
+    //         {
+    //             tilePickupAudio.PlayOneShot(mm.pushboxAudio);
+    //             collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+    //         }
 
-        }
-        //This is to make sure the colliders update
-        if (collision.gameObject.CompareTag("float"))
-        {
-            transform.Translate(0, 0.01f, 0);
-        }
-        // stop people from going through walls hopefully
-        if (collision.gameObject.CompareTag("wall"))
-        {
-            transform.Translate(-0.1f, 0, -0.1f);
-        }
+    //     }
+    //     //This is to make sure the colliders update
+    //     if (collision.gameObject.CompareTag("float"))
+    //     {
+    //         transform.Translate(0, 0.01f, 0);
+    //     }
+    //     // stop people from going through walls hopefully
+    //     if (collision.gameObject.CompareTag("wall"))
+    //     {
+    //         transform.Translate(-0.1f, 0, -0.1f);
+    //     }
 
-    }
+    // }
 
 
     void OnCollisionExit(Collision collision)
@@ -495,22 +495,18 @@ public class PlayerController : MonoBehaviour
         {
             collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
-        if (collision.gameObject.CompareTag("wall")){
+        if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast") || collision.collider.gameObject.CompareTag("move"))){
             hitWall = false;
+            jump = true;
         }
 
     }
 
     void OnTriggerEnter(Collider other)
     {
-
-
-
-
         if (other.gameObject.CompareTag("hole"))
         {
             gm.LoseGame();
-
         }
         else if (other.gameObject.CompareTag("finish"))
         {
