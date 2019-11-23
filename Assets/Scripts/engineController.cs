@@ -26,6 +26,7 @@ public class engineController : MonoBehaviour
     Animator right;
     GameObject main;
     GameObject player;
+    public CPC_CameraPath path;
 
 
     // Start is called before the first frame update
@@ -140,14 +141,20 @@ public class engineController : MonoBehaviour
             {
                 return;
             }
+            CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
+            path.points.Add(start);
+            CPC_Point end = new CPC_Point(floatCamera.transform.position, floatCamera.transform.rotation);
+            path.points.Add(end);
+            path.looped = false;
+            player.GetComponent<PlayerController>().enabled = false;
+
+            main.GetComponent<cameraCollision>().focus = true;
+            path.PlayPath(3);
+
             StartCoroutine(startFloat());
             IEnumerator startFloat()
             {
-
-                player.GetComponent<PlayerController>().enabled = false;
-
-                main.GetComponent<cameraCollision>().focus = true;
-
+                yield return new WaitForSeconds(3);
                 floatCamera.SetActive(true);
                 main.GetComponent<Camera>().enabled = false;
                 Transform box = objectToFloat.transform.GetChild(0);
@@ -158,12 +165,20 @@ public class engineController : MonoBehaviour
                     //flo = true;
                     trigger = true;
                 }
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1.5f);
 
                 main.GetComponent<Camera>().enabled = true;
                 floatCamera.SetActive(false);
+                path.points = new List<CPC_Point>();
+                CPC_Point newPos = new CPC_Point(floatCamera.transform.position, floatCamera.transform.rotation);
+                path.points.Add(newPos);
+                path.points.Add(start);
+                path.PlayPath(3);
+                yield return new WaitForSeconds(3);
+
                 main.GetComponent<cameraCollision>().focus = false;
                 player.GetComponent<PlayerController>().enabled = true;
+                path.points = new List<CPC_Point>();
             }
 
             Icon.GetComponent<Image>().color = Color.white;
@@ -180,6 +195,18 @@ public class engineController : MonoBehaviour
     {
         if (color == Color.blue && yellowbox1 && yellowbox2)
         {
+            CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
+            path.points.Add(start);
+            GameObject temp1 = new GameObject();
+            temp1.transform.position = yellowbox1.transform.position + 30*yellowbox1.transform.TransformDirection(Vector3.up)+new Vector3(0, 5, 0);
+            temp1.transform.LookAt(yellowbox1.transform.position);
+            path.points.Add(new CPC_Point(temp1.transform.position, temp1.transform.rotation));
+
+            temp1.transform.position = yellowbox2.transform.position + 30 * yellowbox2.transform.TransformDirection(Vector3.up) + new Vector3(0, 5, 0);
+            temp1.transform.LookAt(yellowbox2.transform.position);
+            path.points.Add(new CPC_Point(temp1.transform.position, temp1.transform.rotation));
+            path.looped = true;
+            path.PlayPath(7.5f);
             //slideDoors(true);
             StartCoroutine(buildTele());
             IEnumerator buildTele()
@@ -187,21 +214,17 @@ public class engineController : MonoBehaviour
                 player.GetComponent<PlayerController>().enabled = false;
 
                 main.GetComponent<cameraCollision>().focus = true;
-                Quaternion torobot = main.transform.rotation;
-
-                main.transform.position = yellowbox1.transform.position + new Vector3(15, 0, -5);
-                main.transform.LookAt(yellowbox1.transform.position);
+                
                 yellowbox1.SetActive(true);
                 yield return new WaitForSeconds(1.5f);
 
-                main.transform.position = yellowbox2.transform.position + new Vector3(15, 0, -5);
-                main.transform.LookAt(yellowbox2.transform.position);
                 yellowbox2.SetActive(true);
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(6f);
 
                 main.GetComponent<cameraCollision>().focus = false;
-                main.transform.rotation = torobot;
                 player.GetComponent<PlayerController>().enabled = true;
+                path.points = new List<CPC_Point>();
+                Destroy(temp1);
 
             }
 
@@ -219,18 +242,27 @@ public class engineController : MonoBehaviour
     {
         if (color == Color.green && bridge)
         {
-
+            CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
+            path.points.Add(start);
+            Camera bridgeCam = bridge.GetComponent<Camera>();
+            CPC_Point end = new CPC_Point(bridgeCam.transform.position, bridgeCam.transform.rotation);
+            path.points.Add(end);
+            path.looped = true;
+            path.PlayPath(6);
+            
             StartCoroutine(buildBridge());
 
             IEnumerator buildBridge()
             {
+                yield return new WaitForSeconds(3);
+                path.PausePath();
                 player.GetComponent<PlayerController>().enabled = false;
 
                 main.GetComponent<cameraCollision>().focus = true;
 
-                Camera bridgeCam = bridge.GetComponent<Camera>();
-                bridgeCam.enabled = true;
-                main.GetComponent<Camera>().enabled = false;
+                //Camera bridgeCam = bridge.GetComponent<Camera>();
+                //bridgeCam.enabled = true;
+                //main.GetComponent<Camera>().enabled = false;
                 for (int i = 0; i < bridge.transform.childCount; i++)
                 {
 
@@ -239,10 +271,15 @@ public class engineController : MonoBehaviour
                     yield return new WaitForSeconds(1f);
 
                 }
-                main.GetComponent<Camera>().enabled = true;
-                bridgeCam.enabled = false;
+                //main.GetComponent<Camera>().enabled = true;
+                //bridgeCam.enabled = false;
+                //main.GetComponent<cameraCollision>().focus = false;
+
+                path.ResumePath();
+                yield return new WaitForSeconds(3);
                 main.GetComponent<cameraCollision>().focus = false;
                 player.GetComponent<PlayerController>().enabled = true;
+                path.points = new List<CPC_Point>();
 
             }
 
