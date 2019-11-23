@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     public bool control;
     bool hitWall = false;
     float lastHit = 0;
+    public float msgDispTimer = 0;
+    public Text msgDisp;
     //public WheelCollider leftwheel;
     //public WheelCollider rightwheel;
 
@@ -60,6 +62,7 @@ public class PlayerController : MonoBehaviour
         Icon = FindObjectOfType<RobotIcon>();
         animator = GetComponent<Animator>();
         control = false;
+        msgDisp.text = "";
     }
 
 
@@ -140,21 +143,21 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (rotationv != 0 && (currVerRot < 10 && currVerRot > -10))
-        {
-            currVerRot += rotationv;
-            cameraAnchorV.transform.Rotate(rotationv, 0, 0.0f);
-        }
-        else if (rotationv == 0 && (currVerRot > 0.01 || currVerRot < -0.01))
-        {
-            cameraAnchorV.transform.Rotate(-currVerRot / 10, 0, 0.0f);
-            currVerRot -= currVerRot / 10;
-        }
-        else if (rotationv == 0 && currVerRot < 0.1 && currVerRot > -0.1)
-        {
-            cameraAnchorV.transform.Rotate(-currVerRot, 0, 0.0f);
+        //if (rotationv != 0 && (currVerRot < 10 && currVerRot > -10))
+        //{
+            //currVerRot += rotationv;
+            //cameraAnchorV.transform.Rotate(rotationv, 0, 0.0f);
+        //}
+        //else if (rotationv == 0 && (currVerRot > 0.01 || currVerRot < -0.01))
+        //{
+            //cameraAnchorV.transform.Rotate(-currVerRot / 10, 0, 0.0f);
+            //currVerRot -= currVerRot / 10;
+        //}
+        //else if (rotationv == 0 && currVerRot < 0.1 && currVerRot > -0.1)
+        //{
+            //cameraAnchorV.transform.Rotate(-currVerRot, 0, 0.0f);
             currVerRot = 0;
-        }
+        //}
 
         if (rotationh != 0 && (currHorRot < 90 && currHorRot > -90))
         {
@@ -265,6 +268,11 @@ public class PlayerController : MonoBehaviour
                 carryThing.transform.position = transform.position + forward;
                 carry = false;
                 tilePickupAudio.PlayOneShot(mm.putDownBox);
+            } else if (msgDisp)
+            {
+                msgDispTimer = 2;
+                string msg = "Cannot place box here.";
+                msgDisp.text = msg;
             }
 
         }
@@ -428,6 +436,15 @@ public class PlayerController : MonoBehaviour
         {
             lastHit += Time.deltaTime;
         }
+        msgDispTimer -= Time.deltaTime;
+        if (msgDispTimer < 0)
+        {
+            msgDispTimer = 0;
+        }
+        if (msgDisp)
+        {
+            msgDisp.color = new Color(1, 1, 1, msgDispTimer / 2);
+        }
 
     }
 
@@ -451,7 +468,7 @@ public class PlayerController : MonoBehaviour
         } else if (collision.collider.gameObject.CompareTag("wall") && lastHit > 1f)
         {
             //if (color != Color.green) {
-            tilePickupAudio.PlayOneShot(mm.hitWall);
+            //tilePickupAudio.PlayOneShot(mm.hitWall);
             hitWall = true;
             lastHit = 0;
             //}
