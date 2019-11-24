@@ -5096,6 +5096,18 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c36b46d15a4b3d641bc989bc0112492b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64d82b367a200074683e7a1665398874, type: 3}
+--- !u!114 &1103618395 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7249106094416459380, guid: d7ec5d77a1a03224fae71922eda3e388,
+    type: 3}
+  m_PrefabInstance: {fileID: 1616478873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a5c38576769d842b378115500796de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1112548503
 GameObject:
   m_ObjectHideFlags: 0
@@ -6673,6 +6685,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1450075086}
   - component: {fileID: 1450075085}
+  - component: {fileID: 1450075087}
   m_Layer: 0
   m_Name: Path
   m_TagString: Untagged
@@ -6696,15 +6709,125 @@ MonoBehaviour:
   selectedCamera: {fileID: 0}
   lookAtTarget: 0
   target: {fileID: 0}
-  playOnAwake: 0
-  playOnAwakeTime: 20
-  points: []
+  playOnAwake: 1
+  playOnAwakeTime: 10
+  points:
+  - position: {x: -248.93704, y: -22.53337, z: -253.97668}
+    rotation: {x: 0.000000007590403, y: 0.9848077, z: 0.17364818, w: -0.00000004304731}
+    handleprev: {x: 0, y: 0, z: -1}
+    handlenext: {x: 0, y: 0, z: 1}
+    curveTypeRotation: 0
+    rotationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    curveTypePosition: 1
+    positionCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    chained: 1
+  - position: {x: -248.02798, y: -32.80233, z: -10.053757}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+    handleprev: {x: 0, y: 0, z: -1}
+    handlenext: {x: 0, y: 0, z: 1}
+    curveTypeRotation: 0
+    rotationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    curveTypePosition: 1
+    positionCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    chained: 1
   visual:
     pathColor: {r: 0, g: 1, b: 0, a: 1}
     inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     frustrumColor: {r: 1, g: 1, b: 1, a: 1}
     handleColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  looped: 1
+  looped: 0
   alwaysShow: 1
   afterLoop: 1
 --- !u!4 &1450075086
@@ -6715,12 +6838,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450075084}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -253, y: -75.6, z: -282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1450075087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450075084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b9092a37f0b5645ac59cd9dffad43b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pc: {fileID: 1103618395}
+  waitTime: 10
 --- !u!1001 &1470873027
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public float msgDispTimer = 0;
     public Text msgDisp;
     float dropCarryTimer = 0.5f;
+    public bool canMove = true;
 
     void Start()
     {
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (curspeed != 0)
         {
-            curspeed -= acceleration;
+            curspeed = 0;
         }
         float translationx = Input.GetAxis("Vertical") * curspeed;
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
@@ -96,10 +97,15 @@ public class PlayerController : MonoBehaviour
             cameraAnchorH.transform.Rotate(0, -currHorRot / 5, 0.0f);
             currHorRot -= currHorRot / 5;
         }
-        transform.Rotate(0, rotation, 0);
-        Vector3 forward_direction = transform.TransformDirection(Vector3.left);
-        Vector3 forward_velocity = new Vector3(28 * forward_direction.z * translationx, rb.velocity.y, -28 * forward_direction.x * translationx);
-        rb.velocity = forward_velocity;
+        if (canMove){
+            transform.Rotate(0, rotation, 0);
+            Vector3 forward_direction = transform.TransformDirection(Vector3.left);
+            Vector3 forward_velocity = new Vector3(28 * forward_direction.z * translationx, rb.velocity.y, -28 * forward_direction.x * translationx);
+            rb.velocity = forward_velocity;
+        }else{
+            rb.velocity = new Vector3(0,0,0);
+        }
+        
 
         if (stationary && translationx != 0)
         {
