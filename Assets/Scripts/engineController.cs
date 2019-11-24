@@ -147,7 +147,7 @@ public class engineController : MonoBehaviour
             CPC_Point end = new CPC_Point(floatCamera.transform.position, floatCamera.transform.rotation);
             path.points.Add(end);
             path.looped = false;
-            player.GetComponent<PlayerController>().enabled = false;
+            player.GetComponent<PlayerController>().canMove = false;
 
             main.GetComponent<cameraCollision>().focus = true;
             path.PlayPath(3);
@@ -178,7 +178,7 @@ public class engineController : MonoBehaviour
                 yield return new WaitForSeconds(3);
 
                 main.GetComponent<cameraCollision>().focus = false;
-                player.GetComponent<PlayerController>().enabled = true;
+                player.GetComponent<PlayerController>().canMove = true;
             }
 
             Icon.GetComponent<Image>().color = Color.white;
@@ -212,7 +212,7 @@ public class engineController : MonoBehaviour
             StartCoroutine(buildTele());
             IEnumerator buildTele()
             {
-                player.GetComponent<PlayerController>().enabled = false;
+                player.GetComponent<PlayerController>().canMove = false;
 
                 main.GetComponent<cameraCollision>().focus = true;
                 
@@ -223,7 +223,7 @@ public class engineController : MonoBehaviour
                 yield return new WaitForSeconds(6f);
 
                 main.GetComponent<cameraCollision>().focus = false;
-                player.GetComponent<PlayerController>().enabled = true;
+                player.GetComponent<PlayerController>().canMove = true;
                 Destroy(temp1);
 
             }
@@ -242,7 +242,7 @@ public class engineController : MonoBehaviour
     {
         if (color == Color.green && bridge)
         {
-            player.GetComponent<PlayerController>().enabled = false;
+            player.GetComponent<PlayerController>().canMove = false;
 
             main.GetComponent<cameraCollision>().focus = true;
 
@@ -279,7 +279,7 @@ public class engineController : MonoBehaviour
                 path.ResumePath();
                 yield return new WaitForSeconds(3);
                 main.GetComponent<cameraCollision>().focus = false;
-                player.GetComponent<PlayerController>().enabled = true;
+                player.GetComponent<PlayerController>().canMove = true;
 
             }
 
