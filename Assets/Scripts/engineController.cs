@@ -287,11 +287,12 @@ public class engineController : MonoBehaviour
                 {
 
                     GameObject piece = bridge.transform.GetChild(i).gameObject;
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
                     piece.SetActive(true);
-                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
-                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
-                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
-                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
+
                     yield return new WaitForSeconds(1f);
 
                 }

@@ -108,7 +108,7 @@ public class basictut : MonoBehaviour
         }
         // detect pass portals
         if (pc.color ==  Color.red && instructions[3]!= null){
-            instruction.text = "Use Red to destroy the red materials (RB)";
+            instruction.text = Name.Myname + "Use Red to destroy the red materials (RB)";
         }
 
         // detect wall destroyed

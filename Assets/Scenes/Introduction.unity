@@ -520,7 +520,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
@@ -548,8 +548,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -265.8, y: -115.5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -44.12, y: -115.5}
+  m_SizeDelta: {x: 450, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1038412300
 MonoBehaviour:
@@ -565,14 +565,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textdisplay: {fileID: 1038412297}
   sentences:
-  - Hi, I am Robot M.A.X.02 , an amazing robot!
+  - Hi, my name is MAX.02, a smart robot,  what is your name?                                                       A:I
+    can not type now                                                     B:I dont
+    wanna tell you that
+  - OK, Great answer. Please listen to my story no matter what
   - I get stuck in  a spaceship without any power
-  - Please help me find the golden spark to give power to the spaceship
-  - You can pick up color spark to gain color abilities!
-  - Try to use them on the journey!
-  - First I need to ask,have you played with me before?
-  typingSpeed: 0.02
+  - I need to find the golden spark to give power to the spaceship
+  - 'Would you like to help me?                                 A: Yes, my pleasure                                                    B:
+    No way, stupid robot'
+  - 
+  - By the way, I can use color abilities by picking up color spark
+  - 'Do you know how to use color spark?                 '
+  - 
+  - How do you wanna me call you?                                A:Spark Master    B:Sir     X:Lady     Y:Idiot
+  - 
+  typingSpeed: 0.005
   continuetext: {fileID: 235898504}
+  engine: {fileID: 0}
+  allengines: {fileID: 0}
+  allIcons: {fileID: 0}
+  myname: 
 --- !u!1 &1456995485
 GameObject:
   m_ObjectHideFlags: 0
