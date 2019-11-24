@@ -141,6 +141,7 @@ public class engineController : MonoBehaviour
             {
                 return;
             }
+            path.points = new List<CPC_Point>();
             CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
             path.points.Add(start);
             CPC_Point end = new CPC_Point(floatCamera.transform.position, floatCamera.transform.rotation);
@@ -178,7 +179,6 @@ public class engineController : MonoBehaviour
 
                 main.GetComponent<cameraCollision>().focus = false;
                 player.GetComponent<PlayerController>().enabled = true;
-                path.points = new List<CPC_Point>();
             }
 
             Icon.GetComponent<Image>().color = Color.white;
@@ -195,6 +195,7 @@ public class engineController : MonoBehaviour
     {
         if (color == Color.blue && yellowbox1 && yellowbox2)
         {
+            path.points = new List<CPC_Point>();
             CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
             path.points.Add(start);
             GameObject temp1 = new GameObject();
@@ -223,7 +224,6 @@ public class engineController : MonoBehaviour
 
                 main.GetComponent<cameraCollision>().focus = false;
                 player.GetComponent<PlayerController>().enabled = true;
-                path.points = new List<CPC_Point>();
                 Destroy(temp1);
 
             }
@@ -242,6 +242,7 @@ public class engineController : MonoBehaviour
     {
         if (color == Color.green && bridge)
         {
+            path.points = new List<CPC_Point>();
             CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
             path.points.Add(start);
             Camera bridgeCam = bridge.GetComponent<Camera>();
@@ -279,7 +280,6 @@ public class engineController : MonoBehaviour
                 yield return new WaitForSeconds(3);
                 main.GetComponent<cameraCollision>().focus = false;
                 player.GetComponent<PlayerController>().enabled = true;
-                path.points = new List<CPC_Point>();
 
             }
 
