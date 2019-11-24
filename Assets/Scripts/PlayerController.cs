@@ -101,18 +101,20 @@ public class PlayerController : MonoBehaviour
         rotationh *= Time.deltaTime;
         rotation *= Time.deltaTime;
 
-        if (currHorRot != 0 && translationx != 0)
-        {
-            transform.Rotate(0, currHorRot / 5, 0);
-            cameraAnchorH.transform.Rotate(0, -currHorRot / 5, 0.0f);
-            currHorRot -= currHorRot / 5;
-        }
+        
         if (canMove){
             transform.Rotate(0, rotation, 0);
             Vector3 forward_direction = transform.TransformDirection(Vector3.left);
             Vector3 forward_velocity = new Vector3(28 * forward_direction.z * translationx, rb.velocity.y, -28 * forward_direction.x * translationx);
             rb.velocity = forward_velocity;
-        }else{
+            if (currHorRot != 0 && translationx != 0)
+            {
+                transform.Rotate(0, currHorRot / 5, 0);
+                cameraAnchorH.transform.Rotate(0, -currHorRot / 5, 0.0f);
+                currHorRot -= currHorRot / 5;
+            }
+        }
+        else{
             rb.velocity = new Vector3(0,0,0);
         }
         
@@ -188,7 +190,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            if (Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire2") && color != Color.white)
             {
                 Vector3 forward = transform.TransformDirection(Vector3.forward);
                 if (engineHere == false)
@@ -221,7 +223,10 @@ public class PlayerController : MonoBehaviour
 
             for (int i = 0; i < hitColliderss.Length; i++)
             {
-                cc.chat.text = "Guess you put a portal in a wrong place, try to find a better place";
+                if (chat)
+                {
+                    cc.chat.text = "Guess you put a portal in a wrong place, try to find a better place";
+                }
                 if (hitColliderss[i].tag == "tele" && powerups.tele_num > 0)
                 {
                     Destroy(hitColliderss[i].gameObject);
@@ -257,7 +262,10 @@ public class PlayerController : MonoBehaviour
                     carry = true;
                     dropCarryTimer = 0.5f;
                     tilePickupAudio.PlayOneShot(mm.pickUpBox);
-                    cc.chat.text = "I am carrying an object, where should I put it?";
+                    if (chat)
+                    {
+                        cc.chat.text = "I am carrying an object, where should I put it?";
+                    }
                 }
                 //tilePickupAudio.PlayOneShot(mm.blastAudio);
             }
@@ -274,7 +282,10 @@ public class PlayerController : MonoBehaviour
                     carryThing.transform.position = transform.position + forward;
                     carry = false;
                     tilePickupAudio.PlayOneShot(mm.putDownBox);
-                    cc.chat.text = "emmmmmmmm..........Do you think this is the right position to put this box???";
+                    if (chat)
+                    {
+                        cc.chat.text = "emmmmmmmm..........Do you think this is the right position to put this box???";
+                    }
                 }
             }
             else if (msgDisp)
@@ -282,7 +293,10 @@ public class PlayerController : MonoBehaviour
                 msgDispTimer = 2;
                 string msg = "Cannot place box here.";
                 msgDisp.text = msg;
-                cc.chat.text = "There are too many things here. I can  not put a box  here";
+                if (chat)
+                {
+                    cc.chat.text = "There are too many things here. I can  not put a box  here";
+                }
             }
             
 
@@ -327,7 +341,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && (color == Color.blue) && powerups.tele_num < 2)
         {
-            cc.chat.text = "Remember put portal in spare place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
+            if (chat)
+            {
+                cc.chat.text = "Remember put portal in spare place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
+            }
             Vector3 forward = transform.TransformDirection(Vector3.left);
             forward = new Vector3(10 * forward.z, 8, -10 * forward.x);
             powerups.Createtele(transform.position + forward, color);
@@ -487,8 +504,10 @@ public class PlayerController : MonoBehaviour
                 Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
                 transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
             }
-
-            cc.chat.text = "Tell me where is the other side of the portal. It is not hell, right?";
+            if (chat)
+            {
+                cc.chat.text = "Tell me where is the other side of the portal. It is not hell, right?";
+            }
         }
 
     }
@@ -552,7 +571,10 @@ public class PlayerController : MonoBehaviour
 
                 Vector3 off = 2 * otherP.transform.TransformDirection(Vector3.up);
                 transform.position = otherP.transform.position + new Vector3(off.x, 0, off.z);
-                cc.chat.text = "Cool!!!!!!";
+                if (chat)
+                {
+                    cc.chat.text = "Cool!!!!!!";
+                }
 
 
             }
@@ -601,7 +623,10 @@ public class PlayerController : MonoBehaviour
         tilePickupAudio.PlayOneShot(mm.redAudio);
         Icon.GetComponent<Image>().color = Color.white;
         Icon.GetComponent<Image>().sprite = Icon.Drill;
-        cc.chat.text = "Red power is inside me! I can blast red objects now!";
+        if (chat)
+        {
+            cc.chat.text = "Red power is inside me! I can blast red objects now!";
+        }
     }
 
 
@@ -612,7 +637,10 @@ public class PlayerController : MonoBehaviour
         color = Color.blue;
         Icon.GetComponent<Image>().color = Color.white;
         Icon.GetComponent<Image>().sprite = Icon.Teleport;
-        cc.chat.text = "It is Blue Power!Power to generate two portals and then  travel across time and space!";
+        if (chat)
+        {
+            cc.chat.text = "It is Blue Power!Power to generate two portals and then  travel across time and space!";
+        }
     }
 
     public void greenPower()
@@ -622,7 +650,10 @@ public class PlayerController : MonoBehaviour
         color = Color.green;
         Icon.GetComponent<Image>().color = Color.white;
         Icon.GetComponent<Image>().sprite = Icon.Rocket;
-        cc.chat.text = "Green is power of wind!Activate it for a long time , I can fly up high!";
+        if (chat)
+        {
+            cc.chat.text = "Green is power of wind!Activate it for a long time , I can fly up high!";
+        }
     }
 
     public void whitePower()
