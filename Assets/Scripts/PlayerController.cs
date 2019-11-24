@@ -113,6 +113,27 @@ public class PlayerController : MonoBehaviour
                 cameraAnchorH.transform.Rotate(0, -currHorRot / 5, 0.0f);
                 currHorRot -= currHorRot / 5;
             }
+
+            if (rotationh != 0 && (currHorRot < 90 && currHorRot > -90))
+            {
+                currHorRot += rotationh;
+                cameraAnchorH.transform.Rotate(0, rotationh, 0.0f);
+                cameraSetBack = 2.5f;
+            }
+            else if (rotationh == 0 && (currHorRot > 0.01 || currHorRot < -0.01) && cameraSetBack < 0)
+            {
+                cameraAnchorH.transform.Rotate(0, -currHorRot / 10, 0.0f);
+                currHorRot -= currHorRot / 10;
+            }
+            else if (rotationh == 0 && currHorRot < 0.1 && currHorRot > -0.1 && cameraSetBack < 0)
+            {
+                cameraAnchorH.transform.Rotate(0, -currHorRot, 0.0f);
+                currHorRot = 0;
+            }
+            else if (rotationh == 0)
+            {
+                cameraSetBack -= Time.deltaTime;
+            }
         }
         else{
             rb.velocity = new Vector3(0,0,0);
@@ -134,26 +155,7 @@ public class PlayerController : MonoBehaviour
 
         currVerRot = 0;
 
-        if (rotationh != 0 && (currHorRot < 90 && currHorRot > -90))
-        {
-            currHorRot += rotationh;
-            cameraAnchorH.transform.Rotate(0, rotationh, 0.0f);
-            cameraSetBack = 2.5f;
-        }
-        else if (rotationh == 0 && (currHorRot > 0.01 || currHorRot < -0.01) && cameraSetBack < 0)
-        {
-            cameraAnchorH.transform.Rotate(0, -currHorRot / 10, 0.0f);
-            currHorRot -= currHorRot / 10;
-        }
-        else if (rotationh == 0 && currHorRot < 0.1 && currHorRot > -0.1 && cameraSetBack < 0)
-        {
-            cameraAnchorH.transform.Rotate(0, -currHorRot, 0.0f);
-            currHorRot = 0;
-        }
-        else if (rotationh == 0)
-        {
-            cameraSetBack -= Time.deltaTime;
-        }
+        
 
         var hitColliders = Physics.OverlapSphere(transform.position, 4);
         var hitColliderss = Physics.OverlapSphere(transform.position + new Vector3(0, 5, 0), 8);
