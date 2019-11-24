@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     float lastHit = 0;
     public float msgDispTimer = 0;
     public Text msgDisp;
+    float dropCarryTimer = 0.5f;
 
     void Start()
     {
@@ -200,6 +201,7 @@ public class PlayerController : MonoBehaviour
 
                     carryThing = (hitColliders[i].gameObject);
                     carry = true;
+                    dropCarryTimer = 0.5f;
                     tilePickupAudio.PlayOneShot(mm.pickUpBox);
                 }
                 //tilePickupAudio.PlayOneShot(mm.blastAudio);
@@ -210,11 +212,14 @@ public class PlayerController : MonoBehaviour
 
             if (hitColliders.Length < 5)
             {
-                Vector3 forward = transform.TransformDirection(Vector3.left);
-                forward = new Vector3(3 * forward.z, 2, -3 * forward.x);
-                carryThing.transform.position = transform.position + forward;
-                carry = false;
-                tilePickupAudio.PlayOneShot(mm.putDownBox);
+                if (dropCarryTimer <= 0)
+                {
+                    Vector3 forward = transform.TransformDirection(Vector3.left);
+                    forward = new Vector3(3 * forward.z, 2, -3 * forward.x);
+                    carryThing.transform.position = transform.position + forward;
+                    carry = false;
+                    tilePickupAudio.PlayOneShot(mm.putDownBox);
+                }  
             }
             else if (msgDisp)
             {
@@ -369,6 +374,7 @@ public class PlayerController : MonoBehaviour
         {
             msgDisp.color = new Color(1, 1, 1, msgDispTimer / 2);
         }
+        dropCarryTimer = Mathf.Max(dropCarryTimer-Time.deltaTime,0);
     }
 
 
