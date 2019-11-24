@@ -43,6 +43,7 @@ public class PlayerController1 : MonoBehaviour
     public Text msgDisp;
     float dropCarryTimer = 0.5f;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -138,7 +139,10 @@ public class PlayerController1 : MonoBehaviour
         }
 
 
-
+        var hitColliders = Physics.OverlapSphere(transform.position, 4);
+        var hitColliderss = Physics.OverlapSphere(transform.position + new Vector3(0, 5, 0), 8);
+        bool teleHere = false;
+        bool engineHere = false;
 
         if (Input.GetButtonDown("Fire1") && jump == true && paused == false)
         {
@@ -151,8 +155,17 @@ public class PlayerController1 : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
-            forward = new Vector3(-12 * forward.x, 5, -12 * forward.z);
-            powerups.Createbox(transform.position + forward, color);
+            if (engineHere == false) { 
+            
+                forward = new Vector3(-12 * forward.x, 5, -12 * forward.z);
+                powerups.Createbox(transform.position + forward, color);
+            }
+            else
+            {
+
+            }
+        
+            
         }
 
         if (Input.GetButtonDown("Fire3"))
@@ -160,9 +173,7 @@ public class PlayerController1 : MonoBehaviour
             powerups.GetEnginePower(transform.position);
         }
         
-        var hitColliders = Physics.OverlapSphere(transform.position, 4);
-        var hitColliderss = Physics.OverlapSphere(transform.position  + new Vector3(0,5,0), 8);
-        bool teleHere = false;
+
 
         for (int i = 0; i < hitColliderss.Length; i++)
         {
@@ -170,6 +181,16 @@ public class PlayerController1 : MonoBehaviour
             {
                 teleHere = true;
                 break;
+            }
+            for (i = 0; i < hitColliderss.Length; i++)
+            {
+                if (hitColliders[i].tag == ("engine"))
+                {
+
+                    engineHere = true;
+                    break;
+                }
+                ;
             }
         }
         if (Input.GetButtonDown("Fire3") && (color == Color.blue) && teleHere)

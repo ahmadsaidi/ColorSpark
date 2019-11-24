@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     bool paused = false;
     GameObject carryThing;
     GameManager gm;
-    MusicManager mm;
+    public MusicManager mm;
     float currVerRot = 0;
     float currHorRot = 0;
     public Transform axel;
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public Text msgDisp;
     float dropCarryTimer = 0.5f;
     public bool canMove = true;
+    private bool fixportal ;
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         control = false;
         msgDisp.text = "";
+        fixportal = true;
     }
     private void Update()
     {
@@ -143,7 +145,29 @@ public class PlayerController : MonoBehaviour
             cameraSetBack -= Time.deltaTime;
         }
 
+        var hitColliders = Physics.OverlapSphere(transform.position, 4);
+        var hitColliderss = Physics.OverlapSphere(transform.position + new Vector3(0, 5, 0), 8);
+        bool teleHere = false;
+        bool engineHere = false;
 
+        for (int i = 0; i < hitColliderss.Length; i++)
+        {
+            if (hitColliderss[i].tag == "tele" && powerups.tele_num > 0)
+            {
+                teleHere = true;
+                break;
+            }
+        
+        }
+
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+            if (hitColliders[i].tag == "engine")
+            {
+                engineHere = true;
+                break;
+            }
+        }
 
 
         if (Input.GetButtonDown("Fire1") && jump == true && paused == false)
@@ -156,9 +180,23 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
-            forward = new Vector3(-12 * forward.x, 5, -12 * forward.z);
-            powerups.Createbox(transform.position + forward, color);
+            if (Input.GetButtonDown("Fire2"))
+            {
+                Vector3 forward = transform.TransformDirection(Vector3.forward);
+                if (engineHere == false)
+                {
+
+                    forward = new Vector3(-12 * forward.x, 5, -12 * forward.z);
+                    powerups.Createbox(transform.position + forward, color);
+                }
+                else
+                {
+                    forward = new Vector3(-5 * forward.x, 5, -5 * forward.z);
+                    powerups.Createbox(transform.position + forward, color);
+                }
+
+
+            }
         }
 
         if (Input.GetButtonDown("Fire3"))
@@ -166,18 +204,9 @@ public class PlayerController : MonoBehaviour
             powerups.GetEnginePower(transform.position);
         }
 
-        var hitColliders = Physics.OverlapSphere(transform.position, 4);
-        var hitColliderss = Physics.OverlapSphere(transform.position + new Vector3(0, 5, 0), 8);
-        bool teleHere = false;
+    
 
-        for (int i = 0; i < hitColliderss.Length; i++)
-        {
-            if (hitColliderss[i].tag == "tele" && powerups.tele_num > 0)
-            {
-                teleHere = true;
-                break;
-            }
-        }
+
         if (Input.GetButtonDown("Fire3") && (color == Color.blue) && teleHere)
         {
 
@@ -341,7 +370,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (Input.GetButtonDown("Restart"))
+        if (Input.GetButtonDown("Restart")  && canMove == true)
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
@@ -482,11 +511,68 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Fixedtele" )
+        {
+            teleController tc = other.gameObject.GetComponent<teleController>();
+            if (tc.tele)
+            {
+                StartCoroutine(startto());
+                
+            }
+
+            
+            IEnumerator startto()
+            {
+                
+                GameObject otherP = tc.teleport_other;
+                teleController tc2 = otherP.gameObject.GetComponent<teleController>();
+                tc2.tele = false;
+                yield return new WaitForSeconds(1);
+
+                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                tilePickupAudio.PlayOneShot(mm.dropBlueAudio);
+
+                Vector3 off = 2 * otherP.transform.TransformDirection(Vector3.up);
+                transform.position = otherP.transform.position + new Vector3(off.x, 0, off.z);
+                
+               
+            }
+            
+
+
+        }
+    }
+
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("green") || other.gameObject.CompareTag("red") || other.gameObject.CompareTag("blue"))
         {
             eat = true;
+        }
+
+
+        if (other.gameObject.tag == "Fixedtele")
+        {
+
+            teleController tc2 = other.gameObject.GetComponent<teleController>();
+            
+            StartCoroutine(wait());
+
+            
+
+
+            IEnumerator wait()
+            {
+                yield return new WaitForSeconds(1);
+                tc2.tele = true;
+
+
+            }
+           
+
+
         }
     }
 

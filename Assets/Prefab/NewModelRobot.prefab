@@ -3418,8 +3418,10 @@ MonoBehaviour:
   led: {fileID: 0}
   tilePickupAudio: {fileID: 0}
   carry: 0
-  pauseMenu: {fileID: 0}
-  controller: {fileID: 0}
+  pauseMenu: {fileID: 618636911257559042, guid: ea53fcbcc8aca974ba5d95204f2fbb53,
+    type: 3}
+  controller: {fileID: 6060677715998004253, guid: acdbd2ac3dcbe284fb2e11961d95497a,
+    type: 3}
   Icon: {fileID: 0}
   wheel1: {fileID: 7249106093316183192}
   wheel2: {fileID: 7249106094881875516}
@@ -3428,8 +3430,9 @@ MonoBehaviour:
   cameraAnchorH: {fileID: 8823505464079855879}
   acceleration: 0
   control: 0
-  msgDispTimer: 0
+  msgDispTimer: 2
   msgDisp: {fileID: 6363261454934104743, guid: c513fbb1dd6102e45b8753ecaca77515, type: 3}
+  canMove: 1
 --- !u!1 &7249106094478476768
 GameObject:
   m_ObjectHideFlags: 0

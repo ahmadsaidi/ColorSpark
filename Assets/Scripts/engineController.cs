@@ -26,13 +26,16 @@ public class engineController : MonoBehaviour
     Animator right;
     GameObject main;
     GameObject player;
+    //MusicManager mm;
     public CPC_CameraPath path;
+    public GameObject redGlow;
 
 
     // Start is called before the first frame update
     void Start()
     {
         color = Color.white;
+        //mm = FindObjectOfType<MusicManager>();
         pu = FindObjectOfType<PowerUps>();
         if (objectToFloat)
         {
@@ -60,7 +63,11 @@ public class engineController : MonoBehaviour
     {
         if (flo && trigger)
         {
-
+            if (redGlow)
+            {
+                redGlow.SetActive(true);
+            }
+            
 
             for (int i = 0; i < objectToFloat.transform.childCount; i++)
             {
@@ -94,6 +101,11 @@ public class engineController : MonoBehaviour
 
         if (fall && trigger)
         {
+            if (redGlow)
+            {
+                redGlow.SetActive(true);
+            }
+
             Transform[] ts = objectToFloat.GetComponentsInChildren<Transform>();
 
             for (int i = 0; i < objectToFloat.transform.childCount; i++)
@@ -115,6 +127,7 @@ public class engineController : MonoBehaviour
                 {
                     fall = false;
                     trigger = false;
+                    
                     yield return new WaitForSeconds(3f);
                     trigger = color == Color.red;
                     flo = true;
@@ -165,6 +178,12 @@ public class engineController : MonoBehaviour
                     //fall = false;
                     //flo = true;
                     trigger = true;
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropRedAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropRedAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropRedAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropRedAudio);
+
+
                 }
                 yield return new WaitForSeconds(1.5f);
 
@@ -269,6 +288,10 @@ public class engineController : MonoBehaviour
 
                     GameObject piece = bridge.transform.GetChild(i).gameObject;
                     piece.SetActive(true);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
+                    pu.pc.tilePickupAudio.PlayOneShot(pu.pc.mm.dropGreenAudio);
                     yield return new WaitForSeconds(1f);
 
                 }
@@ -303,6 +326,12 @@ public class engineController : MonoBehaviour
         }
 
         trigger = false;
+        if (redGlow)
+        {
+            redGlow.SetActive(false);
+        }
+
+       
 
         if (bridge)
         {

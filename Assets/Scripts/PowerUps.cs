@@ -14,7 +14,7 @@ public class PowerUps : MonoBehaviour
     PlayerController control;
     public AudioSource tilePickupAudio;
     bool fast, teleport, highJump, push = false;
-    PlayerController pc;
+    public PlayerController pc;
     public GameObject yellowbox1 =null;
     public GameObject yellowbox2 = null;
     public int tele_num = 0;
@@ -41,9 +41,11 @@ public class PowerUps : MonoBehaviour
 
         var hitColliders = Physics.OverlapSphere(position, 6);
         Vector3 forward = pc.transform.TransformDirection(Vector3.forward);
-        var hitCollidersFront = Physics.OverlapSphere(position + 5 * new Vector3(forward.x, 0, forward.z), 6);
+        var hitCollidersFront = Physics.OverlapSphere(position + 5 * new Vector3(forward.x, 0, forward.z), 5);
+       
+
         bool foundEngine = false;
-        if (hitCollidersFront.Length > 2)
+        if (hitCollidersFront.Length > 2 )
         {
             for (int i = 0; i < hitCollidersFront.Length; i++)
             {
