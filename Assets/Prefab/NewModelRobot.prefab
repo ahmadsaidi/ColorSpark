@@ -3190,10 +3190,10 @@ GameObject:
   - component: {fileID: 7249106094416459374}
   - component: {fileID: 7249106094416459377}
   - component: {fileID: 7249106094416459381}
-  - component: {fileID: 7249106094416459380}
   - component: {fileID: 7249106094416459379}
   - component: {fileID: 9055264397425044481}
   - component: {fileID: 8363756170044693409}
+  - component: {fileID: 1915219104683230015}
   m_Layer: 0
   m_Name: NewModelRobot
   m_TagString: Player
@@ -3348,37 +3348,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7249106094416459380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7249106094416459383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0a5c38576769d842b378115500796de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  speed: 0
-  rotationSpeed: 0
-  color: {r: 1, g: 1, b: 1, a: 1}
-  led: {fileID: 0}
-  tilePickupAudio: {fileID: 0}
-  carry: 0
-  pauseMenu: {fileID: 0}
-  controller: {fileID: 0}
-  Icon: {fileID: 0}
-  wheel1: {fileID: 7249106093316183192}
-  wheel2: {fileID: 7249106094881875516}
-  axel: {fileID: 624642053119917695}
-  cameraAnchorV: {fileID: 9185331725806151649}
-  cameraAnchorH: {fileID: 8823505464079855879}
-  acceleration: 0
-  control: 0
-  msgDispTimer: 0
-  msgDisp: {fileID: 0}
 --- !u!114 &7249106094416459379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3391,11 +3360,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec31fd3e1ded3854fbd0e7c41c4fd80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bluespark: {fileID: 6665723356765159654, guid: 88c22a4f8d8f33c4c8eaf94da0cb21b1,
+  bluespark: {fileID: 9212058567539184998, guid: eab7bd21ed17df2488e39d722fa79f4e,
     type: 3}
-  greenspark: {fileID: 2555653172586502232, guid: 11e9d89ef1905fe43bfe89008755a203,
+  greenspark: {fileID: 6438035051331445315, guid: fdc534426e3e75f4c9759ee4791d3a86,
     type: 3}
-  redspark: {fileID: 430683382829112059, guid: 7afe0db9ffcd0a74ba075f62eec7e2a5, type: 3}
+  redspark: {fileID: 8644747688758954161, guid: 2ed39fa873afc6247805fdafa5e85e15,
+    type: 3}
   player: {fileID: 7249106094416459383}
   tele: {fileID: 8574291700139414983, guid: c6d740a33ac24e845b58f9c686249359, type: 3}
   tilePickupAudio: {fileID: 0}
@@ -3429,6 +3399,37 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.25
   m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &1915219104683230015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7249106094416459383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dabce8da99b72543aad75f6ab12d260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  speed: 0
+  rotationSpeed: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  led: {fileID: 0}
+  tilePickupAudio: {fileID: 0}
+  carry: 0
+  pauseMenu: {fileID: 0}
+  controller: {fileID: 0}
+  Icon: {fileID: 0}
+  wheel1: {fileID: 7249106093316183192}
+  wheel2: {fileID: 7249106094881875516}
+  axel: {fileID: 624642053119917695}
+  cameraAnchorV: {fileID: 9185331725806151649}
+  cameraAnchorH: {fileID: 8823505464079855879}
+  acceleration: 0
+  control: 0
+  msgDispTimer: 0
+  msgDisp: {fileID: 6363261454934104743, guid: c513fbb1dd6102e45b8753ecaca77515, type: 3}
 --- !u!1 &7249106094478476768
 GameObject:
   m_ObjectHideFlags: 0

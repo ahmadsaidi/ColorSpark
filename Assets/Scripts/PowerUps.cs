@@ -50,7 +50,7 @@ public class PowerUps : MonoBehaviour
 
                 if (hitCollidersFront[i].tag == "engine")
                 {
-                    Vector3 newpos = hitCollidersFront[i].transform.position + new Vector3(0, 10, 0);
+                    Vector3 newpos = hitCollidersFront[i].transform.position + new Vector3(0, 15, 0);
                     engineController gc = hitCollidersFront[i].GetComponent<engineController>();
                     pc.whitePower();
                     if (gc.color != Color.white)
@@ -163,18 +163,18 @@ public class PowerUps : MonoBehaviour
         if (tele_num == 0)
         {
             
-            yellowbox1 = Instantiate(tele, position, Quaternion.Euler( 0 , 0,  0) );
+            yellowbox1 = Instantiate(tele, position, Quaternion.Euler( 0 , Mathf.Rad2Deg * Mathf.Atan(forward.y / forward.x) ,  0) );
 
         }
         if (tele_num == 1)
         {
             if (yellowbox1 == null)
             {
-                yellowbox1 = Instantiate(tele, position, Quaternion.Euler(0, 0, 0));
+                yellowbox1 = Instantiate(tele, position, Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(forward.y / forward.x), 0));
             }
             else
             {
-                yellowbox2 = Instantiate(tele, position, Quaternion.Euler(0, 0,  0));
+                yellowbox2 = Instantiate(tele, position, Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(forward.y / forward.x),  0));
             }
            // yellowbox2 = Instantiate(tele, position, Quaternion.Euler(-90, 0, -180 * forward.z));
         }

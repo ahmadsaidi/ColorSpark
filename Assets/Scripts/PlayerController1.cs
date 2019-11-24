@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController1 : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody rb;
@@ -159,9 +159,9 @@ public class PlayerController : MonoBehaviour
         {
             powerups.GetEnginePower(transform.position);
         }
-
+        
         var hitColliders = Physics.OverlapSphere(transform.position, 4);
-        var hitColliderss = Physics.OverlapSphere(transform.position + new Vector3(0, 5, 0), 8);
+        var hitColliderss = Physics.OverlapSphere(transform.position  + new Vector3(0,5,0), 8);
         bool teleHere = false;
 
         for (int i = 0; i < hitColliderss.Length; i++)
@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Fire3") && (color == Color.blue) && teleHere)
         {
 
-
+          
             for (int i = 0; i < hitColliderss.Length; i++)
             {
                 if (hitColliderss[i].tag == "tele" && powerups.tele_num > 0)
@@ -193,10 +193,10 @@ public class PlayerController : MonoBehaviour
                     //    powerups.yellowbox1 = powerups.yellowbox2;
                     //    powerups.yellowbox2 = null;
                     //}
+ 
+                   
 
-
-
-
+            
 
                 }
             }
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
                     carryThing.transform.position = transform.position + forward;
                     carry = false;
                     tilePickupAudio.PlayOneShot(mm.putDownBox);
-                }
+                }  
             }
             else if (msgDisp)
             {
@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (Input.GetButtonDown("Restart"))
+                if (Input.GetButtonDown("Restart"))
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
@@ -395,7 +395,7 @@ public class PlayerController : MonoBehaviour
         {
             msgDisp.color = new Color(1, 1, 1, msgDispTimer / 2);
         }
-        dropCarryTimer = Mathf.Max(dropCarryTimer - Time.deltaTime, 0);
+        dropCarryTimer = Mathf.Max(dropCarryTimer-Time.deltaTime,0);
     }
 
 
@@ -411,35 +411,33 @@ public class PlayerController : MonoBehaviour
             hitWall = true;
             jump = false;
             lastHit = 0;
-        }
-        else
-        {
+        }else{
             jump = true;
         }
 
 
-
-
-        if (collision.gameObject.tag == "tele" && powerups.tele_num == 2)
-        {
-
-            float d1 = Vector3.Distance(powerups.yellowbox1.transform.position, transform.position);
-            float d2 = Vector3.Distance(powerups.yellowbox2.transform.position, transform.position);
-            if (d1 < d2)
+        
+        
+            if (collision.gameObject.tag == "tele" && powerups.tele_num == 2)
             {
-                tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
 
-                transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
-            }
-            else if (d1 >= d2)
-            {
-                tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
-                transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
-            }
-        }
+                float d1 = Vector3.Distance(powerups.yellowbox1.transform.position, transform.position);
+                float d2 = Vector3.Distance(powerups.yellowbox2.transform.position, transform.position);
+                if (d1 < d2)
+                {
+                    tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                    Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
 
+                    transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x , -10, off.z + 8 );
+                }
+                else if (d1 >= d2)
+                {
+                    tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                    Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
+                    transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
+                }
+            }
+        
     }
 
     IEnumerator dekroy(GameObject o)
@@ -459,7 +457,7 @@ public class PlayerController : MonoBehaviour
             hitWall = false;
             jump = true;
         }
-
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -476,8 +474,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
+    void OnTriggerExit(Collider other) {
         if (other.gameObject.CompareTag("green") || other.gameObject.CompareTag("red") || other.gameObject.CompareTag("blue"))
         {
             eat = true;
@@ -533,25 +530,21 @@ public class PlayerController : MonoBehaviour
 
     void eatPower(Collider item)
     {
-
+        
         if ((item.gameObject.CompareTag("green")) || (item.gameObject.CompareTag("blue")) ||
             (item.gameObject.CompareTag("red")))
         {
-            if (eat)
-            {
-                if (color == Color.blue)
-                {
-                    GameObject spark = Instantiate(powerups.bluespark, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+            if (eat){
+                if (color == Color.blue){
+                    GameObject spark = Instantiate(powerups.bluespark, transform.position+ new Vector3(0,3,0), Quaternion.identity);
                     eat = false;
                 }
-                else if (color == Color.green)
-                {
-                    GameObject spark = Instantiate(powerups.greenspark, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+                else if (color == Color.green){
+                    GameObject spark = Instantiate(powerups.greenspark, transform.position+ new Vector3(0,3,0), Quaternion.identity);
                     eat = false;
                 }
-                else if (color == Color.red)
-                {
-                    GameObject spark = Instantiate(powerups.redspark, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+                else if (color == Color.red){
+                    GameObject spark = Instantiate(powerups.redspark, transform.position+ new Vector3(0,3,0), Quaternion.identity);
                     eat = false;
                 }
 
