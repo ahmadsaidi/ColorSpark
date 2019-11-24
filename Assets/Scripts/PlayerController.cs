@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (curspeed != 0)
         {
-            curspeed -= acceleration;
+            curspeed = 0;
         }
         float translationx = Input.GetAxis("Vertical") * curspeed;
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
