@@ -242,6 +242,10 @@ public class engineController : MonoBehaviour
     {
         if (color == Color.green && bridge)
         {
+            player.GetComponent<PlayerController>().enabled = false;
+
+            main.GetComponent<cameraCollision>().focus = true;
+
             path.points = new List<CPC_Point>();
             CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
             path.points.Add(start);
@@ -257,10 +261,6 @@ public class engineController : MonoBehaviour
             {
                 yield return new WaitForSeconds(3);
                 path.PausePath();
-                player.GetComponent<PlayerController>().enabled = false;
-
-                main.GetComponent<cameraCollision>().focus = true;
-
                 //Camera bridgeCam = bridge.GetComponent<Camera>();
                 //bridgeCam.enabled = true;
                 //main.GetComponent<Camera>().enabled = false;
