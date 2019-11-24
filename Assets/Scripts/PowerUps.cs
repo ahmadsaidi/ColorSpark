@@ -20,8 +20,8 @@ public class PowerUps : MonoBehaviour
     public int count_red = 0;
     public int count_green = 0;
     PlayerController pc;
-    public GameObject yellowbox1;
-    public GameObject yellowbox2;
+    public GameObject yellowbox1 =null;
+    public GameObject yellowbox2 = null;
     public int tele_num = 0;
     MusicManager mm;
     public Text msgDisp;
@@ -159,7 +159,7 @@ public class PowerUps : MonoBehaviour
     public void Createtele(Vector3 position, Color color)
     {
         var hitColliders = Physics.OverlapSphere(position, 6);
-        Vector3 forward = pc.transform.TransformDirection(Vector3.forward);
+        Vector3 forward = pc.transform.TransformDirection(Vector3.left);
         var hitCollidersFront = Physics.OverlapSphere(position + 5 * new Vector3(forward.x, 0, forward.z), 6);
         Vector3 forwardDirection =  new Vector3 (-90 *forward.x, 0, -180 * forward.z);
         if (hitColliders.Length >= 1)
@@ -174,12 +174,21 @@ public class PowerUps : MonoBehaviour
         }
         if (tele_num == 0)
         {
-            yellowbox1 = Instantiate(tele, position, Quaternion.Euler( -90, 0, -180 * forward.z) );
+            
+            yellowbox1 = Instantiate(tele, position, Quaternion.Euler( 0 , 0,  0) );
 
         }
         if (tele_num == 1)
         {
-            yellowbox2 = Instantiate(tele, position, Quaternion.Euler(-90, 0, -180 * forward.z));
+            if (yellowbox1 == null)
+            {
+                yellowbox1 = Instantiate(tele, position, Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                yellowbox2 = Instantiate(tele, position, Quaternion.Euler(0, 0,  0));
+            }
+           // yellowbox2 = Instantiate(tele, position, Quaternion.Euler(-90, 0, -180 * forward.z));
         }
         tele_num++;
 

@@ -3410,7 +3410,7 @@ MonoBehaviour:
     type: 3}
   redspark: {fileID: 430683382829112059, guid: 7afe0db9ffcd0a74ba075f62eec7e2a5, type: 3}
   player: {fileID: 7249106094416459383}
-  tele: {fileID: 4910145467122215977, guid: b619a4952324f774498e32fd9304783f, type: 3}
+  tele: {fileID: 8574291700139414983, guid: c6d740a33ac24e845b58f9c686249359, type: 3}
   tilePickupAudio: {fileID: 0}
   count_yellow: 0
   count_white: 0

@@ -196,13 +196,14 @@ public class PlayerController : MonoBehaviour
         {
             powerups.GetEnginePower(transform.position);
         }
-
+        
         var hitColliders = Physics.OverlapSphere(transform.position, 4);
+        var hitColliderss = Physics.OverlapSphere(transform.position  + new Vector3(0,5,0), 8);
         bool teleHere = false;
 
-        for (int i = 0; i < hitColliders.Length; i++)
+        for (int i = 0; i < hitColliderss.Length; i++)
         {
-            if (hitColliders[i].tag == "tele" && powerups.tele_num > 0)
+            if (hitColliderss[i].tag == "tele" && powerups.tele_num > 0)
             {
                 teleHere = true;
                 break;
@@ -211,24 +212,29 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire3") && (color == Color.blue) && teleHere)
         {
-            
 
-
-            for (int i = 0; i < hitColliders.Length; i++)
+          
+            for (int i = 0; i < hitColliderss.Length; i++)
             {
-                if (hitColliders[i].tag == "tele" && powerups.tele_num > 0)
+                if (hitColliderss[i].tag == "tele" && powerups.tele_num > 0)
                 {
-                    Destroy(hitColliders[i].gameObject);
-                    if (powerups.yellowbox2 != null)
-                    {
-                        Debug.Log("get");
-                        powerups.yellowbox1 = powerups.yellowbox2;
-                    }
+                    Destroy(hitColliderss[i].gameObject);
+                    powerups.tele_num--;
+                    //if (powerups.yellowbox1 != null && powerups.tele_num == 1)
+                    //{
+                    //    Debug.Log("get1");
+                    //    powerups.yellowbox2 = null;
+                    //}
+                    //else if (powerups.yellowbox2 != null  && powerups.tele_num == 1)
+                    //{
+                    //    Debug.Log("get2");
+                    //    powerups.yellowbox1 = powerups.yellowbox2;
+                    //    powerups.yellowbox2 = null;
+                    //}
  
                    
 
-                    
-                    powerups.tele_num--;
+            
 
                 }
             }
@@ -324,53 +330,54 @@ public class PlayerController : MonoBehaviour
 
 
         }
-        else if (Input.GetButtonDown("Jump"))
-        {
-            
-
-
-            for (int i = 0; i < hitColliders.Length; i++)
-            {
-                if (hitColliders[i].tag == "tele" && powerups.tele_num == 2)
-                {
-
-                    float d1 = Vector3.Distance(powerups.yellowbox1.transform.position, transform.position);
-                    float d2 = Vector3.Distance(powerups.yellowbox2.transform.position, transform.position);
-                    if (d1 < d2)
-                    {
-                        tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                        Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
-
-                        transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, 0, off.z);
-                    }
-                    else if (d1 > d2)
-                    {
-                        tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                        Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
-                        transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, 0, off.z);
-                    }
-
-
-                }
-
-                if (hitColliders[i].tag == "Fixedtele")
-                {
-                    teleController tc = hitColliders[i].GetComponent<teleController>();
-                    GameObject other = tc.teleport_other;
-
-                    tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                    Vector3 off = 2 * other.transform.TransformDirection(Vector3.up);
-                    transform.position = other.transform.position + new Vector3(off.x, 0, off.z);
+        //else if (Input.GetButtonDown("Jump"))
+        //{
 
 
 
-                }
-            }
-        }
+        //    for (int i = 0; i < hitColliders.Length; i++)
+        //    {
+        //        if (hitColliders[i].tag == "tele" && powerups.tele_num == 2)
+        //        {
+
+        //            float d1 = Vector3.Distance(powerups.yellowbox1.transform.position, transform.position);
+        //            float d2 = Vector3.Distance(powerups.yellowbox2.transform.position, transform.position);
+        //            if (d1 < d2)
+        //            {
+        //                tilePickupAudio.PlayOneShot(mm.teleportAudio);
+        //                Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
+
+        //                transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, 0, off.z);
+        //            }
+        //            else if (d1 > d2)
+        //            {
+        //                tilePickupAudio.PlayOneShot(mm.teleportAudio);
+        //                Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
+        //                transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, 0, off.z);
+        //            }
+
+
+        //        }
+
+        //        if (hitColliders[i].tag == "Fixedtele")
+        //        {
+        //            teleController tc = hitColliders[i].GetComponent<teleController>();
+        //            GameObject other = tc.teleport_other;
+
+        //            tilePickupAudio.PlayOneShot(mm.teleportAudio);
+        //            Vector3 off = 2 * other.transform.TransformDirection(Vector3.up);
+        //            transform.position = other.transform.position + new Vector3(off.x, 0, off.z);
 
 
 
-        if (Input.GetButtonDown("Restart"))
+        //        }
+        //    }
+        //}
+
+
+
+
+                if (Input.GetButtonDown("Restart"))
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
@@ -465,6 +472,30 @@ public class PlayerController : MonoBehaviour
             lastHit = 0;
             //}
         }
+
+
+        
+        
+            if (collision.gameObject.tag == "tele" && powerups.tele_num == 2)
+            {
+
+                float d1 = Vector3.Distance(powerups.yellowbox1.transform.position, transform.position);
+                float d2 = Vector3.Distance(powerups.yellowbox2.transform.position, transform.position);
+                if (d1 < d2)
+                {
+                    tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                    Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
+
+                    transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x , -10, off.z + 10 );
+                }
+                else if (d1 > d2)
+                {
+                    tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                    Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
+                    transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 10);
+                }
+            }
+        
     }
 
     IEnumerator dekroy(GameObject o)
