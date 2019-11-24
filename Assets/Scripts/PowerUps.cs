@@ -79,7 +79,10 @@ public class PowerUps : MonoBehaviour
                         yellowbox2 = null;
                         tele_num = 0;
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
-                        cc.chat.text = "Wowwwwwwwwwwwwwwwww, take me there please";
+                        if (pc.chat)
+                        {
+                            cc.chat.text = "Wowwwwwwwwwwwwwwwww, take me there please";
+                        }
 
                     }
                     if (color == Color.red )
@@ -91,7 +94,10 @@ public class PowerUps : MonoBehaviour
                         gc.color = Color.red;
                         gc.red();
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
-                        cc.chat.text = "That box starts to float, do you notice that?";
+                        if (pc.chat)
+                        {
+                            cc.chat.text = "That box starts to float, do you notice that?";
+                        }
 
                     }
                     if (color == Color.green)
@@ -102,7 +108,10 @@ public class PowerUps : MonoBehaviour
                         gc.color = Color.green;
                         gc.green();
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
-                        cc.chat.text = "I never expect that there is way there!!!!!";
+                        if (pc.chat)
+                        {
+                            cc.chat.text = "I never expect that there is way there!!!!!";
+                        }
                     }
 
                 }
@@ -141,12 +150,17 @@ public class PowerUps : MonoBehaviour
                 tilePickupAudio.PlayOneShot(mm.dropGreenAudio);
                 pc.whitePower();
             }
-
-            cc.chat.text = "I feel really hollow now, everything inside me is sucked";
+            if (pc.chat)
+            {
+                cc.chat.text = "I feel really hollow now, everything inside me is sucked";
+            }
         } else if (hitColliders.Length > 2 && !foundEngine && pc.color != Color.white)
         {
             string msg = "Cannot drop spark here.";
-            cc.chat.text = "Do you wanna  drop spark on a wall or something?";
+            if (pc.chat)
+            {
+                cc.chat.text = "Do you wanna  drop spark on a wall or something?";
+            }
             if (msgDisp)
             {
                 msgDisp.text = msg;
@@ -165,7 +179,10 @@ public class PowerUps : MonoBehaviour
         {
             if (msgDisp)
             {
-                cc.chat.text = "The portal will just disappear if you put it here";
+                if (pc.chat)
+                {
+                    cc.chat.text = "The portal will just disappear if you put it here";
+                }
                 string msg = "Cannot place portal here.";
                 msgDisp.text = msg;
                 pc.msgDispTimer = 2;
