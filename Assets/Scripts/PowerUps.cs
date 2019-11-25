@@ -19,7 +19,6 @@ public class PowerUps : MonoBehaviour
     public GameObject yellowbox2 = null;
     public int tele_num = 0;
     MusicManager mm;
-    public Text msgDisp;
     ChatController cc;
     // public Color engine_color;
 
@@ -161,9 +160,9 @@ public class PowerUps : MonoBehaviour
             {
                 cc.chat.text = "Do you wanna  drop spark on a wall or something?";
             }
-            if (msgDisp)
+            if (pc.msgDisp)
             {
-                msgDisp.text = msg;
+                pc.msgDisp.text = msg;
                 pc.msgDispTimer = 2;
             }
         }
@@ -177,14 +176,14 @@ public class PowerUps : MonoBehaviour
         Vector3 forwardDirection =  new Vector3 (-90 *forward.x, 0, -180 * forward.z);
         if (hitColliders.Length >= 1)
         {
-            if (msgDisp)
+            if (pc.msgDisp)
             {
                 if (pc.chat)
                 {
                     cc.chat.text = "The portal will just disappear if you put it here";
                 }
                 string msg = "Cannot place portal here.";
-                msgDisp.text = msg;
+                pc.msgDisp.text = msg;
                 pc.msgDispTimer = 2;
             }
             return;

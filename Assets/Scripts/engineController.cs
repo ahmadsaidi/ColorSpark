@@ -155,8 +155,10 @@ public class engineController : MonoBehaviour
                 return;
             }
             path.points = new List<CPC_Point>();
+            Vector3 playerStartPos = player.transform.position;
             CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
             path.points.Add(start);
+            Vector3 off = player.transform.position - main.GetComponent<Camera>().transform.position;
             CPC_Point end = new CPC_Point(floatCamera.transform.position, floatCamera.transform.rotation);
             path.points.Add(end);
             path.looped = false;
@@ -192,6 +194,11 @@ public class engineController : MonoBehaviour
                 path.points = new List<CPC_Point>();
                 CPC_Point newPos = new CPC_Point(floatCamera.transform.position, floatCamera.transform.rotation);
                 path.points.Add(newPos);
+                start.position = player.transform.position - off;
+                if (Mathf.Abs(playerStartPos.y - player.transform.position.y) > 0.1)
+                {
+                    start.position += new Vector3(0, 16, 0);
+                }
                 path.points.Add(start);
                 path.PlayPath(3);
                 yield return new WaitForSeconds(3);

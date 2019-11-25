@@ -9,10 +9,18 @@ public class ButtonSelection : MonoBehaviour
     float waitTime = 0.4f;
     int curr = 0;
     // Start is called before the first frame update
+
     void Start()
     {
         selections[curr].Select();
         //selections[curr].OnSelect(null);
+    }
+
+    void OnEnable()
+    {
+        curr = 0;
+        selections[curr].OnSelect(null);
+        selections[curr].Select();
     }
 
     // Update is called once per frame
@@ -20,11 +28,11 @@ public class ButtonSelection : MonoBehaviour
     {
         //
         float r = Input.GetAxis("Vertical");
-        bool w = Input.GetKeyDown("w");
-        bool s = Input.GetKeyDown("s");
-        if ((s || w || Mathf.Abs(r) > 0.5 )&& waitTime <= 0)
+        //bool w = Input.GetKeyDown("w");
+        //bool s = Input.GetKeyDown("s");
+        if (Mathf.Abs(r) > 0.5 && waitTime <= 0)
         {
-            if (r < 0 || s)
+            if (r < 0)
             {
                 selectDown();
             } else {
@@ -38,7 +46,7 @@ public class ButtonSelection : MonoBehaviour
         }
         if (waitTime > 0)
         {
-            waitTime -= Time.deltaTime;
+            waitTime -= Time.unscaledDeltaTime;
         }
     }
 
