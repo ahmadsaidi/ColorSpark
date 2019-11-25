@@ -10,6 +10,7 @@ public class LevelStartWait : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pc = FindObjectOfType<PlayerController>();
         pc.enabled = false;
         StartCoroutine(waitForStartCamera());
     }
