@@ -17,6 +17,9 @@ public class Continue : MonoBehaviour
     public GameObject engine;
     public GameObject allengines;
     public GameObject allIcons;
+    public GameObject Golden;
+    public GameObject Sparks;
+    public GameObject RobotIcons;
     private bool checkTut;
     public string myname;
     private bool multiple = false;
@@ -137,6 +140,24 @@ public class Continue : MonoBehaviour
             {
                 engine.SetActive(false);
                 allIcons.SetActive(true);
+            }
+
+            if ((SceneManager.GetActiveScene().name == "Introduction") && Golden && index > 2 && index < 6)
+            {
+                Golden.SetActive(true);
+            }
+            if ((SceneManager.GetActiveScene().name == "Introduction") && Sparks && RobotIcons && index >= 6 && index <=8)
+            {
+                Sparks.SetActive(true);
+                RobotIcons.SetActive(true);
+                Golden.SetActive(false);
+            }
+
+            if ((SceneManager.GetActiveScene().name == "Introduction") && Sparks && RobotIcons && index > 8)
+            {
+                Sparks.SetActive(false);
+                RobotIcons.SetActive(false);
+                Golden.SetActive(false);
             }
 
             // continuetext.SetActive(true);

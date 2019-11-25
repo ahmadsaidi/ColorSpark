@@ -13,7 +13,6 @@ public class ChatController : MonoBehaviour
     void Start()
     {
         pc = FindObjectOfType<PlayerController>();
-        chat = GetComponent<Text>();
         if ((SceneManager.GetActiveScene().name == "EngineLevel1"))
         {
             pc.chat = true;
