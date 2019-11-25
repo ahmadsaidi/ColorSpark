@@ -410,38 +410,6 @@ public class PlayerController : MonoBehaviour
             paused = true;
         }
 
-        if (Input.GetButtonDown("Fire1") && paused && control == false)
-        {
-            pauseMenu.SetActive(false);
-            jump = true;
-            Time.timeScale = 1;
-            paused = false;
-        }
-
-        if (Input.GetButtonDown("Fire2") && paused && control == false)
-        {
-            Time.timeScale = 1;
-            paused = false;
-            pauseMenu.SetActive(false);
-            gm.RestartLevel();
-        }
-
-        if (Input.GetButtonDown("Fire3") && paused && control == false)
-        {
-            Time.timeScale = 1;
-            paused = false;
-            pauseMenu.SetActive(false);
-            gm.MainMenu();
-        }
-
-        if (Input.GetButtonDown("Carry") && paused && control == false)
-        {
-            Time.timeScale = 0;
-            pauseMenu.SetActive(false);
-            controller.SetActive(true);
-            control = true;
-        }
-
         if (Input.GetButtonDown("Fire1") && paused && control == true)
         {
             Time.timeScale = 1;
@@ -674,7 +642,37 @@ public class PlayerController : MonoBehaviour
         mymat2.SetColor("_EmissionColor", color);
     }
 
+    public void continueGame()
+    {
+        pauseMenu.SetActive(false);
+        jump = true;
+        Time.timeScale = 1;
+        paused = false;
+    }
 
+    public void restart()
+    {
+        Time.timeScale = 1;
+        paused = false;
+        pauseMenu.SetActive(false);
+        gm.RestartLevel();
+    }
+
+    public void mainMenu()
+    {
+        Time.timeScale = 1;
+        paused = false;
+        pauseMenu.SetActive(false);
+        gm.MainMenu();
+    }
+
+    public void controls()
+    {
+        Time.timeScale = 0;
+        pauseMenu.SetActive(false);
+        controller.SetActive(true);
+        control = true;
+    }
 
     void eatPower(Collider item)
     {
