@@ -222,6 +222,13 @@ public class Continue : MonoBehaviour
                         multiple = false;
                         four = true;
                     }
+                    else if (index == 10)
+                    {
+                        continuetext.text = "Press A to Continue";
+                        continuetext.enabled =true;
+                        multiple = false;
+                        four = false;
+                    }
                     else
                     {
                         continuetext.text = "Press A to Continue";
@@ -234,7 +241,14 @@ public class Continue : MonoBehaviour
                 {
                     //continuetext.enabled = true;
                 }
-                
+
+            }
+            else if (index == 10)
+            {
+                continuetext.text = "Press A to Continue";
+                continuetext.enabled = true;
+                multiple = false;
+                four = false;
             }
             if (SceneManager.GetActiveScene().name == "Introduction2" && index < sentences.Length - 1)
             {
