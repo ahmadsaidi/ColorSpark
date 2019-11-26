@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9221216925755903370}
   - component: {fileID: 9223261281975559152}
   - component: {fileID: 2957145492986180716}
+  - component: {fileID: 4412712211792698485}
   m_Layer: 10
   m_Name: FixedPortal2
   m_TagString: Fixedtele
@@ -4730,11 +4731,25 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9023566785026268578}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6.99
-  m_Center: {x: 3.19, y: -6.3, z: 8.83}
+  m_Radius: 2.35
+  m_Center: {x: -0.77, y: 1.18, z: 0.08}
+--- !u!114 &4412712211792698485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9023566785026268578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc8e57e2517b4342a8b59a5e12fe2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleport_other: {fileID: 0}
+  tele: 0
 --- !u!1 &9024367443839426118
 GameObject:
   m_ObjectHideFlags: 0
