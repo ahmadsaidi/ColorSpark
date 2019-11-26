@@ -29,6 +29,8 @@ public class engineController : MonoBehaviour
     //MusicManager mm;
     public CPC_CameraPath path;
     public GameObject redGlow;
+    public Text Ability;
+    public Text EngineAbility;
 
 
     // Start is called before the first frame update
@@ -213,6 +215,9 @@ public class engineController : MonoBehaviour
 
         Material m = transform.gameObject.GetComponent<Renderer>().material;
         m.SetColor("_EmissionColor", Color.red);
+        EngineAbility.color = Color.red;
+        Ability.color = Color.red;
+        Ability.text = "Float";
 
     }
 
@@ -262,6 +267,9 @@ public class engineController : MonoBehaviour
 
         Material m = transform.gameObject.GetComponent<Renderer>().material;
         m.SetColor("_EmissionColor", Color.blue);
+        EngineAbility.color = Color.blue;
+        Ability.color = Color.blue;
+        Ability.text = "Portal";
     }
 
     public void green()
@@ -322,6 +330,9 @@ public class engineController : MonoBehaviour
 
         Material m = transform.gameObject.GetComponent<Renderer>().material;
         m.SetColor("_EmissionColor", Color.green);
+        EngineAbility.color = Color.green;
+        Ability.color = Color.green;
+       Ability.text = "Build";
 
     }
 
@@ -368,6 +379,9 @@ public class engineController : MonoBehaviour
         color = Color.white;
         Material m = transform.gameObject.GetComponent<Renderer>().material;
         m.SetColor("_EmissionColor", Color.black);
+        EngineAbility.color = Color.white;
+        Ability.color = Color.white;
+        Ability.text = "";
     }
 
     void slideDoors(bool state)

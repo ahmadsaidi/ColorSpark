@@ -76,7 +76,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Y: Control'
+  m_Text: Control
 --- !u!1 &618636911082119354
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'A: Continue'
+  m_Text: Continue
 --- !u!1 &618636911212925489
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +809,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'B: Restart'
+  m_Text: Restart
 --- !u!1 &618636911874414140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,4 +1043,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'X: MainMenu'
+  m_Text: MainMenu
