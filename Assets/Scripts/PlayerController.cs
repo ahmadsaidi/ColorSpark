@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     public Text Abilty;
     public Text Chat;
     public Text max02;
+    private bool OnWall = false;
  
 
 
@@ -191,7 +192,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetButtonDown("Fire1") && jump == true && paused == false && canMove)
+        if (Input.GetButtonDown("Fire1") && jump == true && paused == false && OnWall == false)
         {
             rb.velocity += new Vector3(0, 40, 0);
             tilePickupAudio.PlayOneShot(mm.jump);
@@ -213,7 +214,7 @@ public class PlayerController : MonoBehaviour
             }
             
             
-        } else if(Input.GetButtonDown("Fire1") && jump == false && paused == false && hitWall)
+        } else if(Input.GetButtonDown("Fire1") && OnWall && paused == false && hitWall)
         {
             tilePickupAudio.PlayOneShot(mm.scared);
             if (chat)
@@ -407,7 +408,7 @@ public class PlayerController : MonoBehaviour
             speed = 80;
             if (chat)
             {
-                cc.chat.text = "Speed up£¡£¡£¡£¡£¡£¡";
+                cc.chat.text = "Speed upï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
             }
         }
         else
@@ -516,10 +517,7 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.gameObject.CompareTag("floor") || collision.collider.gameObject.CompareTag("move"))
         {
             jump = true;
-            
-
         }
-
 
         if (collision.collider.gameObject.CompareTag("sand"))
         {
@@ -529,7 +527,6 @@ public class PlayerController : MonoBehaviour
         else if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")) && lastHit > 1f)
         {
             hitWall = true;
-            jump = false;
             lastHit = 0;
             tilePickupAudio.PlayOneShot(mm.question);
             if (chat)
@@ -539,13 +536,6 @@ public class PlayerController : MonoBehaviour
             
 
         }
-        //else
-        //{
-        //    jump = true;
-        //}
-
-
-
 
         if (collision.gameObject.tag == "tele" && powerups.tele_num == 2)
         {
@@ -617,6 +607,16 @@ public class PlayerController : MonoBehaviour
         Destroy(o);
     }
 
+    private void OnCollisionStay(Collision collision) {
+        Debug.Log(collision.collider.gameObject.CompareTag("wall") );
+        
+        if (collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")){
+            OnWall = true;
+        }else{
+            OnWall = false;
+        }
+    }
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.GetComponent<Rigidbody>())
@@ -626,7 +626,6 @@ public class PlayerController : MonoBehaviour
         if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")))
         {
             hitWall = false;
-            jump = false;
         }
 
         if (collision.gameObject.tag == "tele")
