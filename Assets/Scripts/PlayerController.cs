@@ -408,7 +408,7 @@ public class PlayerController : MonoBehaviour
             speed = 80;
             if (chat)
             {
-                cc.chat.text = "Speed up������������";
+                cc.chat.text = "Speed up!!!!!";
             }
         }
         else
