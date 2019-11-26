@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour
         float rotationh = Input.GetAxis("Camera Horizontal") * rotationSpeed;
 
         axel.Rotate(0, 0, -0.1f * translationx);
-        translationx *= Time.deltaTime;
         rotationv *= Time.deltaTime;
         rotationh *= Time.deltaTime;
         rotation *= Time.deltaTime;
@@ -120,7 +119,7 @@ public class PlayerController : MonoBehaviour
         if (canMove){
             transform.Rotate(0, rotation, 0);
             Vector3 forward_direction = transform.TransformDirection(Vector3.left);
-            Vector3 forward_velocity = new Vector3(28 * forward_direction.z * translationx, rb.velocity.y, -28 * forward_direction.x * translationx);
+            Vector3 forward_velocity = new Vector3(1f * forward_direction.z * translationx, rb.velocity.y, -1f * forward_direction.x * translationx);
             rb.velocity = forward_velocity;
             if (currHorRot != 0 && translationx != 0)
             {
@@ -197,7 +196,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetButtonDown("Fire1") && jump == true && paused == false && OnWall == false)
+        if (Input.GetButtonDown("Fire1") && jump == true && paused == false && OnWall == false && canMove)
         {
             rb.velocity += new Vector3(0, 40, 0);
             tilePickupAudio.PlayOneShot(mm.jump);
