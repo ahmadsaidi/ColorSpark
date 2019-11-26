@@ -4630,6 +4630,7 @@ GameObject:
   - component: {fileID: 8375549038258488847}
   - component: {fileID: 8376463047793775825}
   - component: {fileID: 9122460758239322385}
+  - component: {fileID: -4778835327774093105}
   m_Layer: 10
   m_Name: portal2
   m_TagString: tele
@@ -9398,6 +9399,20 @@ CapsuleCollider:
   m_Height: 3.97
   m_Direction: 1
   m_Center: {x: 0.13, y: -0.05, z: -0.3}
+--- !u!114 &-4778835327774093105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8574291700139414983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc8e57e2517b4342a8b59a5e12fe2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleport_other: {fileID: 0}
+  tele: 0
 --- !u!1 &8574483219719510879
 GameObject:
   m_ObjectHideFlags: 0

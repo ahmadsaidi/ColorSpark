@@ -161,7 +161,7 @@ MonoBehaviour:
   tut: {fileID: 8300000, guid: 83d2f962cc2768f4f8658250efa3ed48, type: 3}
   main: {fileID: 8300000, guid: 46f73b595aab06641be46228f52a5699, type: 3}
   puzzle1: {fileID: 8300000, guid: 334cf98dc45bb1e488f40ce99150f975, type: 3}
-  puzzle2: {fileID: 0}
+  puzzle2: {fileID: 8300000, guid: 0e9407cfba34103429f6f69faa10640c, type: 3}
   win: {fileID: 8300000, guid: 5ba64b9bf0a377b4c8dd938524c0a548, type: 3}
   lose: {fileID: 8300000, guid: 9ac396a04fe52d543bdfc40522ffd009, type: 3}
   end: {fileID: 0}
