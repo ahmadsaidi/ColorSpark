@@ -8164,6 +8164,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4412712211792698485, guid: 3c40de95f9160494a8ec37a8b6fcde2f,
+        type: 3}
+      propertyPath: teleport_other
+      value: 
+      objectReference: {fileID: 753815385}
     - target: {fileID: 9023566785026268578, guid: 3c40de95f9160494a8ec37a8b6fcde2f,
         type: 3}
       propertyPath: m_Name
@@ -8228,31 +8233,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2957145492986180716, guid: 3c40de95f9160494a8ec37a8b6fcde2f,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2957145492986180716, guid: 3c40de95f9160494a8ec37a8b6fcde2f,
-        type: 3}
-      propertyPath: m_Center.x
-      value: -0.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 2957145492986180716, guid: 3c40de95f9160494a8ec37a8b6fcde2f,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 2957145492986180716, guid: 3c40de95f9160494a8ec37a8b6fcde2f,
-        type: 3}
-      propertyPath: m_Radius
-      value: 2.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 2957145492986180716, guid: 3c40de95f9160494a8ec37a8b6fcde2f,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 1.18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c40de95f9160494a8ec37a8b6fcde2f, type: 3}
@@ -16177,20 +16157,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 914963945}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2066661207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066661206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc8e57e2517b4342a8b59a5e12fe2fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleport_other: {fileID: 753815385}
-  tele: 0
 --- !u!1 &2073872284 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7004429038951531851, guid: 2eef53000854ed04489337abc66cdb8b,
