@@ -6096,18 +6096,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 265680295}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &272035855 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1215604528127088957, guid: 720bf1574f30c24408dec560dd15d16b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1215604528599136921}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &273760174
 GameObject:
   m_ObjectHideFlags: 0
@@ -16466,7 +16454,7 @@ PrefabInstance:
         type: 3}
       propertyPath: chat
       value: 
-      objectReference: {fileID: 272035855}
+      objectReference: {fileID: 0}
     - target: {fileID: 1215604528127088959, guid: 720bf1574f30c24408dec560dd15d16b,
         type: 3}
       propertyPath: chat
@@ -17084,66 +17072,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: Icon
-      value: 
-      objectReference: {fileID: 1244759862}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: msgDisp
-      value: 
-      objectReference: {fileID: 1788425080}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: msgDispTimer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: chat
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 1307873278}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: controller
-      value: 
-      objectReference: {fileID: 1674485490}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: body
-      value: 
-      objectReference: {fileID: 284419659}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: robotAbilty
-      value: 
-      objectReference: {fileID: 1825089677}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: Abilty
-      value: 
-      objectReference: {fileID: 1817126617}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: Chat
-      value: 
-      objectReference: {fileID: 272035855}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: line
-      value: 
-      objectReference: {fileID: 80083268}
-    - target: {fileID: 441859113259715467, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7249106094416459376, guid: d7ec5d77a1a03224fae71922eda3e388,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17214,21 +17142,6 @@ PrefabInstance:
       propertyPath: msgDisp
       value: 
       objectReference: {fileID: 1788425080}
-    - target: {fileID: 7844265805135796065, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7844265805135796065, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: m_Lightmapping
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7844265805135796065, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7249106094416459379, guid: d7ec5d77a1a03224fae71922eda3e388,
         type: 3}
       propertyPath: msgDisp
@@ -17258,6 +17171,81 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6438035051331445315, guid: fdc534426e3e75f4c9759ee4791d3a86,
         type: 3}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: Icon
+      value: 
+      objectReference: {fileID: 1244759862}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: msgDisp
+      value: 
+      objectReference: {fileID: 1788425080}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: msgDispTimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: chat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1307873278}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1674485490}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 284419659}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: robotAbilty
+      value: 
+      objectReference: {fileID: 1825089677}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: Abilty
+      value: 
+      objectReference: {fileID: 1817126617}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: Chat
+      value: 
+      objectReference: {fileID: 42948161}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: line
+      value: 
+      objectReference: {fileID: 80083268}
+    - target: {fileID: 441859113259715467, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844265805135796065, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844265805135796065, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844265805135796065, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7249106094416459380, guid: d7ec5d77a1a03224fae71922eda3e388, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d7ec5d77a1a03224fae71922eda3e388, type: 3}
