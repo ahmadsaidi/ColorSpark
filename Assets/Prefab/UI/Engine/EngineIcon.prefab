@@ -86,6 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d4d4f71c76c754aa66be9d2ce85306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Float: {fileID: 21300000, guid: d3b40db43b347064fb72c2c8a06093d9, type: 3}
-  Teleport: {fileID: 21300000, guid: c70683bf52939334e898b4bdeff4ed4c, type: 3}
-  plateform: {fileID: 21300000, guid: aa7fe52d2c34ce242ba6011737a9366c, type: 3}
+  Float: {fileID: 21300000, guid: c36582474d424234f8594e8cb8b1f3e8, type: 3}
+  Teleport: {fileID: 21300000, guid: b66c7004d40f407499b91eae0ae7e44d, type: 3}
+  plateform: {fileID: 21300000, guid: 4af04ae68faa39c4196ee103d3665668, type: 3}

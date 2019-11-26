@@ -87,5 +87,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rocket: {fileID: 21300000, guid: f606203fac7a5ae4cb8a9cebb2aa8afb, type: 3}
-  Teleport: {fileID: 21300000, guid: 22ca84f53b110684fbca40dcaf07a9bf, type: 3}
+  Teleport: {fileID: 21300000, guid: 7a25cf0ff3aa08e4cb50539e9bed9d2e, type: 3}
   Drill: {fileID: 21300000, guid: 034dfe1921591624d9979a37c999752e, type: 3}

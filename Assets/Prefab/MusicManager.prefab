@@ -151,7 +151,7 @@ MonoBehaviour:
   pushboxAudio: {fileID: 8300000, guid: 9fc33062985384f49903252d5e35fc3d, type: 3}
   runfasterAudio: {fileID: 8300000, guid: f7e80387025177e4ab6cf708b439ba94, type: 3}
   teleportAudio: {fileID: 8300000, guid: 1e11899073292884dbf18edf690981e1, type: 3}
-  blastAudio: {fileID: 0}
+  blastAudio: {fileID: 8300000, guid: 73222cf37537b0748854f0a3830f4f89, type: 3}
   create_teleport: {fileID: 8300000, guid: 82365f3622acec44b851890f92d15c6f, type: 3}
   door_blast: {fileID: 8300000, guid: 6ea93d21667712149a5b99615e60d4c0, type: 3}
   build_bridge: {fileID: 0}
@@ -161,10 +161,19 @@ MonoBehaviour:
   tut: {fileID: 8300000, guid: 83d2f962cc2768f4f8658250efa3ed48, type: 3}
   main: {fileID: 8300000, guid: 46f73b595aab06641be46228f52a5699, type: 3}
   puzzle1: {fileID: 8300000, guid: 334cf98dc45bb1e488f40ce99150f975, type: 3}
-  puzzle2: {fileID: 0}
+  puzzle2: {fileID: 8300000, guid: 0e9407cfba34103429f6f69faa10640c, type: 3}
   win: {fileID: 8300000, guid: 5ba64b9bf0a377b4c8dd938524c0a548, type: 3}
   lose: {fileID: 8300000, guid: 9ac396a04fe52d543bdfc40522ffd009, type: 3}
   end: {fileID: 0}
   hitWall: {fileID: 8300000, guid: cae3b0c8774a49b498c0ad558af26edb, type: 3}
   pickUpBox: {fileID: 8300000, guid: a44203135ec29d8418d4cb5f0428d0c9, type: 3}
   putDownBox: {fileID: 8300000, guid: 21122e98fa562c147b7ef9b12686e0de, type: 3}
+  question: {fileID: 8300000, guid: 27998597345c014409bed5a6bf46e64b, type: 3}
+  happy: {fileID: 8300000, guid: 61bbf55937d936547929187a031b5388, type: 3}
+  surprise: {fileID: 8300000, guid: 17c860ac275ee4f41b928f1361ec5378, type: 3}
+  scared: {fileID: 8300000, guid: a3b6802bff85bf74c895a367cdef2cba, type: 3}
+  sad: {fileID: 8300000, guid: ea6aaee6383024d4ebe9bee3d35bccc4, type: 3}
+  oh: {fileID: 8300000, guid: 90a1c76a527eb244a82b9f10dd211007, type: 3}
+  ability: {fileID: 8300000, guid: 3642667f9c716874bbd16bfff26fed6c, type: 3}
+  ah: {fileID: 8300000, guid: 4824f36674f0a5343817d51113113ab0, type: 3}
+  engine_start: {fileID: 8300000, guid: d4075c8d16994224a9b60bde9b4d548d, type: 3}

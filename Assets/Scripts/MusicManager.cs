@@ -16,6 +16,8 @@ public class MusicManager : MonoBehaviour
     public AudioClip tut, main, puzzle1, puzzle2, win, lose, end;
     public AudioClip hitWall;
     public AudioClip pickUpBox, putDownBox;
+    public AudioClip question,happy,surprise, scared,sad, oh, ability,ah;
+    public AudioClip engine_start;
     AudioSource music;
     void Start()
     {
@@ -45,10 +47,16 @@ public class MusicManager : MonoBehaviour
 
         }
 
-        if (SceneManager.GetActiveScene().name == "EngineLevel2" || SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "EngineLevel1"|| SceneManager.GetActiveScene().name == "LvNoEngine")
+        if (SceneManager.GetActiveScene().name == "EngineLevel2" || SceneManager.GetActiveScene().name == "Level1"|| SceneManager.GetActiveScene().name == "LvNoEngine")
        
         {
             music.clip = puzzle1;
+            music.Play();
+        }
+        if (SceneManager.GetActiveScene().name == "EngineLevel1" )
+
+        {
+            music.clip = puzzle2;
             music.Play();
         }
 

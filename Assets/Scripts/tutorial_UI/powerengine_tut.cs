@@ -22,7 +22,7 @@ public class powerengine_tut : MonoBehaviour
     private engineController cs0;
     private engineController cs1;
     private engineController cs2;
-    PlayerController pc;
+    public PlayerController pc;
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class powerengine_tut : MonoBehaviour
         //cs2  = redEngine.GetComponent<engineController>();
         robot = GameObject.Find("NewModelRobot");
         stage = 0;
-        pc = robot.GetComponent<PlayerController>();
+        //pc = robot.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -66,6 +66,10 @@ public class powerengine_tut : MonoBehaviour
             stage = 4;
 
         }
-        if (instruction != null)instruction.text = stageInstructions[stage];
+        if (pc.canMove == false)
+        {
+            instruction.text = "";
+        }
+        else if (instruction != null )instruction.text = stageInstructions[stage];
     }
 }

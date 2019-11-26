@@ -39,30 +39,40 @@ public class engineController : MonoBehaviour
         color = Color.white;
         //mm = FindObjectOfType<MusicManager>();
         pu = FindObjectOfType<PowerUps>();
+
+        main = GameObject.FindGameObjectsWithTag("MainCamera")[0];
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
         if (objectToFloat)
         {
 
-
-            Transform box = objectToFloat.transform.GetChild(0);
-            begining = (box.transform.position);
-            Vector3 targetposition = box.transform.position + new Vector3(0, floatHeight, 0);
+            GameObject box = objectToFloat.transform.GetChild(0).gameObject;
+            begining = box.gameObject.GetComponent<Float>().begin;
+            Vector3 targetposition = box.gameObject.GetComponent<Float>().begin + new Vector3(0, floatHeight, 0);
             ending = targetposition;
 
 
-
-
-
-
-
         }
-        main = GameObject.FindGameObjectsWithTag("MainCamera")[0];
-        player = GameObject.FindGameObjectsWithTag("Player")[0];
 
 
     }
     // Update is called once per frame
     void Update()
     {
+        
+       
+        if (objectToFloat)
+        {
+            
+            GameObject box = objectToFloat.transform.GetChild(0).gameObject;
+            if (begining != box.gameObject.GetComponent<Float>().begin)
+            {
+                begining = box.gameObject.GetComponent<Float>().begin;
+                Vector3 targetposition = box.gameObject.GetComponent<Float>().begin + new Vector3(0, floatHeight, 0);
+                ending = targetposition;
+            }
+            
+           
+        }
         if (flo && trigger)
         {
             if (redGlow)

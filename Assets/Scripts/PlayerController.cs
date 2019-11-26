@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
     public Transform back;
     Vector3 carryStart;
     Vector3 carryTo;
+    public Text max02;
+    private bool OnWall = false;
 
 
 
@@ -82,6 +84,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+
+
         if (transform.position.y < -100)
         {
             gm.LoseGame();
@@ -110,7 +114,7 @@ public class PlayerController : MonoBehaviour
         rotationh *= Time.deltaTime;
         rotation *= Time.deltaTime;
 
-        
+
         if (canMove){
             transform.Rotate(0, rotation, 0);
             Vector3 forward_direction = transform.TransformDirection(Vector3.left);
@@ -147,7 +151,7 @@ public class PlayerController : MonoBehaviour
         else{
             rb.velocity = new Vector3(0,0,0);
         }
-        
+
 
         if (stationary && translationx != 0)
         {
@@ -164,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
         currVerRot = 0;
 
-        
+
 
         var hitColliders = Physics.OverlapSphere(transform.position, 4);
         var hitColliderss = Physics.OverlapSphere(transform.position + new Vector3(0, 5, 0), 8);
@@ -178,7 +182,7 @@ public class PlayerController : MonoBehaviour
                 teleHere = true;
                 break;
             }
-        
+
         }
 
         for (int i = 0; i < hitColliders.Length; i++)
@@ -191,12 +195,39 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetButtonDown("Fire1") && jump == true && paused == false)
+        if (Input.GetButtonDown("Fire1") && jump == true && paused == false && OnWall == false)
         {
             rb.velocity += new Vector3(0, 40, 0);
             tilePickupAudio.PlayOneShot(mm.jump);
             animator.SetTrigger("startedJumping");
             jump = false;
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                if (hitColliders[i].tag == "move")
+                {
+                    if (chat)
+                    {
+                        cc.chat.text = "Jumping on a box is fun";
+                    }
+
+                    tilePickupAudio.PlayOneShot(mm.oh);
+                }
+
+
+            }
+
+
+        } else if(Input.GetButtonDown("Fire1") && OnWall && paused == false && hitWall)
+        {
+            tilePickupAudio.PlayOneShot(mm.scared);
+            if (chat)
+            {
+                cc.chat.text = "Do you wanna me dance on a wall or something???";
+            }
+
+            msgDispTimer = 2;
+            string msg = "You can not Jump here";
+            msgDisp.text = msg;
         }
 
         if (Input.GetButtonDown("Fire2"))
@@ -225,7 +256,7 @@ public class PlayerController : MonoBehaviour
             powerups.GetEnginePower(transform.position);
         }
 
-    
+
 
 
         if (Input.GetButtonDown("Fire3") && (color == Color.blue) && teleHere)
@@ -238,6 +269,7 @@ public class PlayerController : MonoBehaviour
                 {
                     cc.chat.text = "Guess you put a portal in a wrong place, try to find a better place";
                 }
+                tilePickupAudio.PlayOneShot(mm.ah);
                 if (hitColliderss[i].tag == "tele" && powerups.tele_num > 0)
                 {
                     Destroy(hitColliderss[i].gameObject);
@@ -268,8 +300,10 @@ public class PlayerController : MonoBehaviour
 
                 if (hitColliders[i].tag == "move")
                 {
-
                     carryThing = (hitColliders[i].gameObject);
+
+
+
                     carry = true;
                     dropCarryTimer = 0.5f;
                     tilePickupAudio.PlayOneShot(mm.pickUpBox);
@@ -283,6 +317,7 @@ public class PlayerController : MonoBehaviour
                     {
                         carryTo = back.position;
                     }
+                    tilePickupAudio.PlayOneShot(mm.happy);
                     if (chat)
                     {
                         cc.chat.text = "I am carrying an object, where should I put it?";
@@ -303,6 +338,12 @@ public class PlayerController : MonoBehaviour
                     carryThing.transform.position = transform.position + forward;
                     carry = false;
                     tilePickupAudio.PlayOneShot(mm.putDownBox);
+                    if (carryThing.GetComponent<Float>()){
+                        carryThing.GetComponent<Float>().begin = carryThing.transform.position;
+
+                    }
+                    tilePickupAudio.PlayOneShot(mm.question);
+
                     if (chat)
                     {
                         cc.chat.text = "emmmmmmmm..........Do you think this is the right position to put this box???";
@@ -313,13 +354,14 @@ public class PlayerController : MonoBehaviour
             {
                 msgDispTimer = 2;
                 string msg = "Cannot place box here.";
+                tilePickupAudio.PlayOneShot(mm.scared);
                 msgDisp.text = msg;
                 if (chat)
                 {
                     cc.chat.text = "There are too many things here. I can  not put a box  here";
                 }
             }
-            
+
 
         }
 
@@ -344,14 +386,34 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && (color == Color.red))
         {
 
-
+            bool nothing = true;
             for (int i = 0; i < hitColliders.Length; i++)
             {
                 if (hitColliders[i].tag == "blast")
                 {
                     Destroy(hitColliders[i].gameObject);
+                    tilePickupAudio.PlayOneShot(mm.blastAudio);
+                    tilePickupAudio.PlayOneShot(mm.ability);
+                    if (chat)
+                    {
+                        cc.chat.text = "Bomb!!!!!";
+                    }
+
+                    nothing = false;
                 }
-                //tilePickupAudio.PlayOneShot(mm.blastAudio);
+
+            }
+            if (nothing)
+            {
+                if (chat)
+                {
+                    cc.chat.text = "Do you wanna me to blast air???";
+                }
+                msgDispTimer = 2;
+                string msg = "There is nothing to blast";
+                msgDisp.text = msg;
+                ;
+                tilePickupAudio.PlayOneShot(mm.question);
             }
 
 
@@ -361,6 +423,10 @@ public class PlayerController : MonoBehaviour
         {
             tilePickupAudio.PlayOneShot(mm.runfasterAudio);
             speed = 80;
+            if (chat)
+            {
+                cc.chat.text = "Speed up!!!!!";
+            }
         }
         else
         {
@@ -376,6 +442,7 @@ public class PlayerController : MonoBehaviour
             Vector3 forward = transform.TransformDirection(Vector3.left);
             forward = new Vector3(10 * forward.z, 8, -10 * forward.x);
             powerups.Createtele(transform.position + forward, color);
+
 
 
 
@@ -463,6 +530,12 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+
+        if (collision.collider.gameObject.CompareTag("floor") || collision.collider.gameObject.CompareTag("move"))
+        {
+            jump = true;
+        }
+
         if (collision.collider.gameObject.CompareTag("sand"))
         {
             jump = false;
@@ -471,35 +544,72 @@ public class PlayerController : MonoBehaviour
         else if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")) && lastHit > 1f)
         {
             hitWall = true;
-            jump = false;
             lastHit = 0;
+            tilePickupAudio.PlayOneShot(mm.question);
+            if (chat)
+            {
+                cc.chat.text = "Damn, my head just hit the wall";
+            }
+
+
         }
-        else
-        {
-            jump = true;
-        }
-
-
-
 
         if (collision.gameObject.tag == "tele" && powerups.tele_num == 2)
         {
 
             float d1 = Vector3.Distance(powerups.yellowbox1.transform.position, transform.position);
             float d2 = Vector3.Distance(powerups.yellowbox2.transform.position, transform.position);
-            if (d1 < d2)
+            teleController tc1 = powerups.yellowbox1.gameObject.GetComponent<teleController>();
+            teleController tc2 = powerups.yellowbox2.gameObject.GetComponent<teleController>();
+            if (d1 < d2 && tc1)
             {
-                tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
+                StartCoroutine(startto1());
+                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                //Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
 
-                transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
+                //transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
             }
-            else if (d1 >= d2)
+            else if (d1 >= d2 && tc2)
             {
+                StartCoroutine(startto2());
+                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                //Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
+                //transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
+            }
+
+
+
+            IEnumerator startto1()
+            {
+                ;
+                Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
+                transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
+                tc1.tele = false;
                 tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                yield return new WaitForSeconds(0.5f);
+
+
+
+
+
+
+            }
+
+            IEnumerator startto2()
+            {
+                ;
                 Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
                 transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
+                tc2.tele = false;
+                yield return new WaitForSeconds(0.5f);
+                tilePickupAudio.PlayOneShot(mm.teleportAudio);
+
+
+
+
+
             }
+            tilePickupAudio.PlayOneShot(mm.surprise);
             if (chat)
             {
                 cc.chat.text = "Tell me where is the other side of the portal. It is not hell, right?";
@@ -514,6 +624,16 @@ public class PlayerController : MonoBehaviour
         Destroy(o);
     }
 
+    private void OnCollisionStay(Collision collision) {
+        Debug.Log(collision.collider.gameObject.CompareTag("wall") );
+
+        if (collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")){
+            OnWall = true;
+        }else{
+            OnWall = false;
+        }
+    }
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.GetComponent<Rigidbody>())
@@ -523,8 +643,31 @@ public class PlayerController : MonoBehaviour
         if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")))
         {
             hitWall = false;
-            jump = true;
         }
+
+        if (collision.gameObject.tag == "tele")
+        {
+
+            teleController tc2 = collision.gameObject.GetComponent<teleController>();
+
+            StartCoroutine(wait());
+
+
+
+
+            IEnumerator wait()
+            {
+                yield return new WaitForSeconds(1.5f);
+                tc2.tele = true;
+
+
+            }
+
+
+
+        }
+
+
 
     }
 
@@ -534,6 +677,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("hole"))
         {
             gm.LoseGame();
+            tilePickupAudio.PlayOneShot(mm.sad);
         }
         else if (other.gameObject.CompareTag("finish"))
         {
@@ -550,13 +694,13 @@ public class PlayerController : MonoBehaviour
             if (tc.tele)
             {
                 StartCoroutine(startto());
-                
+
             }
 
-            
+
             IEnumerator startto()
             {
-                
+
                 GameObject otherP = tc.teleport_other;
                 teleController tc2 = otherP.gameObject.GetComponent<teleController>();
                 tc2.tele = false;
@@ -570,11 +714,13 @@ public class PlayerController : MonoBehaviour
                 if (chat)
                 {
                     cc.chat.text = "Cool!!!!!!";
+
                 }
+                tilePickupAudio.PlayOneShot(mm.surprise);
 
 
             }
-            
+
 
 
         }
@@ -592,10 +738,10 @@ public class PlayerController : MonoBehaviour
         {
 
             teleController tc2 = other.gameObject.GetComponent<teleController>();
-            
+
             StartCoroutine(wait());
 
-            
+
 
 
             IEnumerator wait()
@@ -605,7 +751,7 @@ public class PlayerController : MonoBehaviour
 
 
             }
-           
+
 
 
         }
@@ -623,6 +769,8 @@ public class PlayerController : MonoBehaviour
         robotAbilty.color = Color.red;
         Abilty.color = Color.red;
         Chat.color = Color.red;
+        max02.color = Color.red;
+        tilePickupAudio.PlayOneShot(mm.ability);
 
         if (chat)
         {
@@ -642,6 +790,8 @@ public class PlayerController : MonoBehaviour
         robotAbilty.color = Color.blue;
         Abilty.color = Color.blue;
         Chat.color = Color.blue;
+        max02.color = Color.blue;
+        tilePickupAudio.PlayOneShot(mm.ability);
         if (chat)
         {
             cc.chat.text = "It is Blue Power!Power to generate two portals and then  travel across time and space!";
@@ -659,6 +809,8 @@ public class PlayerController : MonoBehaviour
         robotAbilty.color = Color.green;
         Abilty.color = Color.green;
         Chat.color = Color.green;
+        max02.color = Color.green;
+        tilePickupAudio.PlayOneShot(mm.ability);
         if (chat)
         {
             cc.chat.text = "Green is power of wind!Activate it for a long time , I can fly up high!";
@@ -675,19 +827,21 @@ public class PlayerController : MonoBehaviour
         robotAbilty.color = Color.white;
         Abilty.color = Color.white;
         Chat.color = Color.white;
+        max02.color = Color.white;
+        tilePickupAudio.PlayOneShot(mm.oh);
     }
 
     void ChangeColor(Color color)
     {
-        
+
         foreach (Renderer joint in body.GetComponentsInChildren<Renderer>())
         {
-            
+
             joint.material.SetColor("_EmissionColor", color);
-           
+
         }
 
-            
+
         //Material mymat1 = wheel1.GetComponent<Renderer>().material;
         //mymat1.SetColor("_EmissionColor", color);
         //Material mymat2 = wheel2.GetComponent<Renderer>().material;
@@ -770,4 +924,3 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
-

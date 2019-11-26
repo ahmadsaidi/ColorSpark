@@ -95,7 +95,7 @@ public class PowerUps : MonoBehaviour
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
                         if (pc.chat)
                         {
-                            cc.chat.text = "That box starts to float, do you notice that?";
+                            cc.chat.text = "Something starts to float, do you notice that?";
                         }
 
                     }
@@ -159,6 +159,7 @@ public class PowerUps : MonoBehaviour
             if (pc.chat)
             {
                 cc.chat.text = "Do you wanna  drop spark on a wall or something?";
+                tilePickupAudio.PlayOneShot(mm.ah);
             }
             if (pc.msgDisp)
             {
@@ -185,13 +186,16 @@ public class PowerUps : MonoBehaviour
                 string msg = "Cannot place portal here.";
                 pc.msgDisp.text = msg;
                 pc.msgDispTimer = 2;
+                tilePickupAudio.PlayOneShot(mm.ah);
             }
+
             return;
         }
         if (tele_num == 0)
         {
             
             yellowbox1 = Instantiate(tele, position, Quaternion.Euler( 0 , Mathf.Rad2Deg * Mathf.Atan(forward.y / forward.x) ,  0) );
+            tilePickupAudio.PlayOneShot(mm.ability);
 
         }
         if (tele_num == 1)
@@ -204,9 +208,11 @@ public class PowerUps : MonoBehaviour
             {
                 yellowbox2 = Instantiate(tele, position, Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(forward.y / forward.x),  0));
             }
-           // yellowbox2 = Instantiate(tele, position, Quaternion.Euler(-90, 0, -180 * forward.z));
+            tilePickupAudio.PlayOneShot(mm.ability);
+            // yellowbox2 = Instantiate(tele, position, Quaternion.Euler(-90, 0, -180 * forward.z));
         }
         tele_num++;
+        
 
     }
 

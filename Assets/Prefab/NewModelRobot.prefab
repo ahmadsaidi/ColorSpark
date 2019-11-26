@@ -3448,7 +3448,7 @@ MonoBehaviour:
   rotationSpeed: 0
   color: {r: 1, g: 1, b: 1, a: 1}
   led: {fileID: 0}
-  tilePickupAudio: {fileID: 0}
+  tilePickupAudio: {fileID: 7249106094416459381}
   carry: 0
   pauseMenu: {fileID: 618636911257559042, guid: ea53fcbcc8aca974ba5d95204f2fbb53,
     type: 3}
