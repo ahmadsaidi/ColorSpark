@@ -331,7 +331,14 @@ public class PlayerController : MonoBehaviour
                     {
                         cc.chat.text = "I am carrying an object, where should I put it?";
                     }
-                    carryThing.transform.GetChild(0).gameObject.SetActive(true);
+                    for (int j = 0; j < carryThing.transform.childCount; j++)
+                    {
+                        Transform c = carryThing.transform.GetChild(j);
+                        if (c.CompareTag("robot_light"))
+                        {
+                            c.gameObject.SetActive(true);
+                        }
+                    }
                 }
                 //tilePickupAudio.PlayOneShot(mm.blastAudio);
             }
@@ -353,7 +360,14 @@ public class PlayerController : MonoBehaviour
                         carryThing.GetComponent<Float>().begin = carryThing.transform.position;
 
                     }
-                    carryThing.transform.GetChild(0).gameObject.SetActive(false);
+                    for (int j = 0; j < carryThing.transform.childCount; j++)
+                    {
+                        Transform c = carryThing.transform.GetChild(j);
+                        if (c.CompareTag("robot_light"))
+                        {
+                            c.gameObject.SetActive(false);
+                        }
+                    }
                     tilePickupAudio.PlayOneShot(mm.question);
 
                     if (chat)
