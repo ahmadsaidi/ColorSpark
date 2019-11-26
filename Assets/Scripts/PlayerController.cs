@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     public Text Chat;
     public Transform front;
     public Transform back;
+    public Transform left;
+    public Transform right;
     Vector3 carryStart;
     Vector3 carryTo;
     public Text max02;
@@ -309,18 +311,27 @@ public class PlayerController : MonoBehaviour
                     carryStart = carryThing.transform.position;
                     float df = (carryStart - front.position).sqrMagnitude;
                     float db = (carryStart - back.position).sqrMagnitude;
-                    if (df < db)
+                    float dl = (carryStart - left.position).sqrMagnitude;
+                    float dr = (carryStart - right.position).sqrMagnitude;
+                    if (df < db && df < dr && df < dl)
                     {
                         carryTo = front.position;
-                    } else
+                    } else if (db < dr && db < dl)
                     {
                         carryTo = back.position;
+                    } else if(dr < dl)
+                    {
+                        carryTo = right.position;
+                    } else
+                    {
+                        carryTo = left.position;
                     }
                     tilePickupAudio.PlayOneShot(mm.happy);
                     if (chat)
                     {
                         cc.chat.text = "I am carrying an object, where should I put it?";
                     }
+                    carryThing.transform.GetChild(0).gameObject.SetActive(true);
                 }
                 //tilePickupAudio.PlayOneShot(mm.blastAudio);
             }
@@ -337,10 +348,12 @@ public class PlayerController : MonoBehaviour
                     carryThing.transform.position = transform.position + forward;
                     carry = false;
                     tilePickupAudio.PlayOneShot(mm.putDownBox);
+                    dropCarryTimer = 0.5f;
                     if (carryThing.GetComponent<Float>()){
                         carryThing.GetComponent<Float>().begin = carryThing.transform.position;
 
                     }
+                    carryThing.transform.GetChild(0).gameObject.SetActive(false);
                     tilePickupAudio.PlayOneShot(mm.question);
 
                     if (chat)
