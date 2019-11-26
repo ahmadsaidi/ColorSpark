@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     float dropCarryTimer = 0.5f;
     public bool canMove = true;
     private bool fixportal ;
-    ChatController cc;
+    public ChatController cc;
     public bool chat;
     public GameObject body;
     public Text robotAbilty;
@@ -625,8 +625,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnCollisionStay(Collision collision) {
-        Debug.Log(collision.collider.gameObject.CompareTag("wall") );
-
         if (collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")){
             OnWall = true;
         }else{
