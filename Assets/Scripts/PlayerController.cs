@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     public Text robotAbilty;
     public Text Abilty;
     public Text Chat;
+    public Text max02;
     private bool OnWall = false;
  
 
@@ -80,6 +81,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+
+       
         if (transform.position.y < -100)
         {
             gm.LoseGame();
@@ -199,7 +202,11 @@ public class PlayerController : MonoBehaviour
             {
                 if (hitColliders[i].tag == "move")
                 {
-                    cc.chat.text = "Jumping on a box is fun";
+                    if (chat)
+                    {
+                        cc.chat.text = "Jumping on a box is fun";
+                    }
+                   
                     tilePickupAudio.PlayOneShot(mm.oh);
                 }
              
@@ -210,7 +217,11 @@ public class PlayerController : MonoBehaviour
         } else if(Input.GetButtonDown("Fire1") && OnWall && paused == false && hitWall)
         {
             tilePickupAudio.PlayOneShot(mm.scared);
-            cc.chat.text = "Do you wanna me dance on a wall or something???";
+            if (chat)
+            {
+                cc.chat.text = "Do you wanna me dance on a wall or something???";
+            }
+            
             msgDispTimer = 2;
             string msg = "You can not Jump here";
             msgDisp.text = msg;
@@ -358,7 +369,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && (color == Color.red))
         {
 
-
+            bool nothing = true;
             for (int i = 0; i < hitColliders.Length; i++)
             {
                 if (hitColliders[i].tag == "blast")
@@ -366,8 +377,26 @@ public class PlayerController : MonoBehaviour
                     Destroy(hitColliders[i].gameObject);
                     tilePickupAudio.PlayOneShot(mm.blastAudio);
                     tilePickupAudio.PlayOneShot(mm.ability);
+                    if (chat)
+                    {
+                        cc.chat.text = "Bomb!!!!!";
+                    }
+                   
+                    nothing = false;
                 }
               
+            }
+            if (nothing)
+            {
+                if (chat)
+                {
+                    cc.chat.text = "Do you wanna me to blast air???";
+                }
+                msgDispTimer = 2;
+                string msg = "There is nothing to blast";
+                msgDisp.text = msg;
+                ;
+                tilePickupAudio.PlayOneShot(mm.question);
             }
 
 
@@ -377,6 +406,10 @@ public class PlayerController : MonoBehaviour
         {
             tilePickupAudio.PlayOneShot(mm.runfasterAudio);
             speed = 80;
+            if (chat)
+            {
+                cc.chat.text = "Speed up������������";
+            }
         }
         else
         {
@@ -496,7 +529,12 @@ public class PlayerController : MonoBehaviour
             hitWall = true;
             lastHit = 0;
             tilePickupAudio.PlayOneShot(mm.question);
-            cc.chat.text = "Damn, my head just hit the wall";
+            if (chat)
+            {
+                cc.chat.text = "Damn, my head just hit the wall";
+            }
+            
+
         }
 
         if (collision.gameObject.tag == "tele" && powerups.tele_num == 2)
@@ -504,18 +542,55 @@ public class PlayerController : MonoBehaviour
 
             float d1 = Vector3.Distance(powerups.yellowbox1.transform.position, transform.position);
             float d2 = Vector3.Distance(powerups.yellowbox2.transform.position, transform.position);
-            if (d1 < d2)
+            teleController tc1 = powerups.yellowbox1.gameObject.GetComponent<teleController>();
+            teleController tc2 = powerups.yellowbox2.gameObject.GetComponent<teleController>();
+            if (d1 < d2 && tc1)
             {
-                tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
+                StartCoroutine(startto1());
+                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                //Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
 
-                transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
+                //transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
             }
-            else if (d1 >= d2)
+            else if (d1 >= d2 && tc2)
             {
+                StartCoroutine(startto2());
+                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                //Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
+                //transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
+            }
+
+
+
+            IEnumerator startto1()
+            {
+                ;
+                Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
+                transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
+                tc1.tele = false;
                 tilePickupAudio.PlayOneShot(mm.teleportAudio);
+                yield return new WaitForSeconds(0.5f);
+          
+
+                
+                
+
+
+            }
+
+            IEnumerator startto2()
+            {
+                ;
                 Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
                 transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
+                tc2.tele = false;
+                yield return new WaitForSeconds(0.5f);
+                tilePickupAudio.PlayOneShot(mm.teleportAudio);
+
+
+
+
+
             }
             tilePickupAudio.PlayOneShot(mm.surprise);
             if (chat)
@@ -552,6 +627,30 @@ public class PlayerController : MonoBehaviour
         {
             hitWall = false;
         }
+
+        if (collision.gameObject.tag == "tele")
+        {
+
+            teleController tc2 = collision.gameObject.GetComponent<teleController>();
+
+            StartCoroutine(wait());
+
+
+
+
+            IEnumerator wait()
+            {
+                yield return new WaitForSeconds(1.5f);
+                tc2.tele = true;
+
+
+            }
+
+
+
+        }
+
+
 
     }
 
@@ -653,6 +752,7 @@ public class PlayerController : MonoBehaviour
         robotAbilty.color = Color.red;
         Abilty.color = Color.red;
         Chat.color = Color.red;
+        max02.color = Color.red;
         tilePickupAudio.PlayOneShot(mm.ability);
 
         if (chat)
@@ -673,6 +773,7 @@ public class PlayerController : MonoBehaviour
         robotAbilty.color = Color.blue;
         Abilty.color = Color.blue;
         Chat.color = Color.blue;
+        max02.color = Color.blue;
         tilePickupAudio.PlayOneShot(mm.ability);
         if (chat)
         {
@@ -691,6 +792,7 @@ public class PlayerController : MonoBehaviour
         robotAbilty.color = Color.green;
         Abilty.color = Color.green;
         Chat.color = Color.green;
+        max02.color = Color.green;
         tilePickupAudio.PlayOneShot(mm.ability);
         if (chat)
         {
@@ -708,6 +810,7 @@ public class PlayerController : MonoBehaviour
         robotAbilty.color = Color.white;
         Abilty.color = Color.white;
         Chat.color = Color.white;
+        max02.color = Color.white;
         tilePickupAudio.PlayOneShot(mm.oh);
     }
 

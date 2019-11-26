@@ -95,7 +95,7 @@ public class PowerUps : MonoBehaviour
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
                         if (pc.chat)
                         {
-                            cc.chat.text = "That box starts to float, do you notice that?";
+                            cc.chat.text = "Something starts to float, do you notice that?";
                         }
 
                     }
