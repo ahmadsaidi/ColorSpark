@@ -96,12 +96,18 @@ MonoBehaviour:
   yellowbox2: {fileID: 0}
   bridge: {fileID: 0}
   objectToFloat: {fileID: 0}
+  floatCamera: {fileID: 0}
   floatHeight: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   trigger: 0
   flo: 1
   fall: 0
-  Icon: {fileID: 0}
+  Icon: {fileID: 2384141234752916375, guid: 8ade62a23b30d314aa66487de976c245, type: 3}
+  path: {fileID: 0}
+  redGlow: {fileID: 0}
+  Ability: {fileID: 6596517164199292103, guid: 21088d31318fed646995c925ba4a2bb4, type: 3}
+  EngineAbility: {fileID: 6003546384774761488, guid: a700f28da8340dc4d87c7b0773765179,
+    type: 3}
 --- !u!64 &2913375170099626732
 MeshCollider:
   m_ObjectHideFlags: 0

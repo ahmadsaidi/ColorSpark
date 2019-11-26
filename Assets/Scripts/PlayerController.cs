@@ -46,6 +46,12 @@ public class PlayerController : MonoBehaviour
     private bool fixportal ;
     ChatController cc;
     public bool chat;
+    public GameObject body;
+    public Text robotAbilty;
+    public Text Abilty;
+    public Text Chat;
+ 
+
 
 
     void Start()
@@ -593,6 +599,11 @@ public class PlayerController : MonoBehaviour
         tilePickupAudio.PlayOneShot(mm.redAudio);
         Icon.GetComponent<Image>().color = Color.white;
         Icon.GetComponent<Image>().sprite = Icon.Drill;
+        robotAbilty.text = "Blast";
+        robotAbilty.color = Color.red;
+        Abilty.color = Color.red;
+        Chat.color = Color.red;
+
         if (chat)
         {
             cc.chat.text = "Red power is inside me! I can blast red objects now!";
@@ -607,6 +618,10 @@ public class PlayerController : MonoBehaviour
         color = Color.blue;
         Icon.GetComponent<Image>().color = Color.white;
         Icon.GetComponent<Image>().sprite = Icon.Teleport;
+        robotAbilty.text = "Portal";
+        robotAbilty.color = Color.blue;
+        Abilty.color = Color.blue;
+        Chat.color = Color.blue;
         if (chat)
         {
             cc.chat.text = "It is Blue Power!Power to generate two portals and then  travel across time and space!";
@@ -620,6 +635,10 @@ public class PlayerController : MonoBehaviour
         color = Color.green;
         Icon.GetComponent<Image>().color = Color.white;
         Icon.GetComponent<Image>().sprite = Icon.Rocket;
+        robotAbilty.text = "Rush";
+        robotAbilty.color = Color.green;
+        Abilty.color = Color.green;
+        Chat.color = Color.green;
         if (chat)
         {
             cc.chat.text = "Green is power of wind!Activate it for a long time , I can fly up high!";
@@ -632,14 +651,27 @@ public class PlayerController : MonoBehaviour
         color = Color.white;
         Icon.GetComponent<Image>().color = Color.black;
         Icon.GetComponent<Image>().sprite = null;
+        robotAbilty.text = "";
+        robotAbilty.color = Color.white;
+        Abilty.color = Color.white;
+        Chat.color = Color.white;
     }
 
     void ChangeColor(Color color)
     {
-        Material mymat1 = wheel1.GetComponent<Renderer>().material;
-        mymat1.SetColor("_EmissionColor", color);
-        Material mymat2 = wheel2.GetComponent<Renderer>().material;
-        mymat2.SetColor("_EmissionColor", color);
+        
+        foreach (Renderer joint in body.GetComponentsInChildren<Renderer>())
+        {
+            
+            joint.material.SetColor("_EmissionColor", color);
+           
+        }
+
+            
+        //Material mymat1 = wheel1.GetComponent<Renderer>().material;
+        //mymat1.SetColor("_EmissionColor", color);
+        //Material mymat2 = wheel2.GetComponent<Renderer>().material;
+        //mymat2.SetColor("_EmissionColor", color);
     }
 
     public void continueGame()

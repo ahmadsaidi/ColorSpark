@@ -3369,10 +3369,10 @@ MonoBehaviour:
   player: {fileID: 7249106094416459383}
   tele: {fileID: 8574291700139414983, guid: c6d740a33ac24e845b58f9c686249359, type: 3}
   tilePickupAudio: {fileID: 0}
+  pc: {fileID: 0}
   yellowbox1: {fileID: 0}
   yellowbox2: {fileID: 0}
   tele_num: 0
-  msgDisp: {fileID: 0}
 --- !u!65 &9055264397425044481
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3422,9 +3422,10 @@ MonoBehaviour:
     type: 3}
   controller: {fileID: 6060677715998004253, guid: acdbd2ac3dcbe284fb2e11961d95497a,
     type: 3}
-  Icon: {fileID: 0}
+  Icon: {fileID: 4243545463690049690, guid: 1bac8bfb69e9b04478d2dd28d07977a2, type: 3}
   wheel1: {fileID: 7249106093316183192}
   wheel2: {fileID: 7249106094881875516}
+  mm: {fileID: 0}
   axel: {fileID: 624642053119917695}
   cameraAnchorV: {fileID: 9185331725806151649}
   cameraAnchorH: {fileID: 8823505464079855879}
@@ -3433,6 +3434,12 @@ MonoBehaviour:
   msgDispTimer: 2
   msgDisp: {fileID: 6363261454934104743, guid: c513fbb1dd6102e45b8753ecaca77515, type: 3}
   canMove: 1
+  chat: 0
+  body: {fileID: 7249106094668343508}
+  robotAbilty: {fileID: 6969026838596225668, guid: 20cadce96498ae0409fe10919b0de69c,
+    type: 3}
+  Abilty: {fileID: 6596517164199292103, guid: 21088d31318fed646995c925ba4a2bb4, type: 3}
+  Chat: {fileID: 284993284458544648, guid: 8e16bfafacc0260428e9199f1e8e2c84, type: 3}
 --- !u!1 &7249106094478476768
 GameObject:
   m_ObjectHideFlags: 0
