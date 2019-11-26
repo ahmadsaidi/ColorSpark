@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     public Text robotAbilty;
     public Text Abilty;
     public Text Chat;
+    private bool OnWall = false;
  
 
 
@@ -188,7 +189,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetButtonDown("Fire1") && jump == true && paused == false)
+        if (Input.GetButtonDown("Fire1") && jump == true && paused == false && OnWall == false)
         {
             rb.velocity += new Vector3(0, 40, 0);
             tilePickupAudio.PlayOneShot(mm.jump);
@@ -206,7 +207,7 @@ public class PlayerController : MonoBehaviour
             }
             
             
-        } else if(Input.GetButtonDown("Fire1") && jump == false && paused == false && hitWall)
+        } else if(Input.GetButtonDown("Fire1") && OnWall && paused == false && hitWall)
         {
             tilePickupAudio.PlayOneShot(mm.scared);
             cc.chat.text = "Do you wanna me dance on a wall or something???";
@@ -483,10 +484,7 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.gameObject.CompareTag("floor") || collision.collider.gameObject.CompareTag("move"))
         {
             jump = true;
-            
-
         }
-
 
         if (collision.collider.gameObject.CompareTag("sand"))
         {
@@ -496,18 +494,10 @@ public class PlayerController : MonoBehaviour
         else if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")) && lastHit > 1f)
         {
             hitWall = true;
-            jump = false;
             lastHit = 0;
             tilePickupAudio.PlayOneShot(mm.question);
             cc.chat.text = "Damn, my head just hit the wall";
         }
-        //else
-        //{
-        //    jump = true;
-        //}
-
-
-
 
         if (collision.gameObject.tag == "tele" && powerups.tele_num == 2)
         {
@@ -542,6 +532,16 @@ public class PlayerController : MonoBehaviour
         Destroy(o);
     }
 
+    private void OnCollisionStay(Collision collision) {
+        Debug.Log(collision.collider.gameObject.CompareTag("wall") );
+        
+        if (collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")){
+            OnWall = true;
+        }else{
+            OnWall = false;
+        }
+    }
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.GetComponent<Rigidbody>())
@@ -551,7 +551,6 @@ public class PlayerController : MonoBehaviour
         if ((collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")))
         {
             hitWall = false;
-            jump = false;
         }
 
     }
