@@ -25,6 +25,7 @@ public class Continue : MonoBehaviour
     private bool multiple = false;
     private bool four = false;
     GameManager gm;
+    MusicManager mm;
     
 
     void Start()
@@ -32,7 +33,8 @@ public class Continue : MonoBehaviour
         
         StartCoroutine(Type());
         gm = FindObjectOfType<GameManager>();
-        
+        mm = FindObjectOfType<MusicManager>();
+
     }
 
     IEnumerator Type()
@@ -57,16 +59,26 @@ public class Continue : MonoBehaviour
             if ((SceneManager.GetActiveScene().name == "Introduction")  &&index == 0 && Input.GetButtonDown("Fire2"))
             {
                 continuetext.enabled = false;
+                mm.GetComponent<AudioSource>().PlayOneShot(mm.ah);
+
+            }
+
+            if ((SceneManager.GetActiveScene().name == "Introduction") && index == 0 && Input.GetButtonDown("Fire1"))
+            {
                 
+                mm.GetComponent<AudioSource>().PlayOneShot(mm.ah);
+
             }
 
             if ((SceneManager.GetActiveScene().name == "Introduction") && index == 4 && Input.GetButtonDown("Fire1"))
             {
                 sentences[5] = "Thanks!!!!!! ";
-                
+                mm.GetComponent<AudioSource>().PlayOneShot(mm.happy);
+
             }
             if ((SceneManager.GetActiveScene().name == "Introduction") && index == 4 && Input.GetButtonDown("Fire2"))
             {
+                mm.GetComponent<AudioSource>().PlayOneShot(mm.scared);
                 sentences[5] = "Stupid Human!!!!!! No matter what, you gonna help me, otherwise I will die!!!!! ";
                 
 
@@ -74,6 +86,7 @@ public class Continue : MonoBehaviour
             if ((SceneManager.GetActiveScene().name == "Introduction") && index == 7 && Input.GetButtonDown("Fire1"))
             {
                 sentences[8] = "That's is fine, I will teach you all the color abilities ";
+                mm.GetComponent<AudioSource>().PlayOneShot(mm.happy);
                 checkTut = true;
                 
 
@@ -81,7 +94,8 @@ public class Continue : MonoBehaviour
             if ((SceneManager.GetActiveScene().name == "Introduction") && index == 7 && Input.GetButtonDown("Fire2"))
             {
                 sentences[8] = "You really have some skills. You can skip the tutorial now ";
-         
+                mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
+
                 checkTut = false;
 
 
@@ -89,25 +103,31 @@ public class Continue : MonoBehaviour
 
             if ((SceneManager.GetActiveScene().name == "Introduction") && index == 9 )
             {
+                
                 if (Input.GetButtonDown("Fire1"))
                 {
                     myname = "My Spark Master";
+                    mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
                 } else if (Input.GetButtonDown("Fire2"))
                 {
+                    mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
                     myname = "My Sir";
                     
                 }
                 else if (Input.GetButtonDown("Fire3"))
                 {
                     myname = "My Lady";
-                  
+                    mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
+
                 }
                 else if (Input.GetButtonDown("Carry"))
                 {
                     myname = "My Idiot";
-   
+                    mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
+
                 }
                 Name.Myname= myname;
+                
 
                 if (checkTut)
                 {
@@ -124,7 +144,25 @@ public class Continue : MonoBehaviour
 
             }
 
-            
+            if ((SceneManager.GetActiveScene().name == "Introduction2") && index == 5 && Input.GetButtonDown("Fire1"))
+            {
+                sentences[6] = "That's is fine, I will teach you all the color engines ";
+                mm.GetComponent<AudioSource>().PlayOneShot(mm.happy);
+                checkTut = true;
+
+
+            }
+            if ((SceneManager.GetActiveScene().name == "Introduction2") && index == 5 && Input.GetButtonDown("Fire2"))
+            {
+                sentences[6] = "Great. You can skip the engine tutorial now ";
+                mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
+
+                checkTut = false;
+
+
+            }
+
+
 
             if ((SceneManager.GetActiveScene().name == "Introduction2") && engine && index >0 && index < 3)
             {
@@ -145,12 +183,14 @@ public class Continue : MonoBehaviour
             if ((SceneManager.GetActiveScene().name == "Introduction") && Golden && index > 2 && index < 6)
             {
                 Golden.SetActive(true);
+                
             }
             if ((SceneManager.GetActiveScene().name == "Introduction") && Sparks && RobotIcons && index >= 6 && index <=8)
             {
                 Sparks.SetActive(true);
                 RobotIcons.SetActive(true);
                 Golden.SetActive(false);
+                
             }
 
             if ((SceneManager.GetActiveScene().name == "Introduction") && Sparks && RobotIcons && index > 8)
@@ -158,6 +198,7 @@ public class Continue : MonoBehaviour
                 Sparks.SetActive(false);
                 RobotIcons.SetActive(false);
                 Golden.SetActive(false);
+                
             }
 
             // continuetext.SetActive(true);
@@ -195,12 +236,21 @@ public class Continue : MonoBehaviour
                 }
                 
             }
-            else
+            if (SceneManager.GetActiveScene().name == "Introduction2" && index < sentences.Length - 1)
             {
                 //continuetext.text = "A: No            B: Yes";
                 continuetext.enabled = true;
             }
             
+        }else if  (SceneManager.GetActiveScene().name == "Introduction2" && index == 5)  {
+            continuetext.text = "A: No            B: Yes";
+            multiple = true;
+        }
+        else if (SceneManager.GetActiveScene().name == "Introduction2" && index == 6)
+        {
+            multiple = false;
+            continuetext.enabled = true;
+            continuetext.text = "Press A to Continue";
         }
 
         if (check && Input.GetButtonDown("Fire1") && index < sentences.Length - 1)
@@ -273,22 +323,25 @@ public class Continue : MonoBehaviour
         {
             if (check && Input.GetButtonDown("Fire1") && index == sentences.Length - 1)
             {
-                if (Input.GetButtonDown("Fire1"))
+                if (check && Input.GetButtonDown("Fire1") && checkTut)
                 {
-                    gm.tut2();
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        gm.tut2();
+                    }
+
+
                 }
 
-
-            }
-
-            if (check && Input.GetButtonDown("Fire2") && index == sentences.Length - 1)
-            {
-
-                if (Input.GetButtonDown("Fire2"))
+                if (check && Input.GetButtonDown("Fire1") && checkTut == false)
                 {
-                    gm.StartPuzzle();
-                }
 
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        gm.StartPuzzle();
+                    }
+
+                }
             }
 
         }

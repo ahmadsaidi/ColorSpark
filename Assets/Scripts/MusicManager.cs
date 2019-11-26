@@ -16,6 +16,8 @@ public class MusicManager : MonoBehaviour
     public AudioClip tut, main, puzzle1, puzzle2, win, lose, end;
     public AudioClip hitWall;
     public AudioClip pickUpBox, putDownBox;
+    public AudioClip question,happy,surprise, scared,sad, oh, ability,ah;
+    public AudioClip engine_start;
     AudioSource music;
     void Start()
     {
