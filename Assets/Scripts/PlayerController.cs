@@ -50,7 +50,10 @@ public class PlayerController : MonoBehaviour
     public Text robotAbilty;
     public Text Abilty;
     public Text Chat;
- 
+    public Transform front;
+    public Transform back;
+    Vector3 carryStart;
+    Vector3 carryTo;
 
 
 
@@ -270,6 +273,16 @@ public class PlayerController : MonoBehaviour
                     carry = true;
                     dropCarryTimer = 0.5f;
                     tilePickupAudio.PlayOneShot(mm.pickUpBox);
+                    carryStart = carryThing.transform.position;
+                    float df = (carryStart - front.position).sqrMagnitude;
+                    float db = (carryStart - back.position).sqrMagnitude;
+                    if (df < db)
+                    {
+                        carryTo = front.position;
+                    } else
+                    {
+                        carryTo = back.position;
+                    }
                     if (chat)
                     {
                         cc.chat.text = "I am carrying an object, where should I put it?";
@@ -313,7 +326,14 @@ public class PlayerController : MonoBehaviour
 
         if (carry && carryThing)
         {
-            carryThing.transform.position = transform.position + new Vector3(0, 15, 0);
+            //carryThing.transform.position = transform.position + new Vector3(0, 15, 0);
+            if (dropCarryTimer > 0.25f)
+            {
+                carryThing.transform.position = Vector3.Slerp(carryStart, carryTo, 4 * (0.5f - dropCarryTimer));
+            } else
+            {
+                carryThing.transform.position = Vector3.Slerp(carryTo, transform.position + new Vector3(0, 15, 0), 4 * (0.25f - dropCarryTimer));
+            }
         }
 
         if (Input.GetKey("r"))
