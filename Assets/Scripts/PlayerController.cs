@@ -50,9 +50,12 @@ public class PlayerController : MonoBehaviour
     public Text robotAbilty;
     public Text Abilty;
     public Text Chat;
+    public Transform front;
+    public Transform back;
+    Vector3 carryStart;
+    Vector3 carryTo;
     public Text max02;
     private bool OnWall = false;
- 
 
 
 
@@ -82,7 +85,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-       
+
         if (transform.position.y < -100)
         {
             gm.LoseGame();
@@ -111,7 +114,7 @@ public class PlayerController : MonoBehaviour
         rotationh *= Time.deltaTime;
         rotation *= Time.deltaTime;
 
-        
+
         if (canMove){
             transform.Rotate(0, rotation, 0);
             Vector3 forward_direction = transform.TransformDirection(Vector3.left);
@@ -148,7 +151,7 @@ public class PlayerController : MonoBehaviour
         else{
             rb.velocity = new Vector3(0,0,0);
         }
-        
+
 
         if (stationary && translationx != 0)
         {
@@ -165,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
         currVerRot = 0;
 
-        
+
 
         var hitColliders = Physics.OverlapSphere(transform.position, 4);
         var hitColliderss = Physics.OverlapSphere(transform.position + new Vector3(0, 5, 0), 8);
@@ -179,7 +182,7 @@ public class PlayerController : MonoBehaviour
                 teleHere = true;
                 break;
             }
-        
+
         }
 
         for (int i = 0; i < hitColliders.Length; i++)
@@ -206,14 +209,14 @@ public class PlayerController : MonoBehaviour
                     {
                         cc.chat.text = "Jumping on a box is fun";
                     }
-                   
+
                     tilePickupAudio.PlayOneShot(mm.oh);
                 }
-             
+
 
             }
-            
-            
+
+
         } else if(Input.GetButtonDown("Fire1") && OnWall && paused == false && hitWall)
         {
             tilePickupAudio.PlayOneShot(mm.scared);
@@ -221,7 +224,7 @@ public class PlayerController : MonoBehaviour
             {
                 cc.chat.text = "Do you wanna me dance on a wall or something???";
             }
-            
+
             msgDispTimer = 2;
             string msg = "You can not Jump here";
             msgDisp.text = msg;
@@ -253,7 +256,7 @@ public class PlayerController : MonoBehaviour
             powerups.GetEnginePower(transform.position);
         }
 
-    
+
 
 
         if (Input.GetButtonDown("Fire3") && (color == Color.blue) && teleHere)
@@ -298,15 +301,22 @@ public class PlayerController : MonoBehaviour
                 if (hitColliders[i].tag == "move")
                 {
                     carryThing = (hitColliders[i].gameObject);
-                    
 
-                    
+
+
                     carry = true;
                     dropCarryTimer = 0.5f;
                     tilePickupAudio.PlayOneShot(mm.pickUpBox);
-
-
-
+                    carryStart = carryThing.transform.position;
+                    float df = (carryStart - front.position).sqrMagnitude;
+                    float db = (carryStart - back.position).sqrMagnitude;
+                    if (df < db)
+                    {
+                        carryTo = front.position;
+                    } else
+                    {
+                        carryTo = back.position;
+                    }
                     tilePickupAudio.PlayOneShot(mm.happy);
                     if (chat)
                     {
@@ -330,7 +340,7 @@ public class PlayerController : MonoBehaviour
                     tilePickupAudio.PlayOneShot(mm.putDownBox);
                     if (carryThing.GetComponent<Float>()){
                         carryThing.GetComponent<Float>().begin = carryThing.transform.position;
-                        
+
                     }
                     tilePickupAudio.PlayOneShot(mm.question);
 
@@ -351,14 +361,21 @@ public class PlayerController : MonoBehaviour
                     cc.chat.text = "There are too many things here. I can  not put a box  here";
                 }
             }
-            
+
 
         }
 
 
         if (carry && carryThing)
         {
-            carryThing.transform.position = transform.position + new Vector3(0, 15, 0);
+            //carryThing.transform.position = transform.position + new Vector3(0, 15, 0);
+            if (dropCarryTimer > 0.25f)
+            {
+                carryThing.transform.position = Vector3.Slerp(carryStart, carryTo, 4 * (0.5f - dropCarryTimer));
+            } else
+            {
+                carryThing.transform.position = Vector3.Slerp(carryTo, transform.position + new Vector3(0, 15, 0), 4 * (0.25f - dropCarryTimer));
+            }
         }
 
         if (Input.GetKey("r"))
@@ -381,10 +398,10 @@ public class PlayerController : MonoBehaviour
                     {
                         cc.chat.text = "Bomb!!!!!";
                     }
-                   
+
                     nothing = false;
                 }
-              
+
             }
             if (nothing)
             {
@@ -425,7 +442,7 @@ public class PlayerController : MonoBehaviour
             Vector3 forward = transform.TransformDirection(Vector3.left);
             forward = new Vector3(10 * forward.z, 8, -10 * forward.x);
             powerups.Createtele(transform.position + forward, color);
-          
+
 
 
 
@@ -533,7 +550,7 @@ public class PlayerController : MonoBehaviour
             {
                 cc.chat.text = "Damn, my head just hit the wall";
             }
-            
+
 
         }
 
@@ -570,10 +587,10 @@ public class PlayerController : MonoBehaviour
                 tc1.tele = false;
                 tilePickupAudio.PlayOneShot(mm.teleportAudio);
                 yield return new WaitForSeconds(0.5f);
-          
 
-                
-                
+
+
+
 
 
             }
@@ -607,7 +624,7 @@ public class PlayerController : MonoBehaviour
         Destroy(o);
     }
 
-    private void OnCollisionStay(Collision collision) {        
+    private void OnCollisionStay(Collision collision) {
         if (collision.collider.gameObject.CompareTag("wall") || collision.collider.gameObject.CompareTag("blast")){
             OnWall = true;
         }else{
@@ -675,13 +692,13 @@ public class PlayerController : MonoBehaviour
             if (tc.tele)
             {
                 StartCoroutine(startto());
-                
+
             }
 
-            
+
             IEnumerator startto()
             {
-                
+
                 GameObject otherP = tc.teleport_other;
                 teleController tc2 = otherP.gameObject.GetComponent<teleController>();
                 tc2.tele = false;
@@ -695,13 +712,13 @@ public class PlayerController : MonoBehaviour
                 if (chat)
                 {
                     cc.chat.text = "Cool!!!!!!";
-                   
+
                 }
                 tilePickupAudio.PlayOneShot(mm.surprise);
 
 
             }
-            
+
 
 
         }
@@ -719,10 +736,10 @@ public class PlayerController : MonoBehaviour
         {
 
             teleController tc2 = other.gameObject.GetComponent<teleController>();
-            
+
             StartCoroutine(wait());
 
-            
+
 
 
             IEnumerator wait()
@@ -732,7 +749,7 @@ public class PlayerController : MonoBehaviour
 
 
             }
-           
+
 
 
         }
@@ -814,14 +831,14 @@ public class PlayerController : MonoBehaviour
 
     void ChangeColor(Color color)
     {
-        
+
         foreach (Renderer joint in body.GetComponentsInChildren<Renderer>())
         {
-            
+
             joint.material.SetColor("_EmissionColor", color);
-           
+
         }
-       
+
 
         //Material mymat1 = wheel1.GetComponent<Renderer>().material;
         //mymat1.SetColor("_EmissionColor", color);
@@ -905,4 +922,3 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
-
