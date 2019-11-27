@@ -106,23 +106,23 @@ public class Continue : MonoBehaviour
                 
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    myname = "My Spark Master";
+                    myname = "Master";
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
                 } else if (Input.GetButtonDown("Fire2"))
                 {
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
-                    myname = "My Sir";
+                    myname = "Sir";
                     
                 }
                 else if (Input.GetButtonDown("Fire3"))
                 {
-                    myname = "My Lady";
+                    myname = "Lady";
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
 
                 }
                 else if (Input.GetButtonDown("Carry"))
                 {
-                    myname = "My Idiot";
+                    myname = "Professor";
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
 
                 }
