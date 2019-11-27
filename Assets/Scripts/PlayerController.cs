@@ -521,6 +521,8 @@ public class PlayerController : MonoBehaviour
             controller.SetActive(false);
             pauseMenu.SetActive(false);
             control = false;
+            canMove = true;
+            paused = false;
         }
 
         if (!hitWall)
