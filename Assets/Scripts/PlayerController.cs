@@ -466,7 +466,7 @@ public class PlayerController : MonoBehaviour
                 cc.chat.text = "Remember put portal in spare place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
             }
             Vector3 forward = transform.TransformDirection(Vector3.left);
-            forward = new Vector3(10 * forward.z, 8, -10 * forward.x);
+            forward = new Vector3(5 * forward.z, 8, -5 * forward.x);
             powerups.Createtele(transform.position + forward, color);
 
 
@@ -605,10 +605,10 @@ public class PlayerController : MonoBehaviour
                 float facing;
                 Vector3 directionUP = powerups.yellowbox2.transform.TransformDirection(Vector3.forward);
                 if (Vector3.Dot(offset,directionUP)>Vector3.Dot(offset, -directionUP)){
-                    offset = 5 * directionUP;
+                    offset = 8 * directionUP;
                     facing = powerups.yellowbox2.transform.rotation.eulerAngles.y;
                 }else{
-                    offset = -5 * directionUP;
+                    offset = -8 * directionUP;
                     facing = powerups.yellowbox2.transform.rotation.eulerAngles.y + 180;
                 }
                 transform.position = powerups.yellowbox2.transform.position + new Vector3(offset.x, 0, offset.z);
@@ -625,10 +625,10 @@ public class PlayerController : MonoBehaviour
                 float facing;
                 Vector3 directionUP = powerups.yellowbox1.transform.TransformDirection(Vector3.forward);
                 if (Vector3.Dot(offset,directionUP) > Vector3.Dot(offset, -directionUP)){
-                    offset = 5 * directionUP;
+                    offset = 8 * directionUP;
                     facing = powerups.yellowbox1.transform.rotation.eulerAngles.y;
                 }else{
-                    offset = -5 * directionUP;
+                    offset = -8 * directionUP;
                     facing = powerups.yellowbox1.transform.rotation.eulerAngles.y + 180;
 
                 }
