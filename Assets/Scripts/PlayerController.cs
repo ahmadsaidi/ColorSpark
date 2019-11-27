@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else{
-            rb.velocity = new Vector3(0,0,0);
+            rb.velocity = new Vector3(0,rb.velocity.y,0);
         }
 
 
@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            if (Input.GetButtonDown("Fire2") && color != Color.white)
+            if (Input.GetButtonDown("Fire2") && color != Color.white && canMove)
             {
                 Vector3 forward = transform.TransformDirection(Vector3.forward);
                 if (engineHere == false)
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Fire3") && canMove && !paused)
         {
             powerups.GetEnginePower(transform.position);
         }
@@ -463,7 +463,7 @@ public class PlayerController : MonoBehaviour
         {
             if (chat)
             {
-                cc.chat.text = "Remember put portal in spare place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
+                cc.chat.text = "Remember put portal in a spacious place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
             }
             Vector3 forward = transform.TransformDirection(Vector3.left);
             forward = new Vector3(10 * forward.z, 8, -10 * forward.x);
@@ -527,6 +527,7 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
             paused = true;
+            canMove = false;
         }
 
         if (Input.GetButtonDown("Fire1") && paused && control == true)
@@ -535,6 +536,7 @@ public class PlayerController : MonoBehaviour
             controller.SetActive(false);
             pauseMenu.SetActive(false);
             control = false;
+            canMove = true;
         }
 
         if (!hitWall)
@@ -878,6 +880,7 @@ public class PlayerController : MonoBehaviour
         jump = true;
         Time.timeScale = 1;
         paused = false;
+        canMove = true;
     }
 
     public void restart()
