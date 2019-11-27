@@ -2392,11 +2392,11 @@ MonoBehaviour:
   green: {fileID: 1431028065}
   red: {fileID: 1326284139}
   blue: {fileID: 642692182}
+  goldenSpark: {fileID: 1046933722}
   box: {fileID: 1169041889}
   HLarrow: {fileID: 6685845455175718327, guid: 1ad9753f76d8c9a48ab40319c9693244, type: 3}
   Ramp: {fileID: 1010406078}
   Messager: {fileID: 1066381198}
-  collidingbox: 0
 --- !u!4 &694740879 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8626752815081410331, guid: cd80a110b07421c40b304f275e642b58,
@@ -4657,6 +4657,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0863454, y: 1.0863458, z: 1.0863457}
   m_Center: {x: -0.5, y: -0.50000006, z: 0.5000001}
+--- !u!1 &1046933722 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3737520983152908303, guid: 86f9effb38a67db4b8fa40db58e68f34,
+    type: 3}
+  m_PrefabInstance: {fileID: 707443554}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1053653098
 PrefabInstance:
   m_ObjectHideFlags: 0

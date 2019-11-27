@@ -62,7 +62,6 @@ public class basictut : MonoBehaviour
             Messager.text = "Press A to continue";
             pc.canMove = false;
         }else{
-            Messager.text = "  ";
             Background.SetActive(false);
         }
         if (state == -1){
