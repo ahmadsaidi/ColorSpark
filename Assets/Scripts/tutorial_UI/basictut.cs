@@ -18,6 +18,7 @@ public class basictut : MonoBehaviour
     public GameObject green;
     public GameObject red;
     public GameObject blue;
+    public GameObject goldenSpark;
     public GameObject box;
     public GameObject HLarrow;
     public GameObject Ramp;
@@ -25,7 +26,7 @@ public class basictut : MonoBehaviour
     private GameObject arrow= null;
     private bool redisntpresent = true;
     private bool greenisntpresent = true;
-    private int[] PauseStates = {-1,1,5,6,8,9,12,13,16};
+    private int[] PauseStates = {-1,1,5,6,8,9,12,13,16,21,22,24};
     public Text Messager; 
     int state = -1;
 
@@ -61,7 +62,6 @@ public class basictut : MonoBehaviour
             Messager.text = "Press A to continue";
             pc.canMove = false;
         }else{
-            Messager.text = "  ";
             Background.SetActive(false);
         }
         if (state == -1){
@@ -221,7 +221,7 @@ public class basictut : MonoBehaviour
             state = 18;
         }
         if (state == 18){
-            pc.cc.chat.text = "I can only create 2 portals, be careful!\n (I can take portal back)";
+            pc.cc.chat.text = "I can only create 2 portals, be careful!\n (But I can take portals back!)";
             Messager.text = "press X to take the portal back";
         }
         if (state == 18 && Input.GetButtonDown("Fire3")){
@@ -235,7 +235,55 @@ public class basictut : MonoBehaviour
         }
         if (state == 20){
             pc.canMove = false;
+            GameObject[] portals = GameObject.FindGameObjectsWithTag("tele");
+            foreach (GameObject portal in portals){Destroy(portal);}
+            pc.whitePower();
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(5, 5);
+            transform.position = new Vector3(-254,0,-92);
+            pc.transform.rotation =  Quaternion.Euler(0,180,0);
+            highlight(goldenSpark);
+            state = 21;
         }
+        if (state == 21){
+            pc.cc.chat.text = "Did you see that GOLDEN SPARK? It's so Crucial!";
+        }
+        if (state == 22){
+            pc.cc.chat.text = "It's Hanging too high, I dont think I can Jump that high";
+        }
+        if (state == 23){
+            Destroy(arrow);
+            box.SetActive(true);
+            box.GetComponent<Renderer>().sharedMaterial.SetFloat("_Outline", 1.1f);
+            box.GetComponent<Renderer>().sharedMaterial.SetFloat("_Limiter", 1f);
+            highlight(box);
+            state = 24;
+        }
+        if (state == 24){
+            pc.cc.chat.text = "There is a Box, I can carry and stand on it, Nice!";
+        }
+        if (state == 25){
+            pc.canMove = true;
+            pc.cc.chat.text = "Help me get the GOLDEN SPARK!";
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
+            state = 26;
+        }
+        if (state == 26 ){
+            Messager.text = "Go get that box";
+            
+        }
+        if (state == 27 ){
+            Messager.text = "Press X to pick up the box";
+        }
+        if (state == 27 && pc.carry){
+            Destroy(arrow);
+            highlight(goldenSpark);
+            state = 28;
+        }
+        if (state == 28){
+            Messager.text = "Help MAX02 get the gold sparkling\n You can Press B to drop the box";
+        }
+        Debug.Log(state);
+
     }
 
 
@@ -243,5 +291,20 @@ public class basictut : MonoBehaviour
         if (collision.gameObject.tag == "tele" && powerups.tele_num == 2 && state == 19){
             state = 20;
         }
+        if (collision.gameObject.tag == "move" && state == 26){
+            arrow.SetActive(false);
+            box.GetComponent<Renderer>().sharedMaterial.SetFloat("_Outline", 0f);
+            box.GetComponent<Renderer>().sharedMaterial.SetFloat("_Limiter", 0f);
+            state = 27;
+        }
     }
+    private void OnCollisionExit(Collision collision) {
+        if (collision.gameObject.tag == "move" && state == 27){
+            arrow.SetActive(true);
+            box.GetComponent<Renderer>().sharedMaterial.SetFloat("_Outline", 1.1f);
+            box.GetComponent<Renderer>().sharedMaterial.SetFloat("_Limiter", 1f);
+            state = 26;
+        }
+    }
+
 }

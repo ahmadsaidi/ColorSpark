@@ -672,7 +672,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
       propertyPath: m_Name
-      value: FloorTile1 (4)
+      value: blast 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: blast
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
@@ -5095,7 +5100,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
       propertyPath: m_Name
-      value: FloorTile1
+      value: blast
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: blast
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
@@ -5325,7 +5335,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
       propertyPath: m_Name
-      value: FloorTile1 (3)
+      value: blast 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: blast
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
@@ -9047,7 +9062,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
       propertyPath: m_Name
-      value: FloorTile1 (1)
+      value: blast 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: blast
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
@@ -11478,7 +11498,12 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
       propertyPath: m_Name
-      value: FloorTile1 (2)
+      value: blast 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: blast
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 7f072e22934fcd04593721a907e620ce,
         type: 3}
