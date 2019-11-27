@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2653912714352111393}
   - component: {fileID: 2745911243922135547}
   - component: {fileID: 2745320054569080973}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Glow
   m_TagString: loweffect
   m_Icon: {fileID: 0}

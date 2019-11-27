@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9223261281975559152}
   - component: {fileID: 2957145492986180716}
   - component: {fileID: 4412712211792698485}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: FixedPortal2
   m_TagString: Fixedtele
   m_Icon: {fileID: 0}
@@ -9578,7 +9578,7 @@ GameObject:
   - component: {fileID: 9018901123685806178}
   - component: {fileID: 9222012978087875072}
   - component: {fileID: 9222264785136137594}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Circle
   m_TagString: effect
   m_Icon: {fileID: 0}
@@ -14268,7 +14268,7 @@ GameObject:
   - component: {fileID: 9022768927963740974}
   - component: {fileID: 9221305771656383988}
   - component: {fileID: 9221842681229266050}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Glow
   m_TagString: loweffect
   m_Icon: {fileID: 0}

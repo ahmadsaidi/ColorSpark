@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8568709589271177909}
   - component: {fileID: 8374514964530180379}
   - component: {fileID: 8374810123617147943}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Circle
   m_TagString: effect
   m_Icon: {fileID: 0}
@@ -4631,7 +4631,7 @@ GameObject:
   - component: {fileID: 8376463047793775825}
   - component: {fileID: -4778835327774093105}
   - component: {fileID: 4647722782842067836}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: portal2
   m_TagString: tele
   m_Icon: {fileID: 0}

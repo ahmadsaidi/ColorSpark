@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 4533419}
   - component: {fileID: 4533418}
   - component: {fileID: 4533420}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Glow
   m_TagString: float
   m_Icon: {fileID: 0}
@@ -6918,7 +6918,7 @@ GameObject:
   - component: {fileID: 304692516}
   - component: {fileID: 304692518}
   - component: {fileID: 304692517}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Glow
   m_TagString: loweffect
   m_Icon: {fileID: 0}
@@ -15314,6 +15314,11 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 0.22872034
       objectReference: {fileID: 0}
+    - target: {fileID: 44907704010984875, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2334091723744808676, guid: d7ec5d77a1a03224fae71922eda3e388,
         type: 3}
       propertyPath: m_IsActive
@@ -15323,11 +15328,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 44907704010984875, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7249106094416459378, guid: d7ec5d77a1a03224fae71922eda3e388,
         type: 3}
@@ -16484,16 +16484,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1937380111}
     m_Modifications:
-    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842450823205362995, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8842450823159717793, guid: c72374af5812cfb469dd7bdb846c8158,
         type: 3}
       propertyPath: m_RootOrder
@@ -16518,6 +16508,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 262.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823205362995, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9080043860180261201, guid: c72374af5812cfb469dd7bdb846c8158,
         type: 3}
