@@ -80,7 +80,7 @@ public class PowerUps : MonoBehaviour
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
                         if (pc.chat)
                         {
-                            cc.chat.text = "Wowwwwwwwwwwwwwwwww, take me there please";
+                            cc.chat.text =  "Wowwwwwwwwwwwwwwwww!!!" + Name.Myname + "," +"take me there please";
                         }
 
                     }
@@ -95,7 +95,7 @@ public class PowerUps : MonoBehaviour
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
                         if (pc.chat)
                         {
-                            cc.chat.text = "Something starts to float, do you notice that?";
+                            cc.chat.text = "Something starts to float," + Name.Myname + "," + " do you notice that?";
                         }
 
                     }
@@ -109,7 +109,7 @@ public class PowerUps : MonoBehaviour
                         tilePickupAudio.PlayOneShot(mm.spark_to_engine);
                         if (pc.chat)
                         {
-                            cc.chat.text = "I never expect that there is way there!!!!!";
+                            cc.chat.text = Name.Myname + "," + "I never expect that there is way there!!!!!";
                         }
                     }
 
@@ -158,7 +158,7 @@ public class PowerUps : MonoBehaviour
             string msg = "Cannot drop spark here.";
             if (pc.chat)
             {
-                cc.chat.text = "Do you wanna  drop spark on a wall or something?";
+                cc.chat.text = Name.Myname + "," + "Do you wanna  drop spark on a wall or something?";
                 tilePickupAudio.PlayOneShot(mm.ah);
             }
             if (pc.msgDisp)
@@ -180,7 +180,7 @@ public class PowerUps : MonoBehaviour
             {
                 if (pc.chat)
                 {
-                    cc.chat.text = "The portal will just disappear if you put it here";
+                    cc.chat.text = Name.Myname + "," + "The portal will just disappear if you put it here";
                 }
                 string msg = "Cannot place portal here.";
                 pc.msgDisp.text = msg;

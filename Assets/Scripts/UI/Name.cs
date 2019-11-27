@@ -6,5 +6,5 @@ public static class Name
 {
 
 
-    public static string Myname;
+    public static string Myname = "";
 }

@@ -355,18 +355,18 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                 }
-                if (boxhere == false && engineHere == false && teleHere == false)
-                {
-                    if (chat)
-                    {
-                        cc.chat.text = Name.Myname + "," + "What do you wanna pick up? Maybe you should get closer";
-                    }
-                    tilePickupAudio.PlayOneShot(mm.question);
-                    msgDispTimer = 2;
-                    string msg = "There is nothing to pick up";
-                    msgDisp.text = msg;
+                //if (boxhere == false && engineHere == false && teleHere == false && carry == false)
+                //{
+                //    if (chat)
+                //    {
+                //        cc.chat.text = Name.Myname + "," + "What do you wanna pick up? Maybe you should get closer";
+                //    }
+                //    tilePickupAudio.PlayOneShot(mm.question);
+                //    msgDispTimer = 2;
+                //    string msg = "There is nothing to pick up";
+                //    msgDisp.text = msg;
 
-                }
+                //}
                 //tilePickupAudio.PlayOneShot(mm.blastAudio);
             }
         }
@@ -462,7 +462,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (chat)
                 {
-                    cc.chat.text = "Do you wanna me to blast air???";
+                    cc.chat.text = Name.Myname + "," + "Do you wanna me to blast air???";
                 }
                 msgDispTimer = 2;
                 string msg = "There is nothing to blast";
@@ -494,7 +494,7 @@ public class PlayerController : MonoBehaviour
         {
             if (chat)
             {
-                cc.chat.text = "Remember put portal in a spacious place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
+                cc.chat.text = Name.Myname + "," +"Remember put portal in a spacious place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
             }
             Vector3 forward = transform.TransformDirection(Vector3.left);
             forward = new Vector3(5 * forward.z, 8, -5 * forward.x);
@@ -608,7 +608,7 @@ public class PlayerController : MonoBehaviour
             tilePickupAudio.PlayOneShot(mm.question);
             if (chat)
             {
-                cc.chat.text = "Damn, my head just hit the wall";
+                cc.chat.text = Name.Myname + "!" +  "Damn, you just let my  head  hit the wall";
             }
 
 
@@ -680,7 +680,7 @@ public class PlayerController : MonoBehaviour
             tilePickupAudio.PlayOneShot(mm.surprise);
             if (chat)
             {
-                cc.chat.text = "Tell me where is the other side of the portal. It is not hell, right?";
+                cc.chat.text = Name.Myname + "," + "Tell me where is the other side of the portal. It is not hell, right?";
             }
         }
 

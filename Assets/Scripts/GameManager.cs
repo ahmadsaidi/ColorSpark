@@ -15,7 +15,7 @@ using UnityEngine.SceneManagement;
     public void StartGame()
     {
         PlayerData.Level = 2;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Turtorial1");
     }
 
     public void ContinueGame()
