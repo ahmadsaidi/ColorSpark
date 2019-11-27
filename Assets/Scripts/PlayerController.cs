@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         acceleration = 2f;
         rotationSpeed = 75;
         rb.freezeRotation = true;
-        powerups = rb.gameObject.GetComponent<PowerUps>();
+        powerups = GetComponent<PowerUps>();
         gm = FindObjectOfType<GameManager>();
         mm = FindObjectOfType<MusicManager>();
         tilePickupAudio = GetComponent<AudioSource>();
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
         if (canMove){
             transform.Rotate(0, rotation, 0);
             Vector3 forward_direction = transform.TransformDirection(Vector3.left);
-            Vector3 forward_velocity = new Vector3(1f * forward_direction.z * translationx, rb.velocity.y, -1f * forward_direction.x * translationx);
+            Vector3 forward_velocity = new Vector3(1.1f * forward_direction.z * translationx, rb.velocity.y, -1.1f * forward_direction.x * translationx);
             rb.velocity = forward_velocity;
             if (currHorRot != 0 && translationx != 0)
             {
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else{
-            rb.velocity = new Vector3(0,0,0);
+            rb.velocity = new Vector3(0,rb.velocity.y,0);
         }
 
 
@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            if (Input.GetButtonDown("Fire2") && color != Color.white)
+            if (Input.GetButtonDown("Fire2") && color != Color.white && canMove)
             {
                 Vector3 forward = transform.TransformDirection(Vector3.forward);
                 if (engineHere == false)
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Fire3") && canMove && !paused)
         {
             powerups.GetEnginePower(transform.position);
         }
@@ -331,7 +331,14 @@ public class PlayerController : MonoBehaviour
                     {
                         cc.chat.text = "I am carrying an object, where should I put it?";
                     }
-                    carryThing.transform.GetChild(0).gameObject.SetActive(true);
+                    for (int j = 0; j < carryThing.transform.childCount; j++)
+                    {
+                        Transform c = carryThing.transform.GetChild(j);
+                        if (c.CompareTag("robot_light"))
+                        {
+                            c.gameObject.SetActive(true);
+                        }
+                    }
                 }
                 //tilePickupAudio.PlayOneShot(mm.blastAudio);
             }
@@ -353,7 +360,14 @@ public class PlayerController : MonoBehaviour
                         carryThing.GetComponent<Float>().begin = carryThing.transform.position;
 
                     }
-                    carryThing.transform.GetChild(0).gameObject.SetActive(false);
+                    for (int j = 0; j < carryThing.transform.childCount; j++)
+                    {
+                        Transform c = carryThing.transform.GetChild(j);
+                        if (c.CompareTag("robot_light"))
+                        {
+                            c.gameObject.SetActive(false);
+                        }
+                    }
                     tilePickupAudio.PlayOneShot(mm.question);
 
                     if (chat)
@@ -449,7 +463,7 @@ public class PlayerController : MonoBehaviour
         {
             if (chat)
             {
-                cc.chat.text = "Remember put portal in spare place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
+                cc.chat.text = "Remember put portal in a spacious place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
             }
             Vector3 forward = transform.TransformDirection(Vector3.left);
             forward = new Vector3(10 * forward.z, 8, -10 * forward.x);
@@ -513,6 +527,7 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
             paused = true;
+            canMove = false;
         }
 
         if (Input.GetButtonDown("Fire1") && paused && control == true)
@@ -578,42 +593,50 @@ public class PlayerController : MonoBehaviour
             if (d1 < d2 && tc1)
             {
                 StartCoroutine(startto1());
-                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                //Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
-
-                //transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
             }
             else if (d1 >= d2 && tc2)
             {
                 StartCoroutine(startto2());
-                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                //Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
-                //transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
             }
 
 
 
             IEnumerator startto1()
             {
-                ;
-                Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
-                transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
+                Vector3 offset = powerups.yellowbox2.transform.position-powerups.yellowbox1.transform.position;
+                offset.Normalize();
+                float facing;
+                Vector3 directionUP = powerups.yellowbox2.transform.TransformDirection(Vector3.forward);
+                if (Vector3.Dot(offset,directionUP)>Vector3.Dot(offset, -directionUP)){
+                    offset = 5 * directionUP;
+                    facing = powerups.yellowbox2.transform.rotation.eulerAngles.y;
+                }else{
+                    offset = -5 * directionUP;
+                    facing = powerups.yellowbox2.transform.rotation.eulerAngles.y + 180;
+                }
+                transform.position = powerups.yellowbox2.transform.position + new Vector3(offset.x, 0, offset.z);
+                transform.rotation = Quaternion.Euler(0, facing, 0);
                 tc1.tele = false;
                 tilePickupAudio.PlayOneShot(mm.teleportAudio);
                 yield return new WaitForSeconds(0.5f);
-
-
-
-
-
-
             }
 
             IEnumerator startto2()
             {
-                ;
-                Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
-                transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
+                Vector3 offset = powerups.yellowbox1.transform.position-powerups.yellowbox2.transform.position;
+                offset.Normalize();
+                float facing;
+                Vector3 directionUP = powerups.yellowbox1.transform.TransformDirection(Vector3.forward);
+                if (Vector3.Dot(offset,directionUP) > Vector3.Dot(offset, -directionUP)){
+                    offset = 5 * directionUP;
+                    facing = powerups.yellowbox1.transform.rotation.eulerAngles.y;
+                }else{
+                    offset = -5 * directionUP;
+                    facing = powerups.yellowbox1.transform.rotation.eulerAngles.y + 180;
+
+                }
+                transform.position = powerups.yellowbox1.transform.position + new Vector3(offset.x, 0, offset.z);
+                transform.rotation = Quaternion.Euler(0, facing, 0);
                 tc2.tele = false;
                 yield return new WaitForSeconds(0.5f);
                 tilePickupAudio.PlayOneShot(mm.teleportAudio);
@@ -866,6 +889,7 @@ public class PlayerController : MonoBehaviour
         jump = true;
         Time.timeScale = 1;
         paused = false;
+        canMove = true;
     }
 
     public void restart()

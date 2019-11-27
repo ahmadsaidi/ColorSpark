@@ -13354,7 +13354,7 @@ Camera:
   m_GameObject: {fileID: 539340371}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -13376,7 +13376,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -15342,11 +15342,6 @@ PrefabInstance:
       propertyPath: msgDisp
       value: 
       objectReference: {fileID: 379138139}
-    - target: {fileID: 7844265805135796065, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7249106094416459374, guid: d7ec5d77a1a03224fae71922eda3e388,
         type: 3}
       propertyPath: m_Enabled
@@ -15391,6 +15386,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844265805135796065, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7249106094416459378, guid: d7ec5d77a1a03224fae71922eda3e388,
         type: 3}

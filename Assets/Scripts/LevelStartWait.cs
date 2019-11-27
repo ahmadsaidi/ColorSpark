@@ -24,7 +24,7 @@ public class LevelStartWait : MonoBehaviour
     {
         if (playing)
         {
-            pc.msgDisp.text = "Press Start to skip";
+            pc.msgDisp.text = "Press A to skip";
             pc.msgDispTimer = (Mathf.Cos(Time.time*5) + 1);
         }
 
@@ -34,7 +34,7 @@ public class LevelStartWait : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetButtonDown("Restart") && playing)
+        if (Input.GetButtonDown("Fire1") && playing)
         {
             p.StopPath();
             p.selectedCamera.enabled = false;

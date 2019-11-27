@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 2005595833997236268}
   m_Layer: 10
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: robot_light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &590943563354373005
 Transform:
   m_ObjectHideFlags: 0
