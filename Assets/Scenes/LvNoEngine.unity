@@ -1111,8 +1111,8 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     chained: 1
-  - position: {x: -253.03381, y: 7.685261, z: 112.010475}
-    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  - position: {x: -250.99158, y: 6.5531, z: 117.27043}
+    rotation: {x: -0.000000001906664, y: 0.99904823, z: -0.043619387, w: -0.000000043669786}
     handleprev: {x: 0, y: 0, z: -1}
     handlenext: {x: 0, y: 0, z: 1}
     curveTypeRotation: 0

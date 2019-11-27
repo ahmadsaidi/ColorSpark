@@ -249,6 +249,7 @@ public class engineController : MonoBehaviour
         path.PlayPath(3);
         yield return new WaitForSeconds(3);
         playing = false;
+        player.GetComponent<PlayerController>().msgDispTimer = 0;
         main.GetComponent<cameraCollision>().focus = false;
         player.GetComponent<PlayerController>().canMove = true;
     }
@@ -310,6 +311,7 @@ public class engineController : MonoBehaviour
         yield return new WaitForSeconds(7.5f);
         main.GetComponent<cameraCollision>().focus = false;
         player.GetComponent<PlayerController>().canMove = true;
+        player.GetComponent<PlayerController>().msgDispTimer = 0;
         playing = false;
     }
 
@@ -381,6 +383,7 @@ public class engineController : MonoBehaviour
         yield return new WaitForSeconds(3);
         main.GetComponent<cameraCollision>().focus = false;
         player.GetComponent<PlayerController>().canMove = true;
+        player.GetComponent<PlayerController>().msgDispTimer = 0;
         playing = false;
     }
 
