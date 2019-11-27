@@ -6,10 +6,9 @@ using System.Linq;
 
 public class basictut : MonoBehaviour
 {
-    public Text instruction;
+    private PowerUps powerups;
     private PlayerController pc;
-    private GameObject robot;
-    public GameObject blast1;
+    public GameObject blast;
     // canvas objects
     public GameObject RobotWindow;
     public GameObject EngineWindow;
@@ -26,7 +25,7 @@ public class basictut : MonoBehaviour
     private GameObject arrow= null;
     private bool redisntpresent = true;
     private bool greenisntpresent = true;
-    private int[] PauseStates = {-1,1,5,6,8,9};
+    private int[] PauseStates = {-1,1,5,6,8,9,12,13,16};
     public Text Messager; 
     int state = -1;
 
@@ -43,8 +42,8 @@ public class basictut : MonoBehaviour
     {
         // gm = FindObjectOfType<GameManager>();
 
-        robot = GameObject.Find("NewModelRobot");
-        pc = robot.GetComponent<PlayerController>();
+        pc = GetComponent<PlayerController>();
+        powerups = GetComponent<PowerUps>();
         red.SetActive(false);
         blue.SetActive(false);
         green.SetActive(false);
@@ -75,9 +74,8 @@ public class basictut : MonoBehaviour
         }
 
         if (state == 0){
-            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
             pc.cc.chat.text = "I cannot walk through it...";
-            Vector3 position = new Vector3(Ramp.transform.position.x + 18, Ramp.transform.position.y + 15, Ramp.transform.position.z-5);
+            Vector3 position = new Vector3(Ramp.transform.position.x + 19, Ramp.transform.position.y + 15, Ramp.transform.position.z-5);
             arrow = Instantiate(HLarrow, position, Quaternion.Euler(180,0,0)) ;
             Ramp.GetComponent<Renderer>().sharedMaterial.SetFloat("_Outline", 1.05f);
             Ramp.GetComponent<Renderer>().sharedMaterial.SetFloat("_Limiter", 1.05f);
@@ -87,22 +85,28 @@ public class basictut : MonoBehaviour
             pc.canMove = false;
         }
         
-        // state 2 is active state player try to jump over the trench
+        // jump tut
         if (state == 2){
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
             pc.canMove = true;
             pc.cc.chat.text = "Maybe I can try to jump over it";
             Messager.text = "Press A to jump";
             state = 3;
         }
-        // jump tut finish 
-        if (robot.transform.position.z<67 && state ==3 ){
+        if (transform.position.z<67 && state ==3 ){
             Ramp.GetComponent<Renderer>().sharedMaterial.SetFloat("_Outline", 0.0f);
             Ramp.GetComponent<Renderer>().sharedMaterial.SetFloat("_Limiter", 0.0f);
             Destroy(arrow);
             state =4;
         }
 
+
+
+
+
+        // green spark tut
         if (state == 4){
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(5, 5);
             pc.cc.chat.text = "That cliff is too large.\n I need some extra help";
             pc.rb.velocity = new Vector3(0,0,0);
             green.SetActive(true);
@@ -112,8 +116,8 @@ public class basictut : MonoBehaviour
         if (state == 6){
             pc.cc.chat.text = "Look at that! lets get some Power Ups\n (green power speeds me up)";
         }
-        // state 7 is active state
         if (state == 7){
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
             pc.canMove = true;
             Messager.text = "pick up the green sparkling!";
         }
@@ -133,17 +137,111 @@ public class basictut : MonoBehaviour
             EngineWindow.GetComponent<Outline>().effectDistance = new Vector2(5, 5);
         }
         if (state ==10){
+            EngineWindow.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
             Messager.text = "Lets Dash!\n press RB and Jump!";
             pc.canMove = true;
         }
         // in case jump failed
-        if (robot.transform.position.y < -80 && state <= 10){
+        if (transform.position.y < -80 && state <= 10){
             pc.transform.position = new Vector3(-255,-9,55);
-            // pc.transform.rotation = new Vector3(0,180,0);
-        }else if (robot.transform.position.y < -80 && state <= 10){
+            pc.transform.rotation =  Quaternion.Euler(0,180,0);
+        }else if (transform.position.y < -80 && state > 10){
             pc.transform.position = new Vector3(-255,-9,-28);
-            // pc.transform.rotation = new Vector3(0,180,0);
+            pc.transform.rotation =  Quaternion.Euler(0,180,0);
         }
 
+        if (transform.position.z < -15 && state == 10 && transform.position.y > -10){
+            pc.canMove = false;
+            state = 11;
+        }
+
+
+
+        // red spart tut
+
+        if (state == 11){
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(5, 5);
+            red.SetActive(true);
+            highlight(red);
+            state = 12;
+        }
+        if (state == 12){
+            pc.cc.chat.text = "I must get through this Anti-ratiation Cyrstal Wall. ";
+        }
+        if (state == 13){
+            pc.cc.chat.text = "LOOK at what I found! \n (red spark allows you to blast crystals)";
+        }
+        if (state == 14){
+            pc.canMove = true;
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
+            Messager.text = "pick up the red sparkling!";
+        }
+        if (state == 14 && pc.color == Color.red){
+            Destroy(arrow);
+            Vector3 position = new Vector3(blast.transform.position.x - 17, blast.transform.position.y + 12, blast.transform.position.z-3);
+            arrow = Instantiate(HLarrow, position, Quaternion.Euler(180,0,0)) ;
+            state = 15;
+        }
+        if(state == 15 && pc.color == Color.red){
+            Messager.text = "Lets blow the wall away!";
+        }
+        if (state == 15 && pc.color != Color.red){
+            Messager.text = "pick up the red sparkling!";
+        }
+        if(state == 15 && pc.color == Color.red && transform.position.z<-64.25f){
+            Messager.text = "Press RB to blast!";
+        }
+
+        if (blast == null && state == 15){
+            Destroy(arrow);
+            blue.SetActive(true);
+            highlight(blue); 
+            state = 16;
+        }
+
+        // blue spark tut
+        if (state == 16){
+            pc.canMove = false;
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(5, 5);
+            pc.cc.chat.text = "Did you see that blue spark?\n Go get it, I want to show you something.";
+        }
+        if (state == 17){
+            pc.canMove = true;
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
+            Messager.text = "pick up the blue sparkling!";
+        }
+        if(state == 17 && pc.color == Color.blue){
+            pc.canMove = false;
+            Destroy(arrow);
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(5, 5);
+            pc.cc.chat.text = "Nice job, now create a portal here\n (I can build portals on the map with blue spark)";
+            Messager.text = "press RB to create a portal";
+        }
+        if (state == 17 && Input.GetButtonDown("Jump")){
+            state = 18;
+        }
+        if (state == 18){
+            pc.cc.chat.text = "I can only create 2 portals, be careful!\n (I can take portal back)";
+            Messager.text = "press X to take the portal back";
+        }
+        if (state == 18 && Input.GetButtonDown("Fire3")){
+            state = 19;
+        }
+        if (state == 19){
+            pc.canMove = true;
+            ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(0, 0);
+            pc.cc.chat.text = "Lets build portals!";
+            Messager.text = "build two portals(RB)\n Note: you can only create portal on empty space";
+        }
+        if (state == 20){
+            pc.canMove = false;
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "tele" && powerups.tele_num == 2 && state == 19){
+            state = 20;
+        }
     }
 }

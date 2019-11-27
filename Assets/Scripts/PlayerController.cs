@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         acceleration = 2f;
         rotationSpeed = 75;
         rb.freezeRotation = true;
-        powerups = rb.gameObject.GetComponent<PowerUps>();
+        powerups = GetComponent<PowerUps>();
         gm = FindObjectOfType<GameManager>();
         mm = FindObjectOfType<MusicManager>();
         tilePickupAudio = GetComponent<AudioSource>();
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
         if (canMove){
             transform.Rotate(0, rotation, 0);
             Vector3 forward_direction = transform.TransformDirection(Vector3.left);
-            Vector3 forward_velocity = new Vector3(1f * forward_direction.z * translationx, rb.velocity.y, -1f * forward_direction.x * translationx);
+            Vector3 forward_velocity = new Vector3(1.1f * forward_direction.z * translationx, rb.velocity.y, -1.1f * forward_direction.x * translationx);
             rb.velocity = forward_velocity;
             if (currHorRot != 0 && translationx != 0)
             {
@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2"))
         {
-            if (Input.GetButtonDown("Fire2") && color != Color.white)
+            if (Input.GetButtonDown("Fire2") && color != Color.white && canMove)
             {
                 Vector3 forward = transform.TransformDirection(Vector3.forward);
                 if (engineHere == false)
