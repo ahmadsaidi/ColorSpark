@@ -240,12 +240,12 @@ public class engineController : MonoBehaviour
             CPC_Point start = new CPC_Point(main.GetComponent<Camera>().transform.position, main.GetComponent<Camera>().transform.rotation);
             path.points.Add(start);
             GameObject temp1 = new GameObject();
-            temp1.transform.position = yellowbox1.transform.position + 30*yellowbox1.transform.TransformDirection(Vector3.up)+new Vector3(0, 5, 0);
-            temp1.transform.LookAt(yellowbox1.transform.position);
+            temp1.transform.position = yellowbox1.transform.position + 25*yellowbox1.transform.TransformDirection(Vector3.up)+new Vector3(0, 0, 30);
+            temp1.transform.LookAt(yellowbox1.transform.position + new Vector3(0,15,0));
             path.points.Add(new CPC_Point(temp1.transform.position, temp1.transform.rotation));
 
-            temp1.transform.position = yellowbox2.transform.position + 30 * yellowbox2.transform.TransformDirection(Vector3.up) + new Vector3(0, 5, 0);
-            temp1.transform.LookAt(yellowbox2.transform.position);
+            temp1.transform.position = yellowbox2.transform.position + 25 * yellowbox2.transform.TransformDirection(Vector3.up) + new Vector3(0, 0, 30);
+            temp1.transform.LookAt(yellowbox2.transform.position + new Vector3(0, 15, 0));
             path.points.Add(new CPC_Point(temp1.transform.position, temp1.transform.rotation));
             path.looped = true;
             path.PlayPath(7.5f);

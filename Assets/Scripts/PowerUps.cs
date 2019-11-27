@@ -194,20 +194,21 @@ public class PowerUps : MonoBehaviour
         if (tele_num == 0)
         {
             
-            yellowbox1 = Instantiate(tele, position, Quaternion.Euler( 0 , Mathf.Rad2Deg * Mathf.Atan(forward.y / forward.x) ,  0) );
+            yellowbox1 = Instantiate(tele, position, Quaternion.Euler( 0 ,pc.transform.rotation.eulerAngles.y ,  0) );
             tilePickupAudio.PlayOneShot(mm.ability);
-
         }
         if (tele_num == 1)
         {
             if (yellowbox1 == null)
             {
-                yellowbox1 = Instantiate(tele, position, Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(forward.y / forward.x), 0));
+                yellowbox1 = Instantiate(tele, position, Quaternion.Euler(0, pc.transform.rotation.eulerAngles.y, 0));
+                
             }
             else
             {
-                yellowbox2 = Instantiate(tele, position, Quaternion.Euler(0, Mathf.Rad2Deg * Mathf.Atan(forward.y / forward.x),  0));
+                yellowbox2 = Instantiate(tele, position, Quaternion.Euler(0, pc.transform.rotation.eulerAngles.y,  0));
             }
+            Debug.Log(pc.transform.rotation.y);
             tilePickupAudio.PlayOneShot(mm.ability);
             // yellowbox2 = Instantiate(tele, position, Quaternion.Euler(-90, 0, -180 * forward.z));
         }
