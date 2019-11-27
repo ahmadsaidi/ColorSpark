@@ -833,7 +833,7 @@ MonoBehaviour:
   - 
   - How do you wanna me call you?                                A:Spark Master    B:Sir     X:Lady     Y:Idiot
   - 
-  typingSpeed: 0.005
+  typingSpeed: 0.02
   continuetext: {fileID: 235898504}
   engine: {fileID: 0}
   allengines: {fileID: 0}

@@ -1457,7 +1457,7 @@ MonoBehaviour:
   - And you will see magical changes on the map!
   - Have you tried the engines before?
   - 
-  typingSpeed: 0.01
+  typingSpeed: 0.02
   continuetext: {fileID: 1611809729}
   engine: {fileID: 2045344744}
   allengines: {fileID: 1806785399}
