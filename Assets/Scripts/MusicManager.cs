@@ -38,9 +38,7 @@ public class MusicManager : MonoBehaviour
             music.clip = lose;
             music.Play();
         }
-        if (SceneManager.GetActiveScene().name == "TUTbluePU" || SceneManager.GetActiveScene().name == "TUTredPU" || 
-            SceneManager.GetActiveScene().name == "TUTgreemPU" || SceneManager.GetActiveScene().name == "TUTyellowPU"||
-           SceneManager.GetActiveScene().name == "powerEngineTut" || SceneManager.GetActiveScene().name == "basicTut")
+        if (SceneManager.GetActiveScene().name == "Turtorial1" || SceneManager.GetActiveScene().name == "powerEngineTut" )
         {
             music.clip = tut;
             music.Play();

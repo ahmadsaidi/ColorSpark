@@ -312,20 +312,16 @@ public class Continue : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Introduction")
         {
+            Debug.Log(checkTut);
             if (check && Input.GetButtonDown("Fire1") && index == sentences.Length - 1)
             {
-                if (Input.GetButtonDown("Fire1") && checkTut)
+                if (Input.GetButtonDown("Fire1") && checkTut == true)
                 {
                     gm.StartGame();
                 }
 
 
-            }
-
-            if (check && Input.GetButtonDown("Fire1") && index == sentences.Length - 1)
-            {
-
-                if (Input.GetButtonDown("Fire1") && checkTut == false)
+             else if (Input.GetButtonDown("Fire1") && checkTut == false)
                 {
                     gm.StartPuzzle();
                 }
@@ -360,15 +356,6 @@ public class Continue : MonoBehaviour
 
         }
 
-        void startcount()
-        {
-            continuetext.enabled = false;
-            // continuetext.SetActive(false);
-            index++;
-            textdisplay.text = "";
-            check = false;
-            StartCoroutine(Type());
-        }
 
 
 

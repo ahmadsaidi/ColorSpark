@@ -58,7 +58,9 @@ public class PlayerController : MonoBehaviour
     Vector3 carryTo;
     public Text max02;
     private bool OnWall = false;
-
+    public GameObject fire;
+    public GameObject blastFire;
+    
 
 
     void Start()
@@ -223,7 +225,7 @@ public class PlayerController : MonoBehaviour
             tilePickupAudio.PlayOneShot(mm.scared);
             if (chat)
             {
-                cc.chat.text = "Do you wanna me dance on a wall or something???";
+                cc.chat.text = Name.Myname + "," + "Do you wanna me dance on a wall or something???";
             }
 
             msgDispTimer = 2;
@@ -231,7 +233,7 @@ public class PlayerController : MonoBehaviour
             msgDisp.text = msg;
         }
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && color != Color.white)
         {
             if (Input.GetButtonDown("Fire2") && color != Color.white && canMove)
             {
@@ -252,6 +254,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        else if (Input.GetButtonDown("Fire2") && color == Color.white && carry == false)
+        {
+            if (chat)
+            {
+                cc.chat.text = Name.Myname + "," +"Do you wanna drop my heart on the ground?";
+            }
+            tilePickupAudio.PlayOneShot(mm.question);
+            msgDispTimer = 2;
+            string msg = "There is nothing to drop";
+            msgDisp.text = msg;
+        }
+
         if (Input.GetButtonDown("Fire3") && canMove && !paused)
         {
             powerups.GetEnginePower(transform.position);
@@ -268,7 +282,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (chat)
                 {
-                    cc.chat.text = "Guess you put a portal in a wrong place, try to find a better place";
+                    cc.chat.text = Name.Myname + "," + "Guess you put a portal in a wrong place, try to find a better place";
                 }
                 tilePickupAudio.PlayOneShot(mm.ah);
                 if (hitColliderss[i].tag == "tele" && powerups.tele_num > 0)
@@ -296,13 +310,14 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetButtonDown("Fire3") && carry == false)
         {
+            bool boxhere = false;
             for (int i = 0; i < hitColliders.Length; i++)
             {
 
                 if (hitColliders[i].tag == "move")
                 {
                     carryThing = (hitColliders[i].gameObject);
-
+                    boxhere = true;
 
 
                     carry = true;
@@ -340,6 +355,18 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                 }
+                if (boxhere == false && engineHere == false && teleHere == false)
+                {
+                    if (chat)
+                    {
+                        cc.chat.text = Name.Myname + "," + "What do you wanna pick up? Maybe you should get closer";
+                    }
+                    tilePickupAudio.PlayOneShot(mm.question);
+                    msgDispTimer = 2;
+                    string msg = "There is nothing to pick up";
+                    msgDisp.text = msg;
+
+                }
                 //tilePickupAudio.PlayOneShot(mm.blastAudio);
             }
         }
@@ -372,7 +399,7 @@ public class PlayerController : MonoBehaviour
 
                     if (chat)
                     {
-                        cc.chat.text = "emmmmmmmm..........Do you think this is the right position to put this box???";
+                        cc.chat.text = "emmmmmmmm.......... " + Name.Myname + "," + "Do you think this is the right position to put this box???";
                     }
                 }
             }
@@ -417,6 +444,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (hitColliders[i].tag == "blast")
                 {
+                    Instantiate(blastFire, hitColliders[i].gameObject.transform.position + new Vector3(0,-10,0), Quaternion.identity);
+                    
                     Destroy(hitColliders[i].gameObject);
                     tilePickupAudio.PlayOneShot(mm.blastAudio);
                     tilePickupAudio.PlayOneShot(mm.ability);
@@ -453,9 +482,11 @@ public class PlayerController : MonoBehaviour
             {
                 cc.chat.text = "Speed up!!!!!";
             }
+            fire.SetActive(true);
         }
         else
         {
+            fire.SetActive(false);
             speed = 40;
         }
 

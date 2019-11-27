@@ -33,7 +33,7 @@ using UnityEngine.SceneManagement;
     }
     public void tut2()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("powerEngineTut");
     }
     public void LoseGame()
     {
