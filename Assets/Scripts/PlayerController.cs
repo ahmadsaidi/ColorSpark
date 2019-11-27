@@ -590,42 +590,50 @@ public class PlayerController : MonoBehaviour
             if (d1 < d2 && tc1)
             {
                 StartCoroutine(startto1());
-                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                //Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
-
-                //transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
             }
             else if (d1 >= d2 && tc2)
             {
                 StartCoroutine(startto2());
-                //tilePickupAudio.PlayOneShot(mm.teleportAudio);
-                //Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
-                //transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
             }
 
 
 
             IEnumerator startto1()
             {
-                ;
-                Vector3 off = 2 * powerups.yellowbox2.transform.TransformDirection(Vector3.up);
-                transform.position = powerups.yellowbox2.transform.position + new Vector3(off.x, -10, off.z + 8);
+                Vector3 offset = powerups.yellowbox2.transform.position-powerups.yellowbox1.transform.position;
+                offset.Normalize();
+                float facing;
+                Vector3 directionUP = powerups.yellowbox2.transform.TransformDirection(Vector3.forward);
+                if (Vector3.Dot(offset,directionUP)>Vector3.Dot(offset, -directionUP)){
+                    offset = 5 * directionUP;
+                    facing = powerups.yellowbox2.transform.rotation.eulerAngles.y;
+                }else{
+                    offset = -5 * directionUP;
+                    facing = powerups.yellowbox2.transform.rotation.eulerAngles.y + 180;
+                }
+                transform.position = powerups.yellowbox2.transform.position + new Vector3(offset.x, 0, offset.z);
+                transform.rotation = Quaternion.Euler(0, facing, 0);
                 tc1.tele = false;
                 tilePickupAudio.PlayOneShot(mm.teleportAudio);
                 yield return new WaitForSeconds(0.5f);
-
-
-
-
-
-
             }
 
             IEnumerator startto2()
             {
-                ;
-                Vector3 off = 2 * powerups.yellowbox1.transform.TransformDirection(Vector3.up);
-                transform.position = powerups.yellowbox1.transform.position + new Vector3(off.x, -10, off.z + 8);
+                Vector3 offset = powerups.yellowbox1.transform.position-powerups.yellowbox2.transform.position;
+                offset.Normalize();
+                float facing;
+                Vector3 directionUP = powerups.yellowbox1.transform.TransformDirection(Vector3.forward);
+                if (Vector3.Dot(offset,directionUP) > Vector3.Dot(offset, -directionUP)){
+                    offset = 5 * directionUP;
+                    facing = powerups.yellowbox1.transform.rotation.eulerAngles.y;
+                }else{
+                    offset = -5 * directionUP;
+                    facing = powerups.yellowbox1.transform.rotation.eulerAngles.y + 180;
+
+                }
+                transform.position = powerups.yellowbox1.transform.position + new Vector3(offset.x, 0, offset.z);
+                transform.rotation = Quaternion.Euler(0, facing, 0);
                 tc2.tele = false;
                 yield return new WaitForSeconds(0.5f);
                 tilePickupAudio.PlayOneShot(mm.teleportAudio);
