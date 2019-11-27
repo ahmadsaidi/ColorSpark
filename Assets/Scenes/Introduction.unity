@@ -831,7 +831,7 @@ MonoBehaviour:
   - By the way, I can use color abilities by picking up color spark
   - 'Do you know how to use color spark?                 '
   - 
-  - How do you wanna me call you?                                A:Spark Master    B:Sir     X:Lady     Y:Idiot
+  - How do you wanna me call you?                                A:Master    B:Sir     X:Lady     Y:Friend
   - 
   typingSpeed: 0.02
   continuetext: {fileID: 235898504}

@@ -122,7 +122,7 @@ public class Continue : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("Carry"))
                 {
-                    myname = "Professor";
+                    myname = "Friend";
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
 
                 }
