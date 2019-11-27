@@ -257,12 +257,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1617517450}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &26410317 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8391440084933882885, guid: 4dc91fda2ca762842af6dcf0af4b8092,
-    type: 3}
-  m_PrefabInstance: {fileID: 64264955}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &34872969
 GameObject:
   m_ObjectHideFlags: 0
@@ -2853,12 +2847,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &669159136 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8391440084933882885, guid: 4dc91fda2ca762842af6dcf0af4b8092,
-    type: 3}
-  m_PrefabInstance: {fileID: 1022485633}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &669159137 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8391440084933882881, guid: 4dc91fda2ca762842af6dcf0af4b8092,
@@ -3256,9 +3244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instruction: {fileID: 829280543}
   stage: 0
-  redEngine: {fileID: 26410317}
-  greenEngine: {fileID: 669159136}
-  blueEngine: {fileID: 0}
+  engine0: {fileID: 0}
+  engine1: {fileID: 0}
   stageInstructions:
   - Pick up blue spark, then Press B in front of engine to Activate Blue Engine
   - Blue Engine can generate portals, walk on the portal, wait for a while
@@ -3266,6 +3253,7 @@ MonoBehaviour:
   - Get Red Spark, then go back to first engine to Activate Red Engine and swap color
   - Red Engine can make things float up and down, ride on the box to get golden spark
   pc: {fileID: 2067245533}
+  HLarrow: {fileID: 6685845455175718327, guid: 1ad9753f76d8c9a48ab40319c9693244, type: 3}
 --- !u!114 &829280542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4150,11 +4138,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 395562813}
     m_Modifications:
-    - target: {fileID: 590943563354373005, guid: b4b273eb92ff9fd4a8113e66897a1618,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4728387047660618410, guid: b4b273eb92ff9fd4a8113e66897a1618,
         type: 3}
       propertyPath: m_Name
@@ -4219,6 +4202,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 590943563354373005, guid: b4b273eb92ff9fd4a8113e66897a1618,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4b273eb92ff9fd4a8113e66897a1618, type: 3}
@@ -4335,21 +4323,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1937380111}
     m_Modifications:
-    - target: {fileID: 8842450824061238263, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_Text
-      value: Engine1 Ability
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842450823205362995, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8842450823159717793, guid: c72374af5812cfb469dd7bdb846c8158,
         type: 3}
       propertyPath: m_RootOrder
@@ -4379,6 +4352,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.70360595
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823205362995, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9080043860180261201, guid: c72374af5812cfb469dd7bdb846c8158,
         type: 3}
@@ -4439,6 +4422,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450824061238263, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_Text
+      value: Engine1 Ability
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c72374af5812cfb469dd7bdb846c8158, type: 3}
@@ -5313,9 +5301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instruction: {fileID: 1264036327}
   stage: 0
-  redEngine: {fileID: 26410317}
-  greenEngine: {fileID: 669159136}
-  blueEngine: {fileID: 0}
+  engine0: {fileID: 0}
+  engine1: {fileID: 0}
   stageInstructions:
   - Get Blue Spark,Put spark on engine(Press B)
   - Use Predefined Teleports(RB)
@@ -5323,6 +5310,7 @@ MonoBehaviour:
   - Get Back to engine1 and put Red Spark(Press B)
   - Put Red Spark on Engine1
   pc: {fileID: 0}
+  HLarrow: {fileID: 0}
 --- !u!114 &1264036327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11415,7 +11403,7 @@ PrefabInstance:
     - target: {fileID: 618636911257559043, guid: ea53fcbcc8aca974ba5d95204f2fbb53,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 12.048889
+      value: 12.048828
       objectReference: {fileID: 0}
     - target: {fileID: 618636911257559043, guid: ea53fcbcc8aca974ba5d95204f2fbb53,
         type: 3}

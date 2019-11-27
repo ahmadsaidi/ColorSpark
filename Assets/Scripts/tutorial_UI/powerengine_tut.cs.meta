@@ -3,7 +3,14 @@ guid: c6443f5efe10878419afcec943d40a3a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - instruction: {instanceID: 0}
+  - redEngine: {instanceID: 0}
+  - greenEngine: {instanceID: 0}
+  - blueEngine: {instanceID: 0}
+  - pc: {instanceID: 0}
+  - HLarrow: {fileID: 6685845455175718327, guid: 1ad9753f76d8c9a48ab40319c9693244,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
