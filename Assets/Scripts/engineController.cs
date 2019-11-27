@@ -238,10 +238,10 @@ public class engineController : MonoBehaviour
         robot.position = player.transform.position - off;
         yield return new WaitForSeconds(0.1f);
 
-        if (ps.y - player.transform.position.y > 0.001)
+        if (ps.y - player.transform.position.y > 0.01)
         {
             robot.position += new Vector3(0, -16, 0);
-        } else if (ps.y - player.transform.position.y < -0.001)
+        } else if (ps.y - player.transform.position.y < -0.01)
         {
             robot.position += new Vector3(0, 16, 0);
         }

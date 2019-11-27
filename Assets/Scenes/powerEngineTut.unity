@@ -3249,9 +3249,11 @@ MonoBehaviour:
   stageInstructions:
   - Pick up blue spark, then Press B in front of engine to Activate Blue Engine
   - Blue Engine can generate portals, walk on the portal, wait for a while
-  - 'Green Engine can generate platform, you can reach place you can not reach before '
+  - 'Green Engine can generate platform, you can reach places you could not reach
+    before '
   - Get Red Spark, then go back to first engine to Activate Red Engine and swap color
-  - Red Engine can make things float up and down, ride on the box to get golden spark
+  - Red Engine can make things float up and down, get on the box to collect the golden
+    spark
   pc: {fileID: 2067245533}
   HLarrow: {fileID: 6685845455175718327, guid: 1ad9753f76d8c9a48ab40319c9693244, type: 3}
 --- !u!114 &829280542

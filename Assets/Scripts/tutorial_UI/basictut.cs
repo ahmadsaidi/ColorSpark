@@ -166,7 +166,7 @@ public class basictut : MonoBehaviour
             state = 12;
         }
         if (state == 12){
-            pc.cc.chat.text = "I must get through this Anti-ratiation Cyrstal Wall. ";
+            pc.cc.chat.text = "I must get through this Anti-radiation Cyrstal Wall. ";
         }
         if (state == 13){
             pc.cc.chat.text = "LOOK at what I found! \n (red spark allows you to blast crystals)";
