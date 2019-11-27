@@ -494,7 +494,7 @@ public class PlayerController : MonoBehaviour
         {
             if (chat)
             {
-                cc.chat.text = Name.Myname + "," +"Remember put portal in a spacious place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
+                cc.chat.text = Name.Myname + "," + "Remember put portal in a spacious place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
             }
             Vector3 forward = transform.TransformDirection(Vector3.left);
             forward = new Vector3(5 * forward.z, 8, -5 * forward.x);
@@ -535,25 +535,25 @@ public class PlayerController : MonoBehaviour
 
         //        }
 
-        //        if (hitColliders[i].tag == "Fixedtele")
-        //        {
-        //            teleController tc = hitColliders[i].GetComponent<teleController>();
-        //            GameObject other = tc.teleport_other;
+        //        //        if (hitColliders[i].tag == "Fixedtele")
+        //        //        {
+        //        //            teleController tc = hitColliders[i].GetComponent<teleController>();
+        //        //            GameObject other = tc.teleport_other;
 
-        //            tilePickupAudio.PlayOneShot(mm.teleportAudio);
-        //            Vector3 off = 2 * other.transform.TransformDirection(Vector3.up);
-        //            transform.position = other.transform.position + new Vector3(off.x, 0, off.z);
+        //        //            tilePickupAudio.PlayOneShot(mm.teleportAudio);
+        //        //            Vector3 off = 2 * other.transform.TransformDirection(Vector3.up);
+        //        //            transform.position = other.transform.position + new Vector3(off.x, 0, off.z);
 
 
 
-        //        }
+        //        //        }
+        //        //    }
         //    }
         //}
 
 
 
-
-        if (Input.GetButtonDown("Restart")  && canMove == true)
+                if (Input.GetButtonDown("Restart")  && canMove == true)
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
@@ -621,11 +621,11 @@ public class PlayerController : MonoBehaviour
             float d2 = Vector3.Distance(powerups.yellowbox2.transform.position, transform.position);
             teleController tc1 = powerups.yellowbox1.gameObject.GetComponent<teleController>();
             teleController tc2 = powerups.yellowbox2.gameObject.GetComponent<teleController>();
-            if (d1 < d2 && tc1)
+            if (d1 < d2)
             {
                 StartCoroutine(startto1());
             }
-            else if (d1 >= d2 && tc2)
+            else if (d1 >= d2 )
             {
                 StartCoroutine(startto2());
             }
@@ -634,14 +634,17 @@ public class PlayerController : MonoBehaviour
 
             IEnumerator startto1()
             {
-                Vector3 offset = powerups.yellowbox2.transform.position-powerups.yellowbox1.transform.position;
+                Vector3 offset = powerups.yellowbox2.transform.position - powerups.yellowbox1.transform.position;
                 offset.Normalize();
                 float facing;
                 Vector3 directionUP = powerups.yellowbox2.transform.TransformDirection(Vector3.forward);
-                if (Vector3.Dot(offset,directionUP)>Vector3.Dot(offset, -directionUP)){
+                if (Vector3.Dot(offset, directionUP) > Vector3.Dot(offset, -directionUP))
+                {
                     offset = 8 * directionUP;
                     facing = powerups.yellowbox2.transform.rotation.eulerAngles.y;
-                }else{
+                }
+                else
+                {
                     offset = -8 * directionUP;
                     facing = powerups.yellowbox2.transform.rotation.eulerAngles.y + 180;
                 }
@@ -654,14 +657,17 @@ public class PlayerController : MonoBehaviour
 
             IEnumerator startto2()
             {
-                Vector3 offset = powerups.yellowbox1.transform.position-powerups.yellowbox2.transform.position;
+                Vector3 offset = powerups.yellowbox1.transform.position - powerups.yellowbox2.transform.position;
                 offset.Normalize();
                 float facing;
                 Vector3 directionUP = powerups.yellowbox1.transform.TransformDirection(Vector3.forward);
-                if (Vector3.Dot(offset,directionUP) > Vector3.Dot(offset, -directionUP)){
+                if (Vector3.Dot(offset, directionUP) > Vector3.Dot(offset, -directionUP))
+                {
                     offset = 8 * directionUP;
                     facing = powerups.yellowbox1.transform.rotation.eulerAngles.y;
-                }else{
+                }
+                else
+                {
                     offset = -8 * directionUP;
                     facing = powerups.yellowbox1.transform.rotation.eulerAngles.y + 180;
 
