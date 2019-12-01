@@ -3478,6 +3478,12 @@ PrefabInstance:
       propertyPath: m_FontData.m_MaxSize
       value: 154
       objectReference: {fileID: 0}
+    - target: {fileID: 1215604528127088957, guid: 720bf1574f30c24408dec560dd15d16b,
+        type: 3}
+      propertyPath: m_Text
+      value: You already finish all the tutorials!This is the first puzzle room. Help
+        me get the goldern spark please!
+      objectReference: {fileID: 0}
     - target: {fileID: 1215604528502982121, guid: 720bf1574f30c24408dec560dd15d16b,
         type: 3}
       propertyPath: m_LocalPosition.x
