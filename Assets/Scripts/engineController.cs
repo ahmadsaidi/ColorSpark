@@ -283,9 +283,9 @@ public class engineController : MonoBehaviour
         Icon.GetComponent<Image>().sprite = Icon.Teleport;
 
         Material m = transform.gameObject.GetComponent<Renderer>().material;
-        m.SetColor("_EmissionColor", Color.blue);
-        EngineAbility.color = Color.blue;
-        Ability.color = Color.blue;
+        m.SetColor("_EmissionColor", Name.blue);
+        EngineAbility.color = Name.blue;
+        Ability.color = Name.blue;
         Ability.text = "Portal";
     }
 

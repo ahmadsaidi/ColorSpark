@@ -52,11 +52,20 @@ public class Continue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (textdisplay.text != sentences[index])
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                typingSpeed = 0.000000001f;
+            }
+        }
+
         if (textdisplay.text == sentences[index])
         {
             check = true;
+            typingSpeed =  0.02f;
 
-            if ((SceneManager.GetActiveScene().name == "Introduction")  &&index == 0 && Input.GetButtonDown("Fire2"))
+            if ((SceneManager.GetActiveScene().name == "Introduction") && index == 0 && Input.GetButtonDown("Fire2"))
             {
                 continuetext.enabled = false;
                 mm.GetComponent<AudioSource>().PlayOneShot(mm.ah);
@@ -65,7 +74,7 @@ public class Continue : MonoBehaviour
 
             if ((SceneManager.GetActiveScene().name == "Introduction") && index == 0 && Input.GetButtonDown("Fire1"))
             {
-                
+
                 mm.GetComponent<AudioSource>().PlayOneShot(mm.ah);
 
             }
@@ -80,7 +89,7 @@ public class Continue : MonoBehaviour
             {
                 mm.GetComponent<AudioSource>().PlayOneShot(mm.scared);
                 sentences[5] = "Stupid Human!!!!!! No matter what, you gonna help me, otherwise I will die!!!!! ";
-                
+
 
             }
             if ((SceneManager.GetActiveScene().name == "Introduction") && index == 7 && Input.GetButtonDown("Fire1"))
@@ -88,7 +97,7 @@ public class Continue : MonoBehaviour
                 sentences[8] = "That's is fine, I will teach you all the color abilities ";
                 mm.GetComponent<AudioSource>().PlayOneShot(mm.happy);
                 checkTut = true;
-                
+
 
             }
             if ((SceneManager.GetActiveScene().name == "Introduction") && index == 7 && Input.GetButtonDown("Fire2"))
@@ -101,22 +110,23 @@ public class Continue : MonoBehaviour
 
             }
 
-            if ((SceneManager.GetActiveScene().name == "Introduction") && index == 9 )
+            if ((SceneManager.GetActiveScene().name == "Introduction") && index == 9)
             {
-                
+
                 if (Input.GetButtonDown("Fire1"))
                 {
                     myname = "Master";
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
-                } else if (Input.GetButtonDown("Fire2"))
+                }
+                else if (Input.GetButtonDown("Fire2"))
                 {
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
-                    myname = "Sir";
-                    
+                    myname = "Human";
+
                 }
                 else if (Input.GetButtonDown("Fire3"))
                 {
-                    myname = "Lady";
+                    myname = "Explorer";
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
 
                 }
@@ -126,8 +136,8 @@ public class Continue : MonoBehaviour
                     mm.GetComponent<AudioSource>().PlayOneShot(mm.surprise);
 
                 }
-                Name.Myname= myname;
-                
+                Name.Myname = myname;
+
 
                 if (checkTut)
                 {
@@ -137,7 +147,7 @@ public class Continue : MonoBehaviour
                 {
                     sentences[10] = myname + "! Nice to meet you!                                                      Let's us start the puzzle";
                 }
-                
+
 
 
 
@@ -164,7 +174,7 @@ public class Continue : MonoBehaviour
 
 
 
-            if ((SceneManager.GetActiveScene().name == "Introduction2") && engine && index >0 && index < 3)
+            if ((SceneManager.GetActiveScene().name == "Introduction2") && engine && index > 0 && index < 3)
             {
                 engine.SetActive(true);
             }
@@ -183,14 +193,14 @@ public class Continue : MonoBehaviour
             if ((SceneManager.GetActiveScene().name == "Introduction") && Golden && index > 2 && index < 6)
             {
                 Golden.SetActive(true);
-                
+
             }
-            if ((SceneManager.GetActiveScene().name == "Introduction") && Sparks && RobotIcons && index >= 6 && index <=8)
+            if ((SceneManager.GetActiveScene().name == "Introduction") && Sparks && RobotIcons && index >= 6 && index <= 8)
             {
                 Sparks.SetActive(true);
                 RobotIcons.SetActive(true);
                 Golden.SetActive(false);
-                
+
             }
 
             if ((SceneManager.GetActiveScene().name == "Introduction") && Sparks && RobotIcons && index > 8)
@@ -198,25 +208,29 @@ public class Continue : MonoBehaviour
                 Sparks.SetActive(false);
                 RobotIcons.SetActive(false);
                 Golden.SetActive(false);
-                
+
             }
 
             // continuetext.SetActive(true);
             if (index < sentences.Length - 1)
             {
+               
                 if (SceneManager.GetActiveScene().name == "Introduction")
                 {
-                    if ( index == 0 || index == 4 ){
+                    if (index == 0 || index == 4)
+                    {
                         continuetext.enabled = false;
                         multiple = true;
                         four = false;
-                    }else if ( index == 7 )
-                        {
+                    }
+                    else if (index == 7)
+                    {
                         continuetext.text = "A: No            B: Yes";
                         continuetext.enabled = true;
                         multiple = true;
                         four = false;
-                    }else if (index == 9)
+                    }
+                    else if (index == 9)
                     {
                         continuetext.enabled = false;
                         multiple = false;
@@ -225,7 +239,7 @@ public class Continue : MonoBehaviour
                     else if (index == 10)
                     {
                         continuetext.text = "Press A to Continue";
-                        continuetext.enabled =true;
+                        continuetext.enabled = true;
                         multiple = false;
                         four = false;
                     }
@@ -255,8 +269,10 @@ public class Continue : MonoBehaviour
                 //continuetext.text = "A: No            B: Yes";
                 continuetext.enabled = true;
             }
-            
-        }else if  (SceneManager.GetActiveScene().name == "Introduction2" && index == 5)  {
+
+        }
+        else if (SceneManager.GetActiveScene().name == "Introduction2" && index == 5)
+        {
             continuetext.text = "A: No            B: Yes";
             multiple = true;
         }

@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     private bool OnWall = false;
     public GameObject fire;
     public GameObject blastFire;
+    public bool canPortal;
     
 
 
@@ -80,11 +81,12 @@ public class PlayerController : MonoBehaviour
         control = false;
         msgDisp.text = "";
         fixportal = true;
-        cc =  FindObjectOfType<ChatController>();
-        if (chat == false)
-        {
-            cc.gameObject.SetActive(false);
-        }
+        canPortal = true;
+    cc =  FindObjectOfType<ChatController>();
+        //if (chat == false)
+        //{
+        //    cc.gameObject.SetActive(false);
+        //}
     }
     private void Update()
     {
@@ -119,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
 
         if (canMove){
-            transform.Rotate(0, rotation, 0);
+            transform.Rotate(0, rotationh, 0);
             Vector3 forward_direction = transform.TransformDirection(Vector3.left);
             Vector3 forward_velocity = new Vector3(1.1f * forward_direction.z * translationx, rb.velocity.y, -1.1f * forward_direction.x * translationx);
             rb.velocity = forward_velocity;
@@ -130,26 +132,26 @@ public class PlayerController : MonoBehaviour
                 currHorRot -= currHorRot / 5;
             }
 
-            if (rotationh != 0 && (currHorRot < 90 && currHorRot > -90))
-            {
-                currHorRot += rotationh;
-                cameraAnchorH.transform.Rotate(0, rotationh, 0.0f);
-                cameraSetBack = 2.5f;
-            }
-            else if (rotationh == 0 && (currHorRot > 0.01 || currHorRot < -0.01) && cameraSetBack < 0)
-            {
-                cameraAnchorH.transform.Rotate(0, -currHorRot / 10, 0.0f);
-                currHorRot -= currHorRot / 10;
-            }
-            else if (rotationh == 0 && currHorRot < 0.1 && currHorRot > -0.1 && cameraSetBack < 0)
-            {
-                cameraAnchorH.transform.Rotate(0, -currHorRot, 0.0f);
-                currHorRot = 0;
-            }
-            else if (rotationh == 0)
-            {
-                cameraSetBack -= Time.deltaTime;
-            }
+            //if (rotationh != 0 && (currHorRot < 90 && currHorRot > -90))
+            //{
+            //    currHorRot += rotationh;
+            //    cameraAnchorH.transform.Rotate(0, rotationh, 0.0f);
+            //    cameraSetBack = 2.5f;
+            //}
+            //else if (rotationh == 0 && (currHorRot > 0.01 || currHorRot < -0.01) && cameraSetBack < 0)
+            //{
+            //    cameraAnchorH.transform.Rotate(0, -currHorRot / 10, 0.0f);
+            //    currHorRot -= currHorRot / 10;
+            //}
+            //else if (rotationh == 0 && currHorRot < 0.1 && currHorRot > -0.1 && cameraSetBack < 0)
+            //{
+            //    cameraAnchorH.transform.Rotate(0, -currHorRot, 0.0f);
+            //    currHorRot = 0;
+            //}
+            //else if (rotationh == 0)
+            //{
+            //    cameraSetBack -= Time.deltaTime;
+            //}
         }
         else{
             rb.velocity = new Vector3(0,rb.velocity.y,0);
@@ -229,7 +231,7 @@ public class PlayerController : MonoBehaviour
             }
 
             msgDispTimer = 2;
-            string msg = "You can not Jump here";
+            string msg = "I can not Jump here";
             msgDisp.text = msg;
         }
 
@@ -262,7 +264,7 @@ public class PlayerController : MonoBehaviour
             }
             tilePickupAudio.PlayOneShot(mm.question);
             msgDispTimer = 2;
-            string msg = "There is nothing to drop";
+            string msg = Name.Myname + ",there is nothing to drop";
             msgDisp.text = msg;
         }
 
@@ -406,7 +408,7 @@ public class PlayerController : MonoBehaviour
             else if (msgDisp)
             {
                 msgDispTimer = 2;
-                string msg = "Cannot place box here.";
+                string msg = "I can not place box here.";
                 tilePickupAudio.PlayOneShot(mm.scared);
                 msgDisp.text = msg;
                 if (chat)
@@ -465,7 +467,7 @@ public class PlayerController : MonoBehaviour
                     cc.chat.text = Name.Myname + "," + "Do you wanna me to blast air???";
                 }
                 msgDispTimer = 2;
-                string msg = "There is nothing to blast";
+                string msg = Name.Myname +", there is nothing to blast";
                 msgDisp.text = msg;
                 ;
                 tilePickupAudio.PlayOneShot(mm.question);
@@ -494,7 +496,7 @@ public class PlayerController : MonoBehaviour
         {
             if (chat)
             {
-                cc.chat.text = Name.Myname + "," + "Remember put portal in a spacious place. If you put portals in a corner or put two portals very close, believe me, you will wanna take them back";
+                cc.chat.text = Name.Myname + "," + "Remember put portal in a spacious place.Otherwise you will wanna take them back later";
             }
             Vector3 forward = transform.TransformDirection(Vector3.left);
             forward = new Vector3(5 * forward.z, 8, -5 * forward.x);
@@ -783,7 +785,7 @@ public class PlayerController : MonoBehaviour
 
                 Vector3 off = 2 * otherP.transform.TransformDirection(Vector3.up);
                 transform.position = otherP.transform.position + new Vector3(off.x, 0, off.z);
-                if (chat)
+                if (chat && canMove && canPortal)
                 {
                     cc.chat.text = "Cool!!!!!!";
 
@@ -840,7 +842,11 @@ public class PlayerController : MonoBehaviour
         robotAbilty.text = "Blast";
         robotAbilty.color = Color.red;
         Abilty.color = Color.red;
-        Chat.color = Color.red;
+        if (Chat)
+        {
+            Chat.color = Color.red;
+        }
+       
         max02.color = Color.red;
         tilePickupAudio.PlayOneShot(mm.ability);
 
@@ -853,16 +859,20 @@ public class PlayerController : MonoBehaviour
 
     public void bluePower()
     {
-        ChangeColor(Color.blue);
+        ChangeColor(Name.blue);
         tilePickupAudio.PlayOneShot(mm.blueAudio);
         color = Color.blue;
         Icon.GetComponent<Image>().color = Color.white;
         Icon.GetComponent<Image>().sprite = Icon.Teleport;
         robotAbilty.text = "Portal";
-        robotAbilty.color = Color.blue;
-        Abilty.color = Color.blue;
-        Chat.color = Color.blue;
-        max02.color = Color.blue;
+        robotAbilty.color = Name.blue;
+        Abilty.color = Name.blue;
+        if (Chat)
+        {
+            Chat.color = Name.blue;
+        }
+        
+        max02.color = Name.blue;
         tilePickupAudio.PlayOneShot(mm.ability);
         if (chat)
         {
@@ -880,7 +890,11 @@ public class PlayerController : MonoBehaviour
         robotAbilty.text = "Rush";
         robotAbilty.color = Color.green;
         Abilty.color = Color.green;
-        Chat.color = Color.green;
+        if (Chat)
+        {
+            Chat.color = Color.green;
+        }
+        
         max02.color = Color.green;
         tilePickupAudio.PlayOneShot(mm.ability);
         if (chat)
@@ -898,7 +912,11 @@ public class PlayerController : MonoBehaviour
         robotAbilty.text = "";
         robotAbilty.color = Color.white;
         Abilty.color = Color.white;
-        Chat.color = Color.white;
+        if (Chat)
+        {
+            Chat.color = Color.white;
+        }
+        
         max02.color = Color.white;
         tilePickupAudio.PlayOneShot(mm.oh);
     }

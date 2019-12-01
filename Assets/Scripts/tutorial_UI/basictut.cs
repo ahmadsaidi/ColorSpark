@@ -183,13 +183,13 @@ public class basictut : MonoBehaviour
             state = 15;
         }
         if(state == 15 && pc.color == Color.red){
-            Messager.text = "Lets blow the wall away!";
+            Messager.text = "Get within the red line,Lets blow the wall away!";
         }
         if (state == 15 && pc.color != Color.red){
             Messager.text = "pick up the red sparkling!";
         }
         if(state == 15 && pc.color == Color.red && transform.position.z<-64.25f){
-            Messager.text = "Press RB to blast!";
+            Messager.text = "Press RB to blast !";
         }
 
         if (blast == null && state == 15){
@@ -214,7 +214,7 @@ public class basictut : MonoBehaviour
             pc.canMove = false;
             Destroy(arrow);
             ChatWindow.GetComponent<Outline>().effectDistance = new Vector2(5, 5);
-            pc.cc.chat.text = "Nice job, now create a portal here\n (I can build portals on the map with blue spark)";
+            pc.cc.chat.text = "Nice job, now create a portal here (I can only build portals on the map with blue spark)";
             Messager.text = "press RB to create a portal";
         }
         if (state == 17 && Input.GetButtonDown("Jump")){
