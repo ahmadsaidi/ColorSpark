@@ -643,6 +643,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1883514212}
     m_Modifications:
+    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8842450823590959421, guid: c72374af5812cfb469dd7bdb846c8158,
         type: 3}
       propertyPath: m_Text
@@ -712,21 +727,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.3551673
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8842450823205362995, guid: c72374af5812cfb469dd7bdb846c8158,
         type: 3}
@@ -1121,12 +1121,12 @@ PrefabInstance:
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -96
+      value: -99
       objectReference: {fileID: 0}
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.6999993
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
@@ -1176,7 +1176,7 @@ PrefabInstance:
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 66.42
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
@@ -3468,6 +3468,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1215604528127088959, guid: 720bf1574f30c24408dec560dd15d16b,
+        type: 3}
+      propertyPath: chat
+      value: 
+      objectReference: {fileID: 763203959}
     - target: {fileID: 1215604528127088957, guid: 720bf1574f30c24408dec560dd15d16b,
         type: 3}
       propertyPath: m_FontData.m_FontSize
@@ -3604,11 +3609,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 7.558311
       objectReference: {fileID: 0}
-    - target: {fileID: 1215604528127088959, guid: 720bf1574f30c24408dec560dd15d16b,
-        type: 3}
-      propertyPath: chat
-      value: 
-      objectReference: {fileID: 763203959}
     - target: {fileID: 1215604528127088954, guid: 720bf1574f30c24408dec560dd15d16b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -4350,77 +4350,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: Icon
-      value: 
-      objectReference: {fileID: 922741570}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: msgDisp
-      value: 
-      objectReference: {fileID: 675237778}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: msgDispTimer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: chat
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 2007430232}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: controller
-      value: 
-      objectReference: {fileID: 657434096}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: body
-      value: 
-      objectReference: {fileID: 1373711693}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: robotAbilty
-      value: 
-      objectReference: {fileID: 1283736303}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: Abilty
-      value: 
-      objectReference: {fileID: 74467837}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: Chat
-      value: 
-      objectReference: {fileID: 763203959}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: line
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: max02
-      value: 
-      objectReference: {fileID: 1649006717}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: blastFire
-      value: 
-      objectReference: {fileID: 7191801433104469502, guid: eb4a458014e351743b8ecc7b83e81c02,
-        type: 3}
-    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
-        type: 3}
-      propertyPath: cc
-      value: 
-      objectReference: {fileID: 2108435905}
     - target: {fileID: 7249106094416459376, guid: d7ec5d77a1a03224fae71922eda3e388,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4520,6 +4449,77 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6438035051331445315, guid: fdc534426e3e75f4c9759ee4791d3a86,
         type: 3}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: Icon
+      value: 
+      objectReference: {fileID: 922741570}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: msgDisp
+      value: 
+      objectReference: {fileID: 675237778}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: msgDispTimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: chat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 2007430232}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 657434096}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 1373711693}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: robotAbilty
+      value: 
+      objectReference: {fileID: 1283736303}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: Abilty
+      value: 
+      objectReference: {fileID: 74467837}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: Chat
+      value: 
+      objectReference: {fileID: 763203959}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: line
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: max02
+      value: 
+      objectReference: {fileID: 1649006717}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: blastFire
+      value: 
+      objectReference: {fileID: 7191801433104469502, guid: eb4a458014e351743b8ecc7b83e81c02,
+        type: 3}
+    - target: {fileID: 1915219104683230015, guid: d7ec5d77a1a03224fae71922eda3e388,
+        type: 3}
+      propertyPath: cc
+      value: 
+      objectReference: {fileID: 2108435905}
     - target: {fileID: 441859113259715467, guid: d7ec5d77a1a03224fae71922eda3e388,
         type: 3}
       propertyPath: m_IsActive
@@ -8520,12 +8520,12 @@ PrefabInstance:
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -132.7
+      value: -126
       objectReference: {fileID: 0}
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.7
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
@@ -8575,7 +8575,7 @@ PrefabInstance:
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 74.06
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 6300503724397033304, guid: 2eef53000854ed04489337abc66cdb8b,
         type: 3}
