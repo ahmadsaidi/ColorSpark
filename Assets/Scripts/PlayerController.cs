@@ -503,10 +503,6 @@ public class PlayerController : MonoBehaviour
             powerups.Createtele(transform.position + forward, color);
 
 
-
-
-
-
         }
         //else if (Input.GetButtonDown("Jump"))
         //{
@@ -555,7 +551,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-                if (Input.GetButtonDown("Restart")  && canMove == true)
+        if (Input.GetButtonDown("Restart")  && canMove == true)
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);

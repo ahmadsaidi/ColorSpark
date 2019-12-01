@@ -8479,21 +8479,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1937380111}
     m_Modifications:
-    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
-        type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8842450823590959421, guid: c72374af5812cfb469dd7bdb846c8158,
         type: 3}
       propertyPath: m_Text
@@ -8563,6 +8548,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.354537
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842450823582078825, guid: c72374af5812cfb469dd7bdb846c8158,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8842450823205362995, guid: c72374af5812cfb469dd7bdb846c8158,
         type: 3}
@@ -10353,7 +10353,7 @@ MonoBehaviour:
   playOnAwake: 1
   playOnAwakeTime: 10
   points:
-  - position: {x: -248.93704, y: -22.53337, z: -253.97668}
+  - position: {x: -248.93704, y: -22.53337, z: -244.15268}
     rotation: {x: 0.000000007590403, y: 0.9848077, z: 0.17364818, w: -0.00000004304731}
     handleprev: {x: 0, y: 0, z: -1}
     handlenext: {x: 0, y: 0, z: 1}
@@ -10408,10 +10408,10 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     chained: 1
-  - position: {x: -247.21834, y: -30.501162, z: 0.058830798}
+  - position: {x: -247.21834, y: -33.002563, z: -29.604668}
     rotation: {x: -0.000000001906664, y: 0.99904823, z: -0.043619387, w: -0.000000043669786}
-    handleprev: {x: 0, y: 0, z: -1}
-    handlenext: {x: 0, y: 0, z: 1}
+    handleprev: {x: -0.31010437, y: -0.24051857, z: -0.48080063}
+    handlenext: {x: 0.31010437, y: 0.24051857, z: 0.48080063}
     curveTypeRotation: 0
     rotationCurve:
       serializedVersion: 2
