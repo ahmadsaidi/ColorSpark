@@ -61,7 +61,8 @@ public class PlayerController : MonoBehaviour
     public GameObject fire;
     public GameObject blastFire;
     public bool canPortal;
-    
+
+    private Vector3 lastDirection;
 
 
     void Start()
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
         speed = 40;
         curspeed = 0f;
         acceleration = 2f;
-        rotationSpeed = 75;
+        rotationSpeed = 100;
         rb.freezeRotation = true;
         powerups = GetComponent<PowerUps>();
         gm = FindObjectOfType<GameManager>();
@@ -97,7 +98,7 @@ public class PlayerController : MonoBehaviour
             gm.LoseGame();
 
         }
-        if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
             curspeed += acceleration;
             if (curspeed > speed)
@@ -109,49 +110,24 @@ public class PlayerController : MonoBehaviour
         {
             curspeed = 0;
         }
-        float translationx = Input.GetAxis("Vertical") * curspeed;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+        float translationx = Input.GetAxis("Vertical");
+        float rotation = Input.GetAxis("Horizontal");
         float rotationv = Input.GetAxis("Camera Vertical") * rotationSpeed;
         float rotationh = Input.GetAxis("Camera Horizontal") * rotationSpeed;
 
         axel.Rotate(0, 0, -0.1f * translationx);
         rotationv *= Time.deltaTime;
         rotationh *= Time.deltaTime;
-        rotation *= Time.deltaTime;
 
 
         if (canMove){
-            transform.Rotate(0, rotationh, 0);
-            Vector3 forward_direction = transform.TransformDirection(Vector3.left);
-            Vector3 forward_velocity = new Vector3(1.1f * forward_direction.z * translationx, rb.velocity.y, -1.1f * forward_direction.x * translationx);
+            currHorRot += rotationh;
+            cameraAnchorH.rotation = Quaternion.Euler(0, currHorRot, 0);
+            Rotating(rotation, translationx);
+            Vector3 forward_direction = rb.transform.TransformDirection(Vector3.forward);
+            Vector3 forward_velocity = new Vector3(1.1f * forward_direction.normalized.x * curspeed, rb.velocity.y, 1.1f * forward_direction.normalized.z * curspeed);
             rb.velocity = forward_velocity;
-            if (currHorRot != 0 && translationx != 0)
-            {
-                transform.Rotate(0, currHorRot / 5, 0);
-                cameraAnchorH.transform.Rotate(0, -currHorRot / 5, 0.0f);
-                currHorRot -= currHorRot / 5;
-            }
-
-            //if (rotationh != 0 && (currHorRot < 90 && currHorRot > -90))
-            //{
-            //    currHorRot += rotationh;
-            //    cameraAnchorH.transform.Rotate(0, rotationh, 0.0f);
-            //    cameraSetBack = 2.5f;
-            //}
-            //else if (rotationh == 0 && (currHorRot > 0.01 || currHorRot < -0.01) && cameraSetBack < 0)
-            //{
-            //    cameraAnchorH.transform.Rotate(0, -currHorRot / 10, 0.0f);
-            //    currHorRot -= currHorRot / 10;
-            //}
-            //else if (rotationh == 0 && currHorRot < 0.1 && currHorRot > -0.1 && cameraSetBack < 0)
-            //{
-            //    cameraAnchorH.transform.Rotate(0, -currHorRot, 0.0f);
-            //    currHorRot = 0;
-            //}
-            //else if (rotationh == 0)
-            //{
-            //    cameraSetBack -= Time.deltaTime;
-            //}
+           
         }
         else{
             rb.velocity = new Vector3(0,rb.velocity.y,0);
@@ -169,7 +145,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("startedWalking");
             }
         }
-        stationary = translationx == 0;
+        stationary = translationx == 0 && rotation == 0;
 
         currVerRot = 0;
 
@@ -585,6 +561,43 @@ public class PlayerController : MonoBehaviour
         dropCarryTimer = Mathf.Max(dropCarryTimer - Time.deltaTime, 0);
     }
 
+    Vector3 Rotating(float horizontal, float vertical)
+    {
+        // Get camera forward direction, without vertical component.
+        Vector3 forward = cameraAnchorH.TransformDirection(Vector3.forward);
+
+        // Player is moving on ground, Y component of camera facing is not relevant.
+        forward.y = 0.0f;
+        forward = forward.normalized;
+
+        // Calculate target direction based on camera forward and direction key.
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
+        Vector3 targetDirection;
+        targetDirection = forward * vertical + right * horizontal;
+
+        // Lerp current direction to calculated target direction.
+        if (((horizontal != 0 || vertical != 0) && targetDirection != Vector3.zero))
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+            Quaternion newRotation = Quaternion.Slerp(rb.rotation, targetRotation, 0.06f);
+            rb.MoveRotation(newRotation);
+            lastDirection = targetDirection;
+        }
+        // If idle, Ignore current camera facing and consider last moving direction.
+        if (!(Mathf.Abs(horizontal) > 0.9 || Mathf.Abs(vertical) > 0.9))
+        {
+            if (lastDirection != Vector3.zero)
+            {
+                lastDirection.y = 0;
+                Quaternion targetRotation = Quaternion.LookRotation(lastDirection);
+                Quaternion newRotation = Quaternion.Slerp(rb.rotation, targetRotation, 0.06f);
+                rb.MoveRotation(newRotation);
+            }
+        }
+
+        return targetDirection;
+    }
 
     void OnCollisionEnter(Collision collision)
     {
