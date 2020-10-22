@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
         curspeed = 0f;
         acceleration = 2f;
         rotationSpeed = 100;
+        currHorRot = transform.eulerAngles.y;
+        cameraAnchorH.rotation = Quaternion.Euler(0, currHorRot, 0);
         rb.freezeRotation = true;
         powerups = GetComponent<PowerUps>();
         gm = FindObjectOfType<GameManager>();
